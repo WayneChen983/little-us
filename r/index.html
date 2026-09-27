@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Us：一起領一個月 Plus · A month of Plus for both of you</title>
+<meta name="description" content="用朋友的推薦碼下載 Little Us，你們都能獲得一個月 Couple Plus。">
+<meta property="og:title" content="Little Us：一起領一個月 Plus 💌">
+<meta property="og:description" content="用我的推薦碼下載 Little Us，我們都能獲得一個月 Couple Plus。">
+<meta property="og:image" content="https://waynechen983.github.io/little-us/assets/couple.png">
+<link rel="icon" href="../assets/icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .gift { text-align: center; }
+  .gift img.couple { width: min(280px, 80%); }
+  .code { font-family: "Fredoka", ui-rounded, sans-serif; font-size: 44px; letter-spacing: 8px; color: var(--rose);
+          background: var(--card); border: 2px dashed var(--blush); border-radius: 20px; padding: 10px 18px; display: inline-block; margin: 6px 0 4px; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 18px 0 6px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 12px 22px; font-weight: 600;
+         text-decoration: none; border: 2px solid var(--ink); color: var(--ink); background: var(--butter); cursor: pointer; font-size: 16px; }
+  .btn.alt { background: var(--card); }
+  .btn.rose { background: var(--blush); }
+  ol { text-align: left; margin: 0 auto; max-width: 30em; }
+  .copied { color: var(--rose); font-size: 14px; min-height: 1.5em; }
+</style>
+</head>
+<body>
+<main class="gift">
+  <header style="justify-content:center"><a href="../"><img src="../assets/icon.png" alt="Little Us"></a><h1>Little Us</h1></header>
+  <img class="couple" src="../assets/couple.png" alt="">
+  <h2 data-zh="朋友送你們一個月 Couple Plus 🎁" data-en="Your friend sent you a month of Couple Plus 🎁"></h2>
+  <p class="muted" data-zh="下載 Little Us，輸入這組推薦碼，你和朋友都能獲得一個月 Plus。" data-en="Download Little Us and enter this code. You and your friend each get a month of Plus."></p>
+  <div class="code" id="code">·······</div>
+  <div><button class="btn alt" id="copy" data-zh="複製推薦碼" data-en="Copy code"></button></div>
+  <div class="copied" id="copied"></div>
+  <div class="buttons">
+    <a class="btn" href="https://apps.apple.com/app/id6815943980" data-zh=" App Store 下載" data-en=" Get it on the App Store"></a>
+    <a class="btn alt" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat" data-zh="▶ Google Play 下載" data-en="▶ Get it on Google Play"></a>
+  </div>
+  <div class="buttons"><a class="btn rose" id="open" data-zh="已經安裝了？在 App 中開啟" data-en="Already have it? Open in the app"></a></div>
+  <div class="card">
+    <ol>
+      <li data-zh="下載 Little Us，登入並和另一半配對。" data-en="Download Little Us, sign in and pair with your partner."></li>
+      <li data-zh="到「設定 → 邀請朋友」，輸入上面的推薦碼。" data-en="Go to Settings → Invite friends and enter the code above."></li>
+      <li data-zh="你們和朋友都會馬上獲得一個月 Couple Plus 🎉" data-en="You and your friend each get a month of Couple Plus right away 🎉"></li>
+    </ol>
+  </div>
+  <footer><a href="../">Little Us</a> · <a href="../privacy/" data-zh="隱私權政策" data-en="Privacy Policy"></a> · <a href="../terms/" data-zh="使用條款" data-en="Terms of Use"></a></footer>
+</main>
+<script>
+  const lang = (navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en";
+  document.documentElement.lang = lang === "zh" ? "zh-Hant" : "en";
+  document.querySelectorAll("[data-zh]").forEach((el) => { el.textContent = el.dataset[lang]; });
+  const raw = new URLSearchParams(location.search).get("c") || "";
+  const code = raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 7);
+  const box = document.getElementById("code");
+  if (code) { box.textContent = code; } else { box.style.display = "none"; document.getElementById("copy").style.display = "none"; }
+  document.getElementById("open").href = "coupleapp://referral/" + code;
+  document.getElementById("copy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(code); } catch (e) {}
+    document.getElementById("copied").textContent = lang === "zh" ? "已複製 ✓" : "Copied ✓";
+  });
+</script>
+</body>
+</html>
