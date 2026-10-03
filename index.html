@@ -3,51 +3,195 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Little Us – 說明與客服 · Help</title>
+<title>Little Us – 只屬於你們兩個人的小天地 · A tiny world for two</title>
+<meta name="description" content="Little Us 是只屬於你和另一半的小天地：聊天、心情、抱抱，還有陪你們長大的小動物。A tiny private world for you and your partner.">
+<meta property="og:title" content="Little Us – 只屬於你們兩個人的小天地">
+<meta property="og:description" content="聊天、心情、抱抱，還有陪你們長大的小動物。">
+<meta property="og:image" content="https://waynechen983.github.io/little-us/assets/share.png">
+<meta name="theme-color" content="#FFF8EE">
 <link rel="icon" href="assets/icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preload" href="assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
 </head>
 <body>
-<main>
-  <header>
-    <img src="assets/icon.png" alt="">
-    <div>
-      <h1>Little Us</h1>
-      <div class="muted">只屬於你們兩個人的小天地 · A tiny world just for two</div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icon.png" alt="">Little Us</a>
+    <nav class="links" aria-label="Little Us">
+      <a href="#help"><span data-l="zh">說明</span><span data-l="en">Help</span></a>
+      <a href="privacy/"><span data-l="zh">隱私權</span><span data-l="en">Privacy</span></a>
+      <a href="terms/"><span data-l="zh">條款</span><span data-l="en">Terms</span></a>
+      <a href="delete-account/"><span data-l="zh">刪除帳號</span><span data-l="en">Delete account</span></a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="語言 Language">
+      <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
     </div>
-  </header>
-  <div class="hero"><img src="assets/couple.png" alt="一對情侶一起看手機 / A couple looking at a phone together"></div>
+  </div>
+</header>
 
-  <nav class="lang"><a href="#zh">中文</a><a href="#en">English</a><a href="privacy/">隱私權政策 Privacy</a><a href="terms/">使用條款 Terms</a></nav>
-
-  <section id="zh" class="card">
-    <h2>說明與客服</h2>
-    <p>有任何問題、建議或想回報錯誤，請寫信到 <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>，我們通常會在 2 個工作天內回覆。</p>
-    <h3>怎麼跟另一半配對？</h3>
-    <p>兩個人各自用 Apple 登入。一個人在配對畫面建立邀請碼傳給對方，另一個人輸入邀請碼就完成了。</p>
-    <h3>怎麼取消 Couple Plus 訂閱？</h3>
-    <p>打開 iPhone 的「設定」→ 點你的名字 →「訂閱項目」→ Little Us，就可以取消。取消後到期前都還能使用。</p>
-    <h3>怎麼刪除帳號？</h3>
-    <p>在 App 裡打開「設定」→ 最下面的「刪除帳號」。你的個人資料會立即刪除。</p>
-    <h3>通話接不通？</h3>
-    <p>請確認兩支手機都已允許麥克風（視訊還需要相機）權限，並更新到最新版本。仍然有問題請來信，附上當時雙方使用的網路（Wi‑Fi 或行動網路）。</p>
+<main class="wrap">
+  <section class="hero">
+    <div class="crew" aria-hidden="true">
+      <img class="critter flip" src="assets/art/bunny-wave.webp" alt="" width="302" height="459" style="--w:302">
+      <img class="critter flip" src="assets/art/cat-heart.webp" alt="" width="363" height="393" style="--w:363">
+      <img class="critter" src="assets/art/bear-happy.webp" alt="" width="313" height="375" style="--w:313">
+      <img class="critter" src="assets/art/pup-wave.webp" alt="" width="398" height="400" style="--w:398">
+    </div>
+    <h1 class="display">Little Us</h1>
+    <p class="tagline"><span data-l="zh">只屬於你們兩個人的小天地</span><span data-l="en">A tiny world just for two</span></p>
+    <p class="lede">
+      <span data-l="zh">聊天、心情、抱抱，還有陪你們長大的小動物。另一半還沒準備好也沒關係，可以先自己用。</span>
+      <span data-l="en">Chat, moods, hugs, and little critters that grow with you. Partner not ready yet? Start on your own.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="https://apps.apple.com/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
+      <a class="btn soft" href="https://groups.google.com/g/little-us-testers"><span data-l="zh">搶先試用 Android 版</span><span data-l="en">Try the Android beta</span></a>
+    </div>
+    <p class="note"><span data-l="zh">Android 版正在 Google Play 封閉測試，加入測試群組就能下載。</span><span data-l="en">Android is in closed testing on Google Play: join the testers group to get it.</span></p>
   </section>
 
-  <section id="en" class="card">
-    <h2>Help &amp; feedback</h2>
-    <p>Questions, ideas or a bug? Email <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>. We usually reply within two business days.</p>
-    <h3>How do we pair?</h3>
-    <p>Each of you signs in with Apple. One of you creates an invite code on the pairing screen and sends it; the other enters it.</p>
-    <h3>How do I cancel Couple Plus?</h3>
-    <p>Open the iPhone Settings app → your name → Subscriptions → Little Us. You keep Plus until the end of the period you paid for.</p>
-    <h3>How do I delete my account?</h3>
-    <p>In the app, open Settings → Delete account at the bottom. Your personal data is deleted right away.</p>
-    <h3>A call won't connect?</h3>
-    <p>Make sure both phones allow the microphone (and the camera for video) and run the latest version. If it still fails, email us and tell us which networks you were both on.</p>
+  <section class="block" aria-labelledby="features">
+    <h2 class="section-title" id="features"><span data-l="zh">兩個人的每一天</span><span data-l="en">Every day, together</span></h2>
+    <div class="features">
+      <div class="card feature">
+        <img src="assets/art/spot-chat.webp" alt="">
+        <h3><span data-l="zh">兩個人的聊天室</span><span data-l="en">A chat just for two</span></h3>
+        <p><span data-l="zh">訊息、貼圖即時送到對方手上，也能傳送你現在的位置（只傳一次，不會追蹤）。</span><span data-l="en">Messages and stickers arrive instantly, and you can send where you are (once, never tracked).</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/cat-happy.webp" alt="">
+        <h3><span data-l="zh">陪你們長大的小動物</span><span data-l="en">Critters that grow with you</span></h3>
+        <p><span data-l="zh">選一隻貓咪、兔兔、熊熊或狗狗代表自己，牠們會跟著你們的心情變換表情。</span><span data-l="en">Pick a cat, bunny, bear or pup to be you. Its face changes with your mood.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-two-hearts.webp" alt="">
+        <h3><span data-l="zh">抱抱、愛心、說晚安</span><span data-l="en">Hugs, hearts and goodnights</span></h3>
+        <p><span data-l="zh">想對方的時候，按一下就能讓對方知道。</span><span data-l="en">Thinking of them? One tap lets them know.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-palette.webp" alt="">
+        <h3><span data-l="zh">你畫我猜</span><span data-l="en">Draw &amp; guess</span></h3>
+        <p><span data-l="zh">一個人畫、一個人猜，猜對了一起加分。</span><span data-l="en">One of you draws, the other guesses.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-calendar.webp" alt="">
+        <h3><span data-l="zh">在一起的每一天</span><span data-l="en">Every day together counts</span></h3>
+        <p><span data-l="zh">首頁記著你們在一起幾天了。</span><span data-l="en">The Us page counts the days you've been together.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-house.webp" alt="">
+        <h3><span data-l="zh">先自己用也可以</span><span data-l="en">Start on your own</span></h3>
+        <p><span data-l="zh">記錄心情和在一起的天數，隨時都能邀請另一半，原本的東西都會保留。</span><span data-l="en">Keep your moods and your days together, and invite your partner anytime: everything stays.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-key.webp" alt="">
+        <h3><span data-l="zh">一組邀請碼就配對</span><span data-l="en">Pair with one code</span></h3>
+        <p><span data-l="zh">一個人建立邀請碼，另一個人輸入就完成。iPhone 和 Android 也能互相配對。</span><span data-l="en">One of you makes an invite code, the other enters it. Works between iPhone and Android.</span></p>
+      </div>
+      <div class="card feature">
+        <img src="assets/art/spot-padlock.webp" alt="">
+        <h3><span data-l="zh">隱私第一</span><span data-l="en">Private by design</span></h3>
+        <p><span data-l="zh">你們的內容只有你們兩個人看得到。不賣資料、不放廣告。</span><span data-l="en">Only the two of you can see your space. No ads, and we never sell your data.</span></p>
+      </div>
+    </div>
   </section>
 
-  <footer>© 2026 Little Us · <a href="privacy/">隱私權政策 Privacy Policy</a> · <a href="terms/">使用條款 Terms of Use</a></footer>
+  <section class="block" aria-labelledby="inside">
+    <h2 class="section-title" id="inside"><span data-l="zh">看看裡面</span><span data-l="en">A look inside</span></h2>
+    <div class="shots" data-l="zh">
+      <img src="assets/art/shot-zh-1-us.webp" alt="「我們」頁：在一起的天數和兩隻小動物" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-zh-2-chat.webp" alt="聊天室：訊息和貼圖" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-zh-3-onboarding.webp" alt="選一隻小動物代表你" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-zh-4-pairing.webp" alt="用邀請碼配對" width="540" height="960" loading="lazy">
+    </div>
+    <div class="shots" data-l="en">
+      <img src="assets/art/shot-en-1-us.webp" alt="The Us page: days together and two critters" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-en-2-chat.webp" alt="The chat: messages and stickers" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-en-3-onboarding.webp" alt="Pick a critter to be you" width="540" height="960" loading="lazy">
+      <img src="assets/art/shot-en-4-pairing.webp" alt="Pair with an invite code" width="540" height="960" loading="lazy">
+    </div>
+  </section>
+
+  <section class="block narrow wrap" id="help" aria-labelledby="help-title" style="padding-left:0;padding-right:0">
+    <h2 class="section-title" id="help-title"><span data-l="zh">常見問題</span><span data-l="en">Help</span></h2>
+
+    <div class="faq" data-l="zh">
+      <details>
+        <summary>怎麼跟另一半配對？</summary>
+        <div class="answer"><p>iPhone 用 Apple 登入，Android 用電子郵件註冊。一個人在配對畫面建立邀請碼傳給對方，另一個人點「我有邀請碼」輸入就完成了。iPhone 和 Android 也能互相配對。</p></div>
+      </details>
+      <details>
+        <summary>另一半還沒準備好，可以先自己用嗎？</summary>
+        <div class="answer"><p>可以。在配對畫面點「先自己用」，就能先記錄心情和在一起的天數。之後隨時都能邀請另一半，原本的東西都會保留，變成你們兩個人的。</p></div>
+      </details>
+      <details>
+        <summary>換手機的話，資料會不見嗎？</summary>
+        <div class="answer"><p>不會。你們的訊息、照片、回憶和心情都存在伺服器上，在新手機登入同一個帳號，就會全部回來。</p></div>
+      </details>
+      <details>
+        <summary>怎麼取消 Couple Plus 訂閱？</summary>
+        <div class="answer"><p>打開 iPhone 的「設定」→ 點你的名字 →「訂閱項目」→ Little Us，就可以取消。取消後到期前都還能使用。</p></div>
+      </details>
+      <details>
+        <summary>怎麼刪除帳號？</summary>
+        <div class="answer"><p>在 App 裡打開「設定」→ 最下面的「刪除帳號」。你的個人資料會立即刪除。沒辦法打開 App，或只想刪除部分資料，請看<a href="delete-account/">刪除帳號或資料</a>。</p></div>
+      </details>
+      <details>
+        <summary>通話接不通？</summary>
+        <div class="answer"><p>請確認兩支手機都已允許麥克風（視訊還需要相機）權限，並更新到最新版本。仍然有問題請來信，附上當時雙方使用的網路（Wi‑Fi 或行動網路）。</p></div>
+      </details>
+    </div>
+
+    <div class="faq" data-l="en">
+      <details>
+        <summary>How do we pair?</summary>
+        <div class="answer"><p>Sign in with Apple on iPhone, or with your email on Android. One of you creates an invite code on the pairing screen and sends it; the other taps "I have an invite code" and enters it. iPhone and Android can pair with each other.</p></div>
+      </details>
+      <details>
+        <summary>My partner isn't ready yet. Can I start on my own?</summary>
+        <div class="answer"><p>Yes. Tap "Start on my own for now" on the pairing screen to keep your moods and your days together. Invite your partner anytime: everything stays and becomes yours together.</p></div>
+      </details>
+      <details>
+        <summary>Will I lose anything if I change phones?</summary>
+        <div class="answer"><p>No. Your messages, photos, memories and moods live on our servers: sign in to the same account on the new phone and it's all there.</p></div>
+      </details>
+      <details>
+        <summary>How do I cancel Couple Plus?</summary>
+        <div class="answer"><p>Open the iPhone Settings app → your name → Subscriptions → Little Us. You keep Plus until the end of the period you paid for.</p></div>
+      </details>
+      <details>
+        <summary>How do I delete my account?</summary>
+        <div class="answer"><p>In the app, open Settings → Delete account at the bottom. Your personal data is deleted right away. Can't open the app, or only want to delete some data? See <a href="delete-account/">Delete your account or data</a>.</p></div>
+      </details>
+      <details>
+        <summary>A call won't connect?</summary>
+        <div class="answer"><p>Make sure both phones allow the microphone (and the camera for video) and run the latest version. If it still fails, email us and tell us which networks you were both on.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="block narrow wrap" style="padding-left:0;padding-right:0">
+    <div class="card contact">
+      <img src="assets/art/spot-mailbox.webp" alt="">
+      <div>
+        <h2><span data-l="zh">還有其他問題？</span><span data-l="en">Anything else?</span></h2>
+        <p data-l="zh">問題、建議或想回報錯誤，請寫信到 <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>，我們通常會在 2 個工作天內回覆。</p>
+        <p data-l="en">Questions, ideas or a bug? Email <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>. We usually reply within two business days.</p>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="site">
+  <div class="wrap">
+    <a href="privacy/"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></a>
+    <a href="terms/"><span data-l="zh">使用條款</span><span data-l="en">Terms of Use</span></a>
+    <a href="delete-account/"><span data-l="zh">刪除帳號</span><span data-l="en">Delete account</span></a>
+    <span class="end">© 2026 Little Us · <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a></span>
+  </div>
+</footer>
 </body>
 </html>

@@ -4,64 +4,116 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>刪除 Little Us 帳號或資料 · Delete your Little Us account or data</title>
+<meta name="description" content="如何刪除 Little Us 帳號，或只刪除部分資料。How to delete your Little Us account or some of your data.">
+<meta name="theme-color" content="#FFF8EE">
 <link rel="icon" href="../assets/icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap">
+<link rel="preload" href="../assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
 </head>
 <body>
-<main>
-  <header><a href="../"><img src="../assets/icon.png" alt="Little Us"></a><div><h1>刪除帳號<br>Delete your account</h1><div class="muted">Little Us</div></div></header>
-  <nav class="lang"><a href="#zh">中文</a><a href="#en">English</a></nav>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/icon.png" alt="">Little Us</a>
+    <nav class="links" aria-label="Little Us">
+      <a href="../#help"><span data-l="zh">說明</span><span data-l="en">Help</span></a>
+      <a href="../privacy/"><span data-l="zh">隱私權</span><span data-l="en">Privacy</span></a>
+      <a href="../terms/"><span data-l="zh">條款</span><span data-l="en">Terms</span></a>
+      <a href="./" aria-current="page"><span data-l="zh">刪除帳號</span><span data-l="en">Delete account</span></a>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="語言 Language">
+      <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
 
-  <section id="zh" class="card">
-    <h2>在 App 裡刪除（最快）</h2>
-    <ul>
-      <li><strong>iPhone</strong>：設定 → 刪除帳號</li>
-      <li><strong>Android</strong>：設定 → 刪除帳號</li>
-    </ul>
-    <h2>只刪除部分資料（保留帳號）</h2>
-    <ul>
-      <li><strong>訊息</strong>：長按自己 24 小時內傳的訊息 → 收回。雙方都只會看到「訊息已收回」，內容會從伺服器刪除（iPhone 和 Android 都可以）。</li>
-      <li><strong>回憶照片</strong>（iPhone）：回憶 → 打開照片 → 右上角選單 → 刪除。</li>
-      <li><strong>自製貼圖</strong>（iPhone）：貼圖 → 長按貼圖 → 刪除。</li>
-      <li><strong>清單項目、暗號辭典、感謝罐</strong>（iPhone）：在項目上向左滑 → 刪除。</li>
-      <li>其他想刪除的資料（例如心情紀錄）：用你註冊的電子郵件寄信到 <a href="mailto:tw466376@gmail.com?subject=Delete%20some%20of%20my%20Little%20Us%20data">tw466376@gmail.com</a>，寫明要刪除的內容，我們會在 7 天內處理並回信。</li>
-    </ul>
-    <h2>沒辦法打開 App？</h2>
-    <p>請用你註冊的電子郵件寄信到 <a href="mailto:tw466376@gmail.com?subject=Delete%20my%20Little%20Us%20account">tw466376@gmail.com</a>，主旨寫「刪除帳號」。我們確認是你本人後，會在 7 天內刪除，並回信告訴你。</p>
-    <h2>會刪除哪些資料</h2>
-    <ul>
-      <li>你的帳號、個人資料與大頭照：立即永久刪除。</li>
-      <li>你們的共享空間（訊息、照片、回憶等）：另一半會看到空間已中斷連結，可以在 30 天內匯出，之後永久刪除。</li>
-      <li>推播用的裝置代碼：立即刪除。</li>
-    </ul>
-    <p class="muted">Apple 的訂閱需要在 iPhone 的「設定 → Apple 帳號 → 訂閱」另外取消。</p>
-  </section>
+<main class="wrap narrow">
+  <div class="page-hero">
+    <div class="art" aria-hidden="true">
+      <img class="critter flip" src="../assets/art/pup-wave.webp" alt="" width="398" height="400">
+      <img class="spot" src="../assets/art/spot-box.webp" alt="" width="200" height="174">
+    </div>
+    <div>
+      <h1><span data-l="zh">刪除帳號或資料</span><span data-l="en">Delete your account or data</span></h1>
+      <p class="meta">Little Us</p>
+    </div>
+  </div>
 
-  <section id="en" class="card">
-    <h2>Delete it in the app (fastest)</h2>
-    <ul>
-      <li><strong>iPhone</strong>: Settings → Delete account</li>
-      <li><strong>Android</strong>: Settings → Delete account</li>
-    </ul>
-    <h2>Delete some data, keep your account</h2>
-    <ul>
-      <li><strong>Messages</strong>: long-press a message you sent in the last 24 hours → Unsend. Both of you see "Message unsent", and its content is deleted from our servers (iPhone and Android).</li>
-      <li><strong>Memory photos</strong> (iPhone): Memories → open the photo → the menu at the top right → Delete.</li>
-      <li><strong>Your own stickers</strong> (iPhone): Stickers → long-press a sticker → Delete.</li>
-      <li><strong>List items, the secret dictionary, the thank-you jar</strong> (iPhone): swipe left on an item → Delete.</li>
-      <li>Anything else (your mood history, for example): email <a href="mailto:tw466376@gmail.com?subject=Delete%20some%20of%20my%20Little%20Us%20data">tw466376@gmail.com</a> from the address you signed up with and say what to delete. We do it within 7 days and let you know.</li>
-    </ul>
-    <h2>Can't open the app?</h2>
-    <p>Email <a href="mailto:tw466376@gmail.com?subject=Delete%20my%20Little%20Us%20account">tw466376@gmail.com</a> from the address you signed up with, with the subject "Delete my account". Once we confirm it's you, we delete it within 7 days and let you know.</p>
-    <h2>What gets deleted</h2>
-    <ul>
-      <li>Your account, profile and photo: deleted for good right away.</li>
-      <li>Your shared space (messages, photos, memories and so on): your partner sees it was disconnected and can export it for 30 days, then it is deleted for good.</li>
-      <li>Device tokens for notifications: deleted right away.</li>
-    </ul>
-    <p class="muted">Apple subscriptions are cancelled separately in iPhone Settings → Apple Account → Subscriptions.</p>
-  </section>
+  <article id="zh" class="card doc" data-l="zh" lang="zh-Hant">
+    <section>
+      <h2><img src="../assets/art/spot-phone.webp" alt="">在 App 裡刪除（最快）</h2>
+      <ul>
+        <li><strong>iPhone</strong>：設定 → 刪除帳號</li>
+        <li><strong>Android</strong>：設定 → 刪除帳號</li>
+      </ul>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-pencil.webp" alt="">只刪除部分資料（保留帳號）</h2>
+      <ul>
+        <li><strong>訊息</strong>：長按自己 24 小時內傳的訊息 → 收回。雙方都只會看到「訊息已收回」，內容會從伺服器刪除（iPhone 和 Android 都可以）。</li>
+        <li><strong>回憶照片</strong>（iPhone）：回憶 → 打開照片 → 右上角選單 → 刪除。</li>
+        <li><strong>自製貼圖</strong>（iPhone）：貼圖 → 長按貼圖 → 刪除。</li>
+        <li><strong>清單項目、暗號辭典、感謝罐</strong>（iPhone）：在項目上向左滑 → 刪除。</li>
+        <li>其他想刪除的資料（例如心情紀錄）：用你註冊的電子郵件寄信到 <a href="mailto:tw466376@gmail.com?subject=Delete%20some%20of%20my%20Little%20Us%20data">tw466376@gmail.com</a>，寫明要刪除的內容，我們會在 7 天內處理並回信。</li>
+      </ul>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-mailbox.webp" alt="">沒辦法打開 App？</h2>
+      <p>請用你註冊的電子郵件寄信到 <a href="mailto:tw466376@gmail.com?subject=Delete%20my%20Little%20Us%20account">tw466376@gmail.com</a>，主旨寫「刪除帳號」。我們確認是你本人後，會在 7 天內刪除，並回信告訴你。</p>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-hourglass.webp" alt="">會刪除哪些資料</h2>
+      <ul>
+        <li>你的帳號、個人資料與大頭照：立即永久刪除。</li>
+        <li>你們的共享空間（訊息、照片、回憶等）：另一半會看到空間已中斷連結，可以在 30 天內匯出，之後永久刪除。</li>
+        <li>推播用的裝置代碼：立即刪除。</li>
+      </ul>
+      <p class="aside">Apple 的訂閱需要在 iPhone 的「設定 → Apple 帳號 → 訂閱」另外取消。</p>
+    </section>
+  </article>
+
+  <article id="en" class="card doc" data-l="en" lang="en">
+    <section>
+      <h2><img src="../assets/art/spot-phone.webp" alt="">Delete it in the app (fastest)</h2>
+      <ul>
+        <li><strong>iPhone</strong>: Settings → Delete account</li>
+        <li><strong>Android</strong>: Settings → Delete account</li>
+      </ul>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-pencil.webp" alt="">Delete some data, keep your account</h2>
+      <ul>
+        <li><strong>Messages</strong>: long-press a message you sent in the last 24 hours → Unsend. Both of you see "Message unsent", and its content is deleted from our servers (iPhone and Android).</li>
+        <li><strong>Memory photos</strong> (iPhone): Memories → open the photo → the menu at the top right → Delete.</li>
+        <li><strong>Your own stickers</strong> (iPhone): Stickers → long-press a sticker → Delete.</li>
+        <li><strong>List items, the secret dictionary, the thank-you jar</strong> (iPhone): swipe left on an item → Delete.</li>
+        <li>Anything else (your mood history, for example): email <a href="mailto:tw466376@gmail.com?subject=Delete%20some%20of%20my%20Little%20Us%20data">tw466376@gmail.com</a> from the address you signed up with and say what to delete. We do it within 7 days and let you know.</li>
+      </ul>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-mailbox.webp" alt="">Can't open the app?</h2>
+      <p>Email <a href="mailto:tw466376@gmail.com?subject=Delete%20my%20Little%20Us%20account">tw466376@gmail.com</a> from the address you signed up with, with the subject "Delete my account". Once we confirm it's you, we delete it within 7 days and let you know.</p>
+    </section>
+    <section>
+      <h2><img src="../assets/art/spot-hourglass.webp" alt="">What gets deleted</h2>
+      <ul>
+        <li>Your account, profile and photo: deleted for good right away.</li>
+        <li>Your shared space (messages, photos, memories and so on): your partner sees it was disconnected and can export it for 30 days, then it is deleted for good.</li>
+        <li>Device tokens for notifications: deleted right away.</li>
+      </ul>
+      <p class="aside">Apple subscriptions are cancelled separately in iPhone Settings → Apple Account → Subscriptions.</p>
+    </section>
+  </article>
 </main>
+
+<footer class="site">
+  <div class="wrap">
+    <a href="../"><span data-l="zh">說明與客服</span><span data-l="en">Help</span></a>
+    <a href="../privacy/"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></a>
+    <a href="../terms/"><span data-l="zh">使用條款</span><span data-l="en">Terms of Use</span></a>
+    <span class="end">© 2026 Little Us · <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a></span>
+  </div>
+</footer>
 </body>
 </html>
