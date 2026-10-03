@@ -8,7 +8,8 @@
 <meta property="og:title" content="Little Us：一起領一個月 Plus 💌">
 <meta property="og:description" content="用我的推薦碼下載 Little Us，我們都能獲得一個月 Couple Plus。">
 <meta property="og:image" content="https://waynechen983.github.io/little-us/assets/share.png">
-<meta name="theme-color" content="#FFF8EE">
+<meta name="theme-color" content="#FFF8EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#221B19" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="../assets/icon.png">
 <link rel="preload" href="../assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
@@ -16,14 +17,16 @@
 <style>
   .gift { text-align: center; padding: 32px 0 16px; }
   .gift .art { display: flex; justify-content: center; align-items: flex-end; gap: 8px; margin-bottom: 24px; }
-  .gift .art .critter { width: 120px; }
-  .gift .art .spot { width: 80px; margin-bottom: 12px; }
-  .gift h1 { font-size: var(--title); }
+  .gift .art .critter { width: min(120px, 33vw); }
+  .gift .art .spot { width: min(80px, 22vw); margin-bottom: 12px; }
+  .gift h1 { font-size: var(--title); margin: 0 auto; }
   .gift .lede { color: var(--soft-ink); margin: 8px auto 24px; max-width: 28em; }
   .code {
-    font-size: var(--display); letter-spacing: 8px; color: var(--ink); background: var(--card); border: 2px dashed var(--blush);
-    border-radius: 20px; padding: 8px 24px; display: inline-block; margin-bottom: 12px;
+    position: relative; font-size: var(--display); letter-spacing: 8px; color: var(--ink); background: var(--card);
+    border: 2px dashed var(--blush); border-radius: 20px; padding: 12px 24px 8px 32px; display: inline-block; margin: 12px 0;
+    --tape: var(--butter); --tilt: 4deg; --tape-x: 85%; max-width: 100%; overflow-wrap: anywhere;
   }
+  @media (max-width: 360px) { .code { font-size: var(--title); letter-spacing: 4px; } }
   .copied { color: var(--rose); font-size: var(--subhead); min-height: 24px; margin: 4px 0 16px; }
   .gift .actions + .actions { margin-top: 12px; }
   .how { margin-top: 32px; text-align: left; }
@@ -44,21 +47,21 @@
 <main class="wrap narrow">
   <section class="gift">
     <div class="art" aria-hidden="true">
-      <img class="critter flip" src="../assets/art/bunny-cheer.webp" alt="" width="403" height="449" style="width:133px">
-      <img class="spot" src="../assets/art/spot-gift.webp" alt="" width="194" height="200">
+      <img class="critter flip" src="../assets/art/bunny-cheer.webp" alt="" width="403" height="449" style="width:min(133px, 36vw)">
+      <img class="spot sticker" src="../assets/art/spot-gift.webp" alt="" width="194" height="200">
       <img class="critter" src="../assets/art/cat-heart.webp" alt="" width="363" height="393">
     </div>
-    <h1><span data-l="zh">朋友送你們一個月 Couple Plus</span><span data-l="en">Your friend sent you a month of Couple Plus</span></h1>
+    <h1 class="heading"><span data-l="zh">朋友送你們一個月 <span style="white-space:nowrap">Couple Plus</span></span><span data-l="en">Your friend sent you a month of Couple Plus</span></h1>
     <p class="lede">
       <span data-l="zh">下載 Little Us，輸入這組推薦碼，你和朋友都能獲得一個月 Plus。</span>
       <span data-l="en">Download Little Us and enter this code. You and your friend each get a month of Plus.</span>
     </p>
-    <div class="code" id="code">·······</div>
+    <div class="code tape" id="code">·······</div>
     <div><button class="btn soft" id="copy" type="button"><span data-l="zh">複製推薦碼</span><span data-l="en">Copy code</span></button></div>
     <div class="copied" id="copied" aria-live="polite"></div>
     <div class="actions">
       <a class="btn primary" href="https://apps.apple.com/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
-      <a class="btn soft" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat"><span data-l="zh">在 Google Play 下載</span><span data-l="en">Get it on Google Play</span></a>
+      <a class="btn soft" href="https://groups.google.com/g/little-us-testers"><span data-l="zh">搶先試用 Android 版</span><span data-l="en">Try the Android beta</span></a>
     </div>
     <div class="actions">
       <a class="btn soft" id="open"><span data-l="zh">已經安裝了？在 App 中開啟</span><span data-l="en">Already have it? Open in the app</span></a>
@@ -77,6 +80,7 @@
 
 <footer class="site">
   <div class="wrap">
+    <img class="critter sleeper" src="../assets/art/bunny-sleep.webp" alt="" width="443" height="324" aria-hidden="true" loading="lazy">
     <a href="../"><span data-l="zh">說明與客服</span><span data-l="en">Help</span></a>
     <a href="../privacy/"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></a>
     <a href="../terms/"><span data-l="zh">使用條款</span><span data-l="en">Terms of Use</span></a>

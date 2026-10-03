@@ -8,7 +8,8 @@
 <meta property="og:title" content="Little Us – 只屬於你們兩個人的小天地">
 <meta property="og:description" content="聊天、心情、抱抱，還有陪你們長大的小動物。">
 <meta property="og:image" content="https://waynechen983.github.io/little-us/assets/share.png">
-<meta name="theme-color" content="#FFF8EE">
+<meta name="theme-color" content="#FFF8EE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#221B19" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preload" href="assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin>
@@ -34,11 +35,12 @@
 
 <main class="wrap">
   <section class="hero">
-    <div class="crew" aria-hidden="true">
-      <img class="critter flip" src="assets/art/bunny-wave.webp" alt="" width="302" height="459" style="--w:302">
-      <img class="critter flip" src="assets/art/cat-heart.webp" alt="" width="363" height="393" style="--w:363">
-      <img class="critter" src="assets/art/bear-happy.webp" alt="" width="313" height="375" style="--w:313">
-      <img class="critter" src="assets/art/pup-wave.webp" alt="" width="398" height="400" style="--w:398">
+    <div class="scene" aria-hidden="true">
+      <img class="plant" src="assets/art/plant-classic-6.webp" alt="" width="132" height="240" style="--w:132">
+      <img class="critter flip" src="assets/art/bunny-hug.webp" alt="" width="387" height="455" style="--w:387">
+      <img class="critter heart" src="assets/art/spot-two-hearts.webp" alt="" width="200" height="154" style="--w:120">
+      <img class="critter" src="assets/art/bear-hug.webp" alt="" width="371" height="373" style="--w:371">
+      <img class="plant" src="assets/art/plant-blossom-6.webp" alt="" width="193" height="240" style="--w:193">
     </div>
     <h1 class="display">Little Us</h1>
     <p class="tagline"><span data-l="zh">只屬於你們兩個人的小天地</span><span data-l="en">A tiny world just for two</span></p>
@@ -54,45 +56,50 @@
   </section>
 
   <section class="block" aria-labelledby="features">
-    <h2 class="section-title" id="features"><span data-l="zh">兩個人的每一天</span><span data-l="en">Every day, together</span></h2>
+    <h2 class="section-title heading" id="features"><span data-l="zh">兩個人的每一天</span><span data-l="en">Every day, together</span><img class="critter perch" src="assets/art/cat-neutral.webp" alt="" width="378" height="400"></h2>
     <div class="features">
-      <div class="card feature">
-        <img src="assets/art/spot-chat.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-chat.webp" alt="">
         <h3><span data-l="zh">兩個人的聊天室</span><span data-l="en">A chat just for two</span></h3>
         <p><span data-l="zh">訊息、貼圖即時送到對方手上，也能傳送你現在的位置（只傳一次，不會追蹤）。</span><span data-l="en">Messages and stickers arrive instantly, and you can send where you are (once, never tracked).</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/cat-happy.webp" alt="">
+      <div class="card feature tape">
+        <div class="crew" aria-hidden="true">
+          <img class="critter flip" src="assets/art/cat-neutral.webp" alt="" width="378" height="400">
+          <img class="critter flip" src="assets/art/bunny-wave.webp" alt="" width="302" height="459">
+          <img class="critter" src="assets/art/bear-happy.webp" alt="" width="313" height="375">
+          <img class="critter" src="assets/art/pup-happy.webp" alt="" width="436" height="398">
+        </div>
         <h3><span data-l="zh">陪你們長大的小動物</span><span data-l="en">Critters that grow with you</span></h3>
         <p><span data-l="zh">選一隻貓咪、兔兔、熊熊或狗狗代表自己，牠們會跟著你們的心情變換表情。</span><span data-l="en">Pick a cat, bunny, bear or pup to be you. Its face changes with your mood.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-two-hearts.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-two-hearts.webp" alt="">
         <h3><span data-l="zh">抱抱、愛心、說晚安</span><span data-l="en">Hugs, hearts and goodnights</span></h3>
         <p><span data-l="zh">想對方的時候，按一下就能讓對方知道。</span><span data-l="en">Thinking of them? One tap lets them know.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-palette.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-palette.webp" alt="">
         <h3><span data-l="zh">你畫我猜</span><span data-l="en">Draw &amp; guess</span></h3>
         <p><span data-l="zh">一個人畫、一個人猜，猜對了一起加分。</span><span data-l="en">One of you draws, the other guesses.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-calendar.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-calendar.webp" alt="">
         <h3><span data-l="zh">在一起的每一天</span><span data-l="en">Every day together counts</span></h3>
         <p><span data-l="zh">首頁記著你們在一起幾天了。</span><span data-l="en">The Us page counts the days you've been together.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-house.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-house.webp" alt="">
         <h3><span data-l="zh">先自己用也可以</span><span data-l="en">Start on your own</span></h3>
         <p><span data-l="zh">記錄心情和在一起的天數，隨時都能邀請另一半，原本的東西都會保留。</span><span data-l="en">Keep your moods and your days together, and invite your partner anytime: everything stays.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-key.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-key.webp" alt="">
         <h3><span data-l="zh">一組邀請碼就配對</span><span data-l="en">Pair with one code</span></h3>
         <p><span data-l="zh">一個人建立邀請碼，另一個人輸入就完成。iPhone 和 Android 也能互相配對。</span><span data-l="en">One of you makes an invite code, the other enters it. Works between iPhone and Android.</span></p>
       </div>
-      <div class="card feature">
-        <img src="assets/art/spot-padlock.webp" alt="">
+      <div class="card feature tape">
+        <img class="sticker" src="assets/art/spot-padlock.webp" alt="">
         <h3><span data-l="zh">隱私第一</span><span data-l="en">Private by design</span></h3>
         <p><span data-l="zh">你們的內容只有你們兩個人看得到。不賣資料、不放廣告。</span><span data-l="en">Only the two of you can see your space. No ads, and we never sell your data.</span></p>
       </div>
@@ -100,23 +107,23 @@
   </section>
 
   <section class="block" aria-labelledby="inside">
-    <h2 class="section-title" id="inside"><span data-l="zh">看看裡面</span><span data-l="en">A look inside</span></h2>
+    <h2 class="section-title heading" id="inside"><span data-l="zh">看看裡面</span><span data-l="en">A look inside</span></h2>
     <div class="shots" data-l="zh">
-      <img src="assets/art/shot-zh-1-us.webp" alt="「我們」頁：在一起的天數和兩隻小動物" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-zh-2-chat.webp" alt="聊天室：訊息和貼圖" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-zh-3-onboarding.webp" alt="選一隻小動物代表你" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-zh-4-pairing.webp" alt="用邀請碼配對" width="540" height="960" loading="lazy">
+      <figure class="shot tape"><img src="assets/art/shot-zh-1-us.webp" alt="「我們」頁：在一起的天數和兩隻小動物" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-zh-2-chat.webp" alt="聊天室：訊息和貼圖" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-zh-3-onboarding.webp" alt="選一隻小動物代表你" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-zh-4-pairing.webp" alt="用邀請碼配對" width="540" height="960" loading="lazy"></figure>
     </div>
     <div class="shots" data-l="en">
-      <img src="assets/art/shot-en-1-us.webp" alt="The Us page: days together and two critters" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-en-2-chat.webp" alt="The chat: messages and stickers" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-en-3-onboarding.webp" alt="Pick a critter to be you" width="540" height="960" loading="lazy">
-      <img src="assets/art/shot-en-4-pairing.webp" alt="Pair with an invite code" width="540" height="960" loading="lazy">
+      <figure class="shot tape"><img src="assets/art/shot-en-1-us.webp" alt="The Us page: days together and two critters" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-en-2-chat.webp" alt="The chat: messages and stickers" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-en-3-onboarding.webp" alt="Pick a critter to be you" width="540" height="960" loading="lazy"></figure>
+      <figure class="shot tape"><img src="assets/art/shot-en-4-pairing.webp" alt="Pair with an invite code" width="540" height="960" loading="lazy"></figure>
     </div>
   </section>
 
   <section class="block narrow wrap" id="help" aria-labelledby="help-title" style="padding-left:0;padding-right:0">
-    <h2 class="section-title" id="help-title"><span data-l="zh">常見問題</span><span data-l="en">Help</span></h2>
+    <h2 class="section-title heading" id="help-title"><span data-l="zh">常見問題</span><span data-l="en">Help</span><img class="critter perch" src="assets/art/pup-missyou.webp" alt="" width="419" height="446" style="--perch-h:72px" loading="lazy"></h2>
 
     <div class="faq" data-l="zh">
       <details>
@@ -173,20 +180,29 @@
     </div>
   </section>
 
-  <section class="block narrow wrap" style="padding-left:0;padding-right:0">
-    <div class="card contact">
-      <img src="assets/art/spot-mailbox.webp" alt="">
+  <section class="block narrow wrap contact-block" style="padding-left:0;padding-right:0">
+    <div class="peek-host">
+    <img class="critter peek rock" src="assets/art/bear-wave.webp" alt="" width="353" height="388" aria-hidden="true" loading="lazy">
+    <div class="card contact tape" style="--tape-x:56px;--tape:var(--peach)">
+      <img class="sticker" src="assets/art/spot-mailbox.webp" alt="">
       <div>
         <h2><span data-l="zh">還有其他問題？</span><span data-l="en">Anything else?</span></h2>
         <p data-l="zh">問題、建議或想回報錯誤，請寫信到 <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>，我們通常會在 2 個工作天內回覆。</p>
         <p data-l="en">Questions, ideas or a bug? Email <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>. We usually reply within two business days.</p>
       </div>
     </div>
+    </div>
   </section>
 </main>
 
 <footer class="site">
   <div class="wrap">
+    <div class="cheer" aria-hidden="true">
+      <img class="critter flip" src="assets/art/cat-cheer.webp" alt="" width="387" height="391" loading="lazy">
+      <img class="critter flip" src="assets/art/bunny-cheer.webp" alt="" width="403" height="449" loading="lazy">
+      <img class="critter" src="assets/art/bear-cheer.webp" alt="" width="374" height="371" loading="lazy">
+      <img class="critter" src="assets/art/pup-cheer.webp" alt="" width="442" height="389" loading="lazy">
+    </div>
     <a href="privacy/"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></a>
     <a href="terms/"><span data-l="zh">使用條款</span><span data-l="en">Terms of Use</span></a>
     <a href="delete-account/"><span data-l="zh">刪除帳號</span><span data-l="en">Delete account</span></a>

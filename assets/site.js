@@ -37,3 +37,20 @@
     if (button) set(button.getAttribute("data-set-lang"), true);
   });
 })();
+
+// Critters hop when you point at them or tap them (once per hop, never under Reduce Motion).
+(function () {
+  var still = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+
+  function hop(event) {
+    var critter = event.target.closest && event.target.closest(".critter");
+    if (!critter || critter.classList.contains("hop") || (still && still.matches)) return;
+    critter.classList.add("hop");
+  }
+
+  document.addEventListener("mouseover", hop);
+  document.addEventListener("click", hop);
+  document.addEventListener("animationend", function (event) {
+    if (event.animationName === "hop") event.target.classList.remove("hop");
+  });
+})();

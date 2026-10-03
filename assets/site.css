@@ -1,5 +1,6 @@
 /* Little Us website. Tokens from design/DESIGN_SYSTEM.md in the app repo: same colours, type sizes,
-   spacing, radii and the two shadows. A picture book open on a desk: cream paper, cocoa ink. */
+   spacing, radii and the two shadows. A picture book open on a desk: cream paper, cocoa ink,
+   washi tape and stickers. All art is the app's approved drawings; code only moves and layers it. */
 
 @font-face {
   /* jf open huninn (SIL OFL 1.1), cut down to the characters this site uses and renamed as the
@@ -35,9 +36,12 @@ html[data-lang="zh"] [data-l="en"], html[data-lang="en"] [data-l="zh"] { display
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; background: var(--paper); color: var(--ink);
+  margin: 0; color: var(--ink); overflow-x: hidden;
+  /* The app's paper (StoryBackground): cream with a faint dot grid, like a journal. */
+  background-color: var(--paper);
+  background-image: radial-gradient(circle, var(--line) .8px, transparent 1.2px);
+  background-size: 22px 22px;
   font: var(--body)/1.75 "Little Us Rounded", "PingFang TC", "Noto Sans TC", -apple-system, system-ui, sans-serif;
-  overflow-x: hidden;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--rose); text-decoration-thickness: 2px; text-underline-offset: 3px; }
@@ -45,6 +49,7 @@ a:hover { color: var(--rose); }
 h1, h2, h3 { font-weight: 400; line-height: 1.35; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 p + p { margin-top: 12px; }
+p, li { text-wrap: pretty; }
 :focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; border-radius: 10px; }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
@@ -54,9 +59,12 @@ p + p { margin-top: 12px; }
 .top { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; gap: 16px; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: var(--headline); }
-.brand img { width: 36px; height: 36px; border-radius: 10px; }
+.brand:hover { color: var(--ink); }
+.brand img { width: 36px; height: 36px; border-radius: 10px; transition: rotate .2s; }
+.brand:hover img { rotate: -8deg; }
 .links { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .links a { text-decoration: none; padding: 4px 12px; border-radius: 999px; font-size: var(--subhead); white-space: nowrap; }
+.links a:hover { background: var(--paper-deep); color: var(--ink); }
 .links a[aria-current="page"] { background: var(--paper-deep); }
 .lang-switch { display: flex; background: var(--paper-deep); border-radius: 999px; padding: 4px; }
 .lang-switch button {
@@ -74,48 +82,130 @@ p + p { margin-top: 12px; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px;
   border-radius: 999px; font: inherit; font-size: var(--body); text-decoration: none; border: 0; cursor: pointer;
+  transition: scale .2s;
 }
-.btn.primary { background: linear-gradient(135deg, var(--rose), #F4A3A3); color: #fff; box-shadow: var(--shadow-float); }
+.btn:active { scale: .97; }
+/* The one allowed gradient on a control: rose → peach, subtle. */
+.btn.primary {
+  background-color: var(--rose);
+  background-image: linear-gradient(135deg, var(--rose) 30%, color-mix(in srgb, var(--rose) 72%, var(--peach)));
+  color: #fff; box-shadow: var(--shadow-float);
+}
 .btn.primary:hover { color: #fff; filter: brightness(1.03); }
 .btn.soft { background: var(--paper-deep); color: var(--ink); }
 .btn.soft:hover { color: var(--ink); background: var(--line); }
 
 /* --- paper card --- */
-.card { background: var(--card); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-paper); }
+.card { position: relative; background: var(--card); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-paper); }
 @media (max-width: 480px) { .card { padding: 20px 16px; } }
 
-/* --- critters: code only moves them (breathe, 3.6 s), the drawings are the app's --- */
+/* --- section heading (the app's StoryHeading): a rose squiggle under the title --- */
+.heading { position: relative; display: table; padding-bottom: 12px; }
+.heading::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: var(--rose); opacity: .7;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M1.5 4Q6.75 .5 12 4T22.5 4' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 24px 8px round no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M1.5 4Q6.75 .5 12 4T22.5 4' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 24px 8px round no-repeat;
+  -webkit-mask-repeat: round no-repeat; mask-repeat: round no-repeat;
+}
+
+/* --- washi tape: one strip, only on pinned paper (cards, screenshots, the code slip) --- */
+.tape::before {
+  content: ""; position: absolute; z-index: 2; top: -11px; left: var(--tape-x, 50%); width: 78px; height: 22px;
+  margin-left: -39px; background: var(--tape, var(--butter)); opacity: .78; rotate: var(--tilt, -4deg); pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 3px) 10%, 100% 20%, calc(100% - 3px) 30%, 100% 40%, calc(100% - 3px) 50%,
+    100% 60%, calc(100% - 3px) 70%, 100% 80%, calc(100% - 3px) 90%, 100% 100%, 0 100%, 3px 90%, 0 80%, 3px 70%, 0 60%,
+    3px 50%, 0 40%, 3px 30%, 0 20%, 3px 10%);
+}
+.tape:nth-child(6n+1):is(.features > *, .shots > *) { --tape: var(--blush); --tilt: -4deg; }
+.tape:nth-child(6n+2):is(.features > *, .shots > *) { --tape: var(--butter); --tilt: 3deg; }
+.tape:nth-child(6n+3):is(.features > *, .shots > *) { --tape: var(--sage); --tilt: -2deg; }
+.tape:nth-child(6n+4):is(.features > *, .shots > *) { --tape: var(--sky); --tilt: 4deg; }
+.tape:nth-child(6n+5):is(.features > *, .shots > *) { --tape: var(--lavender); --tilt: -3deg; }
+.tape:nth-child(6n+6):is(.features > *, .shots > *) { --tape: var(--peach); --tilt: 2deg; }
+
+/* --- spot art as stickers: stuck on a little crooked --- */
+.sticker { rotate: var(--lean, -4deg); transition: rotate .25s; }
+.features > :nth-child(even) .sticker, .sticker.lean-right { --lean: 4deg; }
+
+/* --- critters: code only moves them. Idle breathe (3.6 s); a hop on hover or tap; waving ones
+   rock ±4° now and then. The drawings face left; .flip turns the ones on the left to face right. --- */
 .critter { transform-origin: 50% 100%; animation: breathe 3.6s ease-in-out infinite; }
-.critter.flip { --flip: -1; }
-@keyframes breathe { 0%, 100% { transform: scaleX(var(--flip, 1)) scale(1); } 50% { transform: scaleX(var(--flip, 1)) scale(1.02); } }
-@media (prefers-reduced-motion: reduce) { .critter { animation: none; transform: scaleX(var(--flip, 1)); } }
+.flip { transform: scaleX(-1); }
+.critter.rock { animation: breathe 3.6s ease-in-out infinite, rock 7.5s ease-in-out infinite; }
+.critter.hop { animation: hop .95s linear 1; }
+@keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.02; } }
+@keyframes rock {
+  0%, 74%, 100% { rotate: 0deg; }
+  78% { rotate: 4deg; } 82% { rotate: -4deg; } 86% { rotate: 4deg; } 90% { rotate: -4deg; } 94% { rotate: 0deg; }
+}
+@keyframes hop {
+  0% { translate: 0 0; scale: 1 1; animation-timing-function: ease-out; }
+  13% { translate: 0 0; scale: 1.06 .92; animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  45% { translate: 0 -15%; scale: .96 1.05; animation-timing-function: cubic-bezier(.6, 0, .9, .5); }
+  70% { translate: 0 0; scale: 1.07 .93; animation-timing-function: ease-out; }
+  85% { translate: 0 0; scale: .98 1.02; }
+  100% { translate: 0 0; scale: 1 1; }
+}
+.critter:nth-child(2) { animation-delay: -.9s; }
+.critter:nth-child(3) { animation-delay: -1.8s; }
+.critter:nth-child(4) { animation-delay: -2.7s; }
+.critter:nth-child(5) { animation-delay: -1.3s; }
+.critter.hop { animation-delay: 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .critter, .critter.rock, .critter.hop { animation: none; }
+  .btn, .sticker, .brand img { transition: none; }
+}
+
+/* A critter peeking over the top edge of the card after it: it sits behind the card. */
+.peek-host { position: relative; }
+.peek-host > .card { z-index: 1; }
+.peek { position: absolute; z-index: 0; right: var(--peek-x, 32px); bottom: calc(100% - var(--hide, 40px)); width: var(--peek-w, 96px); }
+
+/* A critter sitting at the end of a section title, on the squiggle. */
+/* The title and its critter are centred together. */
+.section-title:has(.perch) { left: calc(var(--perch-h, 64px) / -2 - 4px); }
+.perch { position: absolute; left: 100%; bottom: 6px; margin-left: 8px; height: var(--perch-h, 64px); width: auto; max-width: none; }
 
 /* --- home hero --- */
 .hero { text-align: center; padding: 48px 0 32px; }
-.hero .crew { display: flex; justify-content: center; align-items: flex-end; gap: 2%; margin: 0 auto 24px; max-width: 600px; }
-/* All four share one scale (the app's), so each takes its own drawn width. */
-.hero .crew img { width: calc(var(--w) / 1376 * 94%); }
-.hero .crew img:nth-child(2) { animation-delay: -.9s; }
-.hero .crew img:nth-child(3) { animation-delay: -1.8s; }
-.hero .crew img:nth-child(4) { animation-delay: -2.7s; }
+.scene { display: flex; justify-content: center; align-items: flex-end; margin: 0 auto 24px; max-width: 600px; }
+/* Everything in the scene shares one scale, so each takes its own drawn width. */
+.scene > img { width: calc(var(--w) / 1310 * 100%); }
+.scene .heart { align-self: center; margin: 0 2% 8%; }
+.scene .plant { margin-bottom: 1%; }
 .display { font-size: var(--display); line-height: 1.15; }
 .hero .tagline { font-size: var(--title); margin-top: 8px; }
 .hero .lede { color: var(--soft-ink); margin: 12px auto 24px; max-width: 32em; }
-.hero .note { color: var(--soft-ink); font-size: var(--caption); margin-top: 12px; }
+.hero .note { color: var(--soft-ink); font-size: var(--caption); margin-top: 12px; text-wrap: balance; }
 
 /* --- sections --- */
 section.block { padding: 32px 0; }
-.section-title { font-size: var(--title); text-align: center; margin-bottom: 24px; }
-.section-title + .section-sub { color: var(--soft-ink); text-align: center; margin: -16px 0 24px; }
+.section-title { font-size: var(--title); text-align: center; margin: 0 auto 32px; }
+.section-sub { color: var(--soft-ink); text-align: center; margin: -16px 0 24px; }
 
-.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-.feature { display: flex; flex-direction: column; gap: 4px; }
-.feature img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
+.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px 16px; padding-top: 12px; }
+.feature { display: flex; flex-direction: column; gap: 4px; padding-top: 28px; }
+.feature > img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
 .feature h3 { font-size: var(--headline); }
 .feature p { color: var(--soft-ink); font-size: var(--subhead); line-height: 1.65; }
+.feature .crew { display: flex; align-items: flex-end; gap: 4px; height: 64px; margin-bottom: 8px; }
+.feature .crew img { height: 52px; width: auto; }
+.feature .crew img:nth-child(2) { height: 60px; }
+@media (max-width: 560px) {
+  /* Phones: picture beside the words, so eight cards don't run for pages. */
+  .feature { display: grid; grid-template-columns: 56px 1fr; column-gap: 16px; row-gap: 4px; align-items: start; padding-top: 24px; }
+  .feature > img { width: 56px; height: 56px; grid-row: span 2; margin: 0; }
+  .feature .crew { grid-column: 1 / -1; height: 56px; margin: 0 0 4px; }
+  .feature .crew img { height: 44px; }
+  .feature .crew img:nth-child(2) { height: 52px; }
+  .feature .crew ~ h3, .feature .crew ~ p { grid-column: 1 / -1; }
+}
 
-.shots { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 20px 16px; margin: 0 -20px; scrollbar-width: thin; }
-.shots img { flex: 0 0 auto; width: min(220px, 60vw); border-radius: 20px; scroll-snap-align: center; box-shadow: var(--shadow-paper); }
+/* Screenshots, pinned to the page like photos. */
+.shots { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 20px 20px; margin: 0 -20px; scrollbar-width: thin; }
+.shot { position: relative; flex: 0 0 auto; width: min(212px, 60vw); margin: 0; scroll-snap-align: center; rotate: -1.5deg; }
+.shot:nth-child(even) { rotate: 1.5deg; }
+.shot img { border-radius: 20px; box-shadow: var(--shadow-paper); }
 @media (min-width: 960px) { .shots { justify-content: center; overflow: visible; } }
 
 /* --- questions --- */
@@ -131,33 +221,42 @@ section.block { padding: 32px 0; }
 .faq details[open] summary::after { content: "−"; }
 .faq .answer { padding: 0 20px 20px; color: var(--ink); }
 
+.contact-block { padding-top: 80px !important; }
 .contact { display: flex; gap: 20px; align-items: center; }
-.contact img { width: 88px; flex: 0 0 auto; }
+.contact > img { width: 88px; flex: 0 0 auto; }
 .contact h2 { font-size: var(--headline); margin-bottom: 4px; }
 @media (max-width: 480px) { .contact { flex-direction: column; text-align: center; } }
 
 /* --- document pages (privacy, terms, delete account) --- */
-.page-hero { display: flex; align-items: flex-end; gap: 24px; padding: 48px 0 32px; }
-.page-hero .art { display: flex; align-items: flex-end; gap: 4px; flex: 0 0 auto; }
-.page-hero .art .critter { width: 120px; }
-.page-hero .art .spot { width: 72px; margin-bottom: 8px; }
+.page-hero { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 48px; margin-bottom: -32px; }
+.page-hero .titles { padding-bottom: 56px; }
 .page-hero h1 { font-size: var(--title); }
-.page-hero .meta { color: var(--soft-ink); font-size: var(--subhead); margin-top: 4px; }
+.page-hero .meta { color: var(--soft-ink); font-size: var(--subhead); margin-top: 8px; }
+.page-hero .art { display: flex; align-items: flex-end; gap: 4px; flex: 0 0 auto; margin-right: 16px; }
+.page-hero .art .critter { width: 128px; }
+.page-hero .art .spot { width: 64px; margin-bottom: 48px; }
+.page-hero + * { position: relative; z-index: 1; }
 @media (max-width: 560px) {
-  .page-hero { flex-direction: column; align-items: center; text-align: center; padding-top: 32px; }
-  .page-hero .art .critter { width: 104px; }
+  .page-hero { padding-top: 32px; }
+  .page-hero .titles { padding-bottom: 48px; }
+  .page-hero .art { margin-right: 4px; }
+  .page-hero .art .critter { width: 100px; }
+  .page-hero .art .spot { width: 48px; margin-bottom: 44px; }
 }
 
 .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
 .promise { background: var(--card); border-radius: 20px; box-shadow: var(--shadow-paper); padding: 16px; text-align: center; font-size: var(--subhead); }
 .promise img { width: 56px; height: 56px; object-fit: contain; margin: 0 auto 8px; }
+.promise:nth-child(even) img { --lean: 4deg; }
 @media (max-width: 560px) { .promises { grid-template-columns: 1fr; } .promise { display: flex; align-items: center; gap: 12px; text-align: left; } .promise img { margin: 0; width: 44px; height: 44px; } }
 
+.doc { --tape-x: 64px; --tape: var(--sky); --tilt: -3deg; }
 .doc .intro { font-size: var(--headline); line-height: 1.7; }
 .doc section { padding-top: 32px; }
-.doc section:first-child { padding-top: 0; }
+.doc section:first-child { padding-top: 8px; }
 .doc h2 { font-size: var(--headline); display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.doc h2 img { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; }
+.doc h2 img { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; rotate: -5deg; }
+.doc section:nth-child(even) h2 img { rotate: 5deg; }
 .doc ul { margin: 0; padding-left: 20px; }
 .doc li { margin: 8px 0; }
 .doc li::marker { color: var(--rose); }
@@ -166,16 +265,24 @@ section.block { padding: 32px 0; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .doc strong { background: none; color: var(--butter); } }
 .doc .aside { color: var(--soft-ink); font-size: var(--subhead); margin-top: 16px; }
 
-.steps { counter-reset: step; list-style: none; padding: 0 !important; display: grid; gap: 12px; }
+.steps { counter-reset: step; list-style: none; padding: 0 !important; margin: 0; display: grid; gap: 12px; }
 .steps li { counter-increment: step; display: flex; gap: 12px; align-items: baseline; margin: 0 !important; }
 .steps li::before {
   content: counter(step); flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; background: var(--butter);
   color: var(--cocoa); display: inline-flex; align-items: center; justify-content: center; font-size: var(--subhead);
 }
 
-/* --- footer --- */
-footer.site { border-top: 1px solid var(--line); margin-top: 48px; padding: 32px 0 48px; color: var(--soft-ink); font-size: var(--subhead); }
-footer.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+/* --- footer: the critters stand on its top line --- */
+footer.site { border-top: 1px solid var(--line); margin-top: 112px; padding: 32px 0 48px; color: var(--soft-ink); font-size: var(--subhead); }
+footer.site .wrap { position: relative; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
 footer.site .end { margin-left: auto; }
 footer.site a { text-decoration-color: var(--line); }
-@media (max-width: 560px) { footer.site .end { margin-left: 0; width: 100%; } }
+footer.site a:hover { text-decoration-color: var(--rose); }
+.cheer { position: absolute; bottom: calc(100% + 32px); left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; gap: 4px; pointer-events: none; }
+.cheer img { height: 84px; width: auto; pointer-events: auto; }
+.sleeper { position: absolute; bottom: calc(100% + 31px); right: 32px; height: 60px; width: auto; }
+@media (max-width: 560px) {
+  footer.site .end { margin-left: 0; width: 100%; }
+  .cheer img { height: 68px; }
+  .sleeper { right: 20px; height: 52px; }
+}
