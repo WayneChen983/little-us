@@ -34,7 +34,7 @@
   <div class="page-hero">
     <div class="titles">
       <h1 class="heading"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></h1>
-      <p class="meta"><span data-l="zh">生效日期：2026-10-04</span><span data-l="en">Effective: 2026-10-04</span></p>
+      <p class="meta"><span data-l="zh">生效日期：2026-11-07</span><span data-l="en">Effective: 2026-11-07</span></p>
     </div>
     <div class="art" aria-hidden="true">
       <img class="spot sticker" src="../assets/art/spot-padlock.webp" alt="" width="170" height="200">
@@ -63,7 +63,7 @@
         <li><strong>通話</strong>：語音與視訊通話以點對點加密傳輸；無法直連時會經由 Cloudflare 的中繼伺服器加密轉送。我們不錄音、不錄影，也不保存通話內容，只保存通話紀錄（時間與長度）。</li>
         <li><strong>心跳</strong>：只有在你按下「傳送心跳」時，App 才會從 Apple「健康」讀取當下的心率，把數字傳給另一半，不會另外保存。</li>
         <li><strong>裝置與推播</strong>：推播通知所需的裝置代碼。</li>
-        <li><strong>購買</strong>：訂閱透過 Apple 處理，我們只會收到訂閱狀態與到期日，不會取得你的付款資訊。</li>
+        <li><strong>購買</strong>：訂閱和購買透過 Apple 或 Google Play 處理，我們只會收到購買狀態與到期日，不會取得你的付款資訊。</li>
         <li><strong>使用紀錄</strong>：每天是否開啟過 App（只記日期），用來了解配對與留存狀況。</li>
       </ul>
     </section>
@@ -73,7 +73,7 @@
     </section>
     <section>
       <h2><img src="../assets/art/spot-house.webp" alt="">服務供應商</h2>
-      <p>我們使用以下服務來提供 App：Supabase（資料庫、檔案儲存、登入與即時連線）、Apple（登入、推播通知與付款）、Google（登入與寄送驗證碼信件）、Cloudflare（通話中繼）。這些供應商只會依我們的指示處理資料。</p>
+      <p>我們使用以下服務來提供 App：Supabase（資料庫、檔案儲存、登入與即時連線）、Apple（登入、推播通知與付款）、Google（登入、Android 推播通知、Google Play 付款與寄送驗證碼信件）、Cloudflare（通話中繼）。這些供應商只會依我們的指示處理資料。</p>
     </section>
     <section>
       <h2><img src="../assets/art/spot-hourglass.webp" alt="">資料保存</h2>
@@ -81,7 +81,9 @@
         <li>免費方案的聊天照片保存 90 天；存進「回憶」的照片會一直保留。</li>
         <li>只看一次與可重看的照片：看完後在當天的清理中永久刪除；沒有打開的，30 天後刪除。</li>
         <li>解除配對後，共享空間會保留 30 天讓你們匯出，之後永久刪除。</li>
-        <li>刪除帳號後，你的個人資料會立即刪除。</li>
+        <li>刪除帳號：申請後立即在所有裝置登出、停止通知，30 天內可以再次登入取消；第 30 天永久刪除你的帳號、個人資料、大頭照、心情與生理期紀錄、照片拍攝地點、裝置代碼和購買紀錄。用 Apple 登入的帳號會向 Apple 撤銷授權。</li>
+        <li>你們一起的內容（聊天紀錄、回憶、照片、語音、清單）會留給另一半，可以隨時匯出，你寫的內容會顯示為「已刪除的使用者」；另一半也刪除帳號時就會全部刪除。只有你自己的空間會整個刪除。</li>
+        <li>資料庫備份最多保留 7 天；伺服器紀錄不含個人資料，最多保留 7 天。刪除帳號不會取消商店訂閱，請到 Apple 或 Google Play 取消。詳見<a href="../delete-account/">刪除帳號</a>。</li>
       </ul>
     </section>
     <section>
@@ -113,7 +115,7 @@
         <li><strong>Calls</strong>: voice and video calls are encrypted and peer to peer; when a direct connection isn't possible they are relayed, still encrypted, through Cloudflare. We never record or store calls, only a call log (time and length).</li>
         <li><strong>Heartbeat</strong>: only when you tap "send your heartbeat" does the app read your current heart rate from Apple Health and send the number to your partner; it isn't stored separately.</li>
         <li><strong>Device and notifications</strong>: the device token needed for push notifications.</li>
-        <li><strong>Purchases</strong>: subscriptions are handled by Apple; we only receive the subscription status and expiry, never your payment details.</li>
+        <li><strong>Purchases</strong>: subscriptions and purchases are handled by Apple or Google Play; we only receive their status and expiry, never your payment details.</li>
         <li><strong>Usage</strong>: whether you opened the app on a given day (the date only), to understand pairing and retention.</li>
       </ul>
     </section>
@@ -123,7 +125,7 @@
     </section>
     <section>
       <h2><img src="../assets/art/spot-house.webp" alt="">Service providers</h2>
-      <p>We use Supabase (database, file storage, sign-in and realtime), Apple (sign-in, notifications and payments), Google (sign-in and sending code emails) and Cloudflare (call relay). They process data only on our instructions.</p>
+      <p>We use Supabase (database, file storage, sign-in and realtime), Apple (sign-in, notifications and payments), Google (sign-in, Android notifications, Google Play payments and sending code emails) and Cloudflare (call relay). They process data only on our instructions.</p>
     </section>
     <section>
       <h2><img src="../assets/art/spot-hourglass.webp" alt="">Retention</h2>
@@ -131,7 +133,9 @@
         <li>On the free plan, chat photos are kept for 90 days; photos saved to Memories are kept.</li>
         <li>View-once and replayable photos are deleted for good in the daily cleanup after they've been viewed; unopened ones after 30 days.</li>
         <li>After you disconnect, the shared space is kept for 30 days so you can export it, then deleted for good.</li>
-        <li>When you delete your account, your personal data is deleted right away.</li>
+        <li>Deleting your account: you're signed out everywhere and notifications stop at once, and you can sign in within 30 days to cancel; on day 30 your account, profile, photo, mood and cycle records, where your photos were taken, device tokens and purchase records are deleted for good. For Sign in with Apple we revoke our access with Apple.</li>
+        <li>What you made together (the chat, memories, photos, voice messages, lists) stays with your partner, who can export it any time, shown as from "Deleted user"; it's deleted when your partner deletes their account too. A space of your own is deleted entirely.</li>
+        <li>Database backups are kept for up to 7 days; server logs hold no personal data and are kept for up to 7 days. Deleting your account doesn't cancel a store subscription: cancel it with Apple or Google Play. See <a href="../delete-account/">Delete account</a>.</li>
       </ul>
     </section>
     <section>
