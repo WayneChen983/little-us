@@ -620,18 +620,18 @@ footer.site.night-foot a:hover { color: #F28B9D; }
 /* --- the bear in the U says hello (DESIGN.md "Bear in the U"). Layers inside the U, back to front: the whole U
    (U-back); the bear, masked to the U's opening — the counter traced from Jua's U, its rounded floor and both
    inner edges, extended straight up and opening out above the stems' tops — so the bowl below the floor is the
-   lip in front of it and nothing can show beside or under the strokes; then a clear hit area. 1 px of art = .0016 em. */
+   lip in front of it and nothing can show beside or under the strokes; then a clear hit area. 1 px of art = .00144 em. */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .mark .u { pointer-events: none; }
 .u-stage { position: absolute; left: 0; top: 0; width: .63em; height: .9em; z-index: 1;
   clip-path: polygon(-0.500em -3.000em, -0.500em 0.035em, 0.146em 0.039em, 0.185em 0.079em, 0.189em 0.119em, 0.190em 0.159em, 0.191em 0.199em, 0.191em 0.239em, 0.190em 0.279em, 0.189em 0.319em, 0.188em 0.359em, 0.188em 0.399em, 0.190em 0.439em, 0.194em 0.479em, 0.202em 0.519em, 0.220em 0.559em, 0.267em 0.599em, 0.284em 0.603em, 0.308em 0.607em, 0.332em 0.603em, 0.346em 0.599em, 0.403em 0.559em, 0.423em 0.519em, 0.431em 0.479em, 0.434em 0.439em, 0.437em 0.399em, 0.439em 0.359em, 0.441em 0.319em, 0.443em 0.279em, 0.444em 0.239em, 0.444em 0.199em, 0.444em 0.159em, 0.443em 0.119em, 0.449em 0.079em, 0.491em 0.039em, 1.200em 0.035em, 1.200em -3.000em); animation: bearin .6s var(--ease) 1.1s both; }
 @keyframes bearin { from { opacity: 0; } to { opacity: 1; } }
-.b-pos { position: absolute; left: .315em; top: .75em; width: 0; height: 0; translate: 0 -.01em; } /* PEEK */
+.b-pos { position: absolute; left: .315em; top: .75em; width: 0; height: 0; translate: 0 -.02em; } /* PEEK */
 .b-tilt, .b-fx, .b-breath { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
 .b-tilt { transition: rotate .35s cubic-bezier(.25, .8, .3, 1); }
 .b-breath { animation: breathe2 3.2s ease-in-out infinite; }
 @keyframes breathe2 { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2px; } }
-.b-breath img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * .0016em); max-width: none; translate: -50% 0; }
+.b-breath img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * .00144em); max-width: none; translate: -50% 0; }
 .b-breath .pb { opacity: 0; }
 .b-heart { position: absolute; left: .315em; width: .09em; pointer-events: none; }
 .u-hit { position: absolute; z-index: 3; left: .146em; top: -.45em; width: .345em; height: 1.05em; padding: 0; border: 0; background: none;

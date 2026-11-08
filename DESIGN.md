@@ -187,8 +187,10 @@ Owner, 2026-11-08: 「不用那麼多動作 一個打招呼的就好 你把一�
   U-lip in front of it. The bear is centred in the opening (.315 em from the glyph's origin), never floats, is
   never cut by a straight line, never shows outside the strokes. A clear `<button>` over the opening and above it
   (「跟熊熊打招呼」 / "Say hi to Bear"; Enter and Space work; focus ring).
-- **Positions** (the bear's base above the baseline): PEEK = eyes and nose over the rim (rest); UP = head,
-  shoulders and paws resting on the lip.
+- **Positions** (the bear's base above the baseline): PEEK = eyes and nose over the lip (rest); UP = the bear sits
+  up in the mouth of the U, high enough that the waving paw is fully above the stems' tops (derived from the wave
+  drawing: the paw is 95–169 px up a 290 px sprite), head and shoulders clearly above the letter. The bear is
+  drawn 10% smaller than the app's 1:1 (1 px = .00144 em) so ears and paw clear the stems.
 - **IDLE**: PEEK, neutral; breathing 2 px over 3.2 s; a blink (blink pose, 120 ms) every 3–6 s. Nothing else.
 - **HELLO** (desktop: the pointer enters the U area, or click/Enter/Space; phones: tap, plus one automatic hello
   the first time the hero is in view, after 1.2 s):

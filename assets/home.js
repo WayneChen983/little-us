@@ -45,7 +45,9 @@
   // DESIGN.md "Bear in the U". One gesture, done carefully: anticipation, a soft rise, two paw swings, a happy
   // beat with one small heart, settle, blink. Positions are the bear's base above the baseline, in em.
   var BEAR = { neutral: 232, blink: 232, wave: 264, happy: 234 };   // drawn widths in px (one scale)
-  var PEEK = 0.01, UP = 0.127;                                     // eyes+nose over the lip / paws on the lip
+  // PEEK: eyes and nose over the lip. UP: the waving paw (95–169 px up the wave drawing) clears the stems' tops
+  // (.715 em), so the bear sits up in the mouth of the U with its head, shoulders and paw above the letter.
+  var PEEK = 0.02, UP = 0.59;
   function bear() {
     var hit = document.querySelector(".mark .u-hit");
     if (!hit) return;
@@ -73,8 +75,16 @@
     function move(to, ms, easing, dip) {
       var from = y; y = to;
       if (still.matches) { pos.style.translate = ty(to); return Promise.resolve(); }
-      var frames = dip ? [{ translate: ty(from) }, { translate: ty(from, 3), offset: dip / (dip + ms), easing: easing }, { translate: ty(to) }]
-                       : [{ translate: ty(from), easing: easing }, { translate: ty(to) }];
+      var frames;
+      if (dip) {
+        // the rise: a 3 px dip, then up with a soft overshoot capped at .03 em (a long rise must not fling the
+        // bear clear of the U), settling onto its seat
+        var d = dip / (dip + ms);
+        frames = [{ translate: ty(from) }, { translate: ty(from, 3), offset: d, easing: "cubic-bezier(.3,.9,.4,1)" },
+                  { translate: ty(to + 0.03), offset: d + (1 - d) * 0.68, easing: "cubic-bezier(.45,0,.55,1)" }, { translate: ty(to) }];
+      } else {
+        frames = [{ translate: ty(from), easing: easing }, { translate: ty(to) }];
+      }
       var a = pos.animate(frames, { duration: ms + (dip || 0), fill: "forwards", easing: "linear" });
       return a.finished.then(function () { pos.style.translate = ty(to); a.cancel(); });
     }
@@ -90,7 +100,7 @@
       if (still.matches) return;
       var h = new Image();
       h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "b-heart";
-      h.style.top = (0.75 - UP - 0.48) + "em";
+      h.style.top = (0.75 - UP - 0.44) + "em";
       stage.appendChild(h);
       h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.06em", scale: 1, offset: .25 },
                  { opacity: 0, translate: "-50% -.26em", scale: .9 }], { duration: 900, easing: "cubic-bezier(.2,.7,.3,1)" })
