@@ -43,45 +43,35 @@
 </header>
 
 <main id="main">
-  <!-- 1. 相遇: the two of them start apart and meet as you scroll -->
-  <section class="hero wrap" aria-labelledby="hero-title">
-    <span class="eyebrow"><span data-l="zh">給兩個人的情侶 App · iPhone 與 Android</span><span data-l="en">A couple app for two · iPhone and Android</span></span>
-    <h1 id="hero-title">
-      <span data-l="zh"><span class="line">只屬於你們</span><span class="line">兩個人的小天地</span></span>
-      <span data-l="en"><span class="line">A tiny world</span><span class="line">just for two</span></span>
-    </h1>
-    <p class="lede">
-      <span data-l="zh">聊天、手寫紙條、抱抱和每日一問都在這裡。住在一起或遠距離都適用：打開就看到彼此，不打開也能在主畫面想到對方。</span>
-      <span data-l="en">Chat, handwritten notes, hugs and a daily question in one place. Together or long distance: open it and you're together, or see them on your Home Screen without opening it at all.</span>
-    </p>
-    <div class="actions stores">
-      <a class="btn primary magnet" data-store="apple" href="https://apps.apple.com/tw/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
-      <a class="btn soft magnet" data-store="play" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat"><span data-l="zh">在 Google Play 下載</span><span data-l="en">Get it on Google Play</span></a>
+  <!-- 1. The wordmark: letters rise in, the bunny sits on the "e", the bear peeks out of the "U" -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="mark-wrap">
+      <p class="mark" aria-hidden="true"><span class="ch" style="--i:0">L</span><span class="ch" style="--i:1">i</span><span class="ch" style="--i:2">t</span><span class="ch" style="--i:3">t</span><span class="ch" style="--i:4">l</span><span class="ch e" style="--i:5">e<button class="sit bunny" type="button" tabindex="-1"><img class="critter flip" src="assets/art/bunny-wave.webp" alt="" width="302" height="459" fetchpriority="high"></button></span><span class="gap"> </span><span class="ch us u" style="--i:6"><button class="peek-in bear" type="button" tabindex="-1"><img class="critter" src="assets/art/bear-wave.webp" alt="" width="353" height="388"></button>U</span><span class="ch us" style="--i:7">s</span></p>
     </div>
-
-    <div class="stage" aria-hidden="true">
-      <img class="plant critter" src="assets/art/plant-classic-6.webp" alt="" width="132" height="240" style="--x:-780;--w:132" loading="lazy">
-      <button class="mate a" type="button" tabindex="-1" style="--x:-371;--w:387;--h:459;--iw:302"
-        data-wave="assets/art/bunny-wave.webp" data-wave-w="302" data-hug="assets/art/bunny-hug.webp" data-hug-w="387">
-        <img class="critter flip" src="assets/art/bunny-wave.webp" alt="" width="302" height="459" loading="lazy">
-      </button>
-      <img class="hearts" src="assets/art/spot-two-hearts.webp" alt="" width="200" height="154" style="--x:-56;--w:112" loading="lazy">
-      <button class="mate b" type="button" tabindex="-1" style="--x:-16;--w:371;--h:388;--iw:353"
-        data-wave="assets/art/bear-wave.webp" data-wave-w="353" data-hug="assets/art/bear-hug.webp" data-hug-w="371">
-        <img class="critter" src="assets/art/bear-wave.webp" alt="" width="353" height="388" loading="lazy">
-      </button>
-      <img class="plant critter" src="assets/art/plant-blossom-6.webp" alt="" width="193" height="240" style="--x:587;--w:193" loading="lazy">
-    </div>
-    <p class="stage-hint" aria-hidden="true"><span data-l="zh">往下滑，讓牠們見面</span><span data-l="en">Scroll, and they'll meet</span></p>
+    <div class="wrap hero-copy">
+      <h1 id="hero-title">
+        <span data-l="zh"><span class="nowrap">只屬於你們</span><wbr><span class="nowrap">兩個人的小天地</span></span>
+        <span data-l="en">A tiny world just for two</span>
+      </h1>
+      <p class="lede">
+        <span data-l="zh">聊天、手寫紙條、抱抱和每日一問都在這裡。住在一起或遠距離都適用：打開就看到彼此，不打開也能在主畫面想到對方。</span>
+        <span data-l="en">Chat, handwritten notes, hugs and a daily question in one place. Together or long distance: open it and you're together, or see them on your Home Screen without opening it at all.</span>
+      </p>
+      <div class="actions stores">
+        <a class="btn primary magnet" data-store="apple" href="https://apps.apple.com/tw/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
+        <a class="btn soft magnet" data-store="play" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat"><span data-l="zh">在 Google Play 下載</span><span data-l="en">Get it on Google Play</span></a>
+      </div>
+      <p class="platforms"><span data-l="zh">iPhone 與 Android 都能用，也能互相配對</span><span data-l="en">On iPhone and Android, and they pair with each other</span></p>
 
     <ul class="promises-row">
       <li class="reveal"><img class="sticker" src="assets/art/spot-two-hearts.webp" alt="" width="200" height="154"><span><span data-l="zh">只有你們兩個人看得到</span><span data-l="en">Only the two of you can see it</span></span></li>
       <li class="reveal" style="--d:.08s"><img class="sticker lean-right" src="assets/art/spot-padlock.webp" alt="" width="170" height="200"><span><span data-l="zh">不放廣告、不賣資料</span><span data-l="en">No ads, no selling your data</span></span></li>
       <li class="reveal" style="--d:.16s"><img class="sticker" src="assets/art/spot-key.webp" alt="" width="166" height="200"><span><span data-l="zh">iPhone 和 Android 也能配對</span><span data-l="en">iPhone and Android pair too</span></span></li>
     </ul>
+    </div>
   </section>
 
-  <!-- 2. 一天的你們: the App Store art pinned, six moments of a day scroll by -->
+  <!-- 2. 一天的你們: a phone with the real app, pinned; it turns as six moments of a day scroll by -->
   <section class="day" id="day" aria-labelledby="day-title">
     <div class="wrap">
       <header class="chapter reveal">
@@ -91,21 +81,23 @@
       </header>
       <div class="day-grid">
         <div class="day-stage">
-          <figure class="screens">
-          <noscript><img class="first" src="assets/story/zh-1-480.webp" width="880" height="1444" alt=""></noscript>
-        <img data-step="0" data-l="zh" class="first" data-src="assets/story/zh-1-480.webp" data-srcset="assets/story/zh-1-480.webp 480w, assets/story/zh-1-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="「我們」頁：在一起 827 天，兩隻小動物跟著心情換表情" loading="lazy" decoding="async">
-        <img data-step="1" data-l="zh" class="" data-src="assets/story/zh-2-480.webp" data-srcset="assets/story/zh-2-480.webp 480w, assets/story/zh-2-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="聊天室：訊息、貼圖和手寫紙條" loading="lazy" decoding="async">
-        <img data-step="2" data-l="zh" class="" data-src="assets/story/zh-3-480.webp" data-srcset="assets/story/zh-3-480.webp 480w, assets/story/zh-3-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="約會轉盤：轉到「夜市小吃巡禮」" loading="lazy" decoding="async">
-        <img data-step="3" data-l="zh" class="" data-src="assets/story/zh-4-480.webp" data-srcset="assets/story/zh-4-480.webp 480w, assets/story/zh-4-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="每日小挑戰、今日紙條和回憶照片" loading="lazy" decoding="async">
-        <img data-step="4" data-l="zh" class="" data-src="assets/story/zh-5-480.webp" data-srcset="assets/story/zh-5-480.webp 480w, assets/story/zh-5-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="睡前：對方說晚安了，兔兔已經睡著" loading="lazy" decoding="async">
-        <img data-step="5" data-l="zh" class="" data-src="assets/story/zh-6-480.webp" data-srcset="assets/story/zh-6-480.webp 480w, assets/story/zh-6-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="我們的小天地：共同清單、約會轉盤、時光膠囊和回憶地圖" loading="lazy" decoding="async">
-        <img data-step="0" data-l="en" class="first" data-src="assets/story/en-1-480.webp" data-srcset="assets/story/en-1-480.webp 480w, assets/story/en-1-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="The Us page: together 827 days, two critters whose faces follow your moods" loading="lazy" decoding="async">
-        <img data-step="1" data-l="en" class="" data-src="assets/story/en-2-480.webp" data-srcset="assets/story/en-2-480.webp 480w, assets/story/en-2-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="The chat: messages, stickers and handwritten notes" loading="lazy" decoding="async">
-        <img data-step="2" data-l="en" class="" data-src="assets/story/en-3-480.webp" data-srcset="assets/story/en-3-480.webp 480w, assets/story/en-3-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="The date spinner: learn to make tiramisu together" loading="lazy" decoding="async">
-        <img data-step="3" data-l="en" class="" data-src="assets/story/en-4-480.webp" data-srcset="assets/story/en-4-480.webp 480w, assets/story/en-4-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="A daily challenge, today's note and a memory photo" loading="lazy" decoding="async">
-        <img data-step="4" data-l="en" class="" data-src="assets/story/en-5-480.webp" data-srcset="assets/story/en-5-480.webp 480w, assets/story/en-5-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="Bedtime: your partner said goodnight and the bunny is asleep" loading="lazy" decoding="async">
-        <img data-step="5" data-l="en" class="" data-src="assets/story/en-6-480.webp" data-srcset="assets/story/en-6-480.webp 480w, assets/story/en-6-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="Our little world: shared lists, the date spinner, time capsules and the memory map" loading="lazy" decoding="async">
-          </figure>
+          <div class="device">
+            <div class="glass">
+              <div class="scr first" data-step="0" data-l="zh" style="--top:#FEF8EF;--top-dark:#241D1C;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-1-360.webp 360w, assets/screens/zh-dark-1-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-1-360.webp" data-srcset="assets/screens/zh-light-1-360.webp 360w, assets/screens/zh-light-1-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="「我們」頁：在一起 827 天，Wayne 和 Amy 的小動物在花園裡睡覺，等著說早安" decoding="async"></picture></div>
+              <div class="scr" data-step="1" data-l="zh" style="--top:#FCF9EE;--top-dark:#3E3331;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-2-360.webp 360w, assets/screens/zh-dark-2-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-2-360.webp" data-srcset="assets/screens/zh-light-2-360.webp 360w, assets/screens/zh-light-2-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="聊天室：訊息、地點、貼圖和回覆" decoding="async"></picture></div>
+              <div class="scr" data-step="2" data-l="zh" style="--top:#FBF4EA;--top-dark:#211A18;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-3-360.webp 360w, assets/screens/zh-dark-3-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-3-360.webp" data-srcset="assets/screens/zh-light-3-360.webp 360w, assets/screens/zh-light-3-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="約會轉盤：轉出今天的約會" decoding="async"></picture></div>
+              <div class="scr" data-step="3" data-l="zh" style="--top:#F6F7F4;--top-dark:#3E3B3C;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-4-360.webp 360w, assets/screens/zh-dark-4-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-4-360.webp" data-srcset="assets/screens/zh-light-4-360.webp 360w, assets/screens/zh-light-4-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="每日一問、小挑戰和 Amy 的今日紙條" decoding="async"></picture></div>
+              <div class="scr" data-step="4" data-l="zh" style="--top:#FDF7EF;--top-dark:#261E1D;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-5-360.webp 360w, assets/screens/zh-dark-5-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-5-360.webp" data-srcset="assets/screens/zh-light-5-360.webp 360w, assets/screens/zh-light-5-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="睡前：Amy 說晚安了，兔兔已經睡著" decoding="async"></picture></div>
+              <div class="scr" data-step="5" data-l="zh" style="--top:#FEF7EE;--top-dark:#27201E;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/zh-dark-6-360.webp 360w, assets/screens/zh-dark-6-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/zh-light-6-360.webp" data-srcset="assets/screens/zh-light-6-360.webp 360w, assets/screens/zh-light-6-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="回憶：照片依月份收好" decoding="async"></picture></div>
+              <div class="scr first" data-step="0" data-l="en" style="--top:#FEF8EF;--top-dark:#241D1C;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-1-360.webp 360w, assets/screens/en-dark-1-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-1-360.webp" data-srcset="assets/screens/en-light-1-360.webp 360w, assets/screens/en-light-1-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="The Us page: together 827 days, both critters asleep in the garden waiting for good morning" decoding="async"></picture></div>
+              <div class="scr" data-step="1" data-l="en" style="--top:#FDFAEF;--top-dark:#423735;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-2-360.webp 360w, assets/screens/en-dark-2-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-2-360.webp" data-srcset="assets/screens/en-light-2-360.webp 360w, assets/screens/en-light-2-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="The chat: messages, a location, stickers and replies" decoding="async"></picture></div>
+              <div class="scr" data-step="2" data-l="en" style="--top:#FBF4EA;--top-dark:#211A18;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-3-360.webp 360w, assets/screens/en-dark-3-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-3-360.webp" data-srcset="assets/screens/en-light-3-360.webp 360w, assets/screens/en-light-3-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="The date spinner deciding tonight's date" decoding="async"></picture></div>
+              <div class="scr" data-step="3" data-l="en" style="--top:#F3F6F4;--top-dark:#464547;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-4-360.webp 360w, assets/screens/en-dark-4-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-4-360.webp" data-srcset="assets/screens/en-light-4-360.webp 360w, assets/screens/en-light-4-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="The daily question, a little challenge and Amy's note for today" decoding="async"></picture></div>
+              <div class="scr" data-step="4" data-l="en" style="--top:#FCF6ED;--top-dark:#271F1D;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-5-360.webp 360w, assets/screens/en-dark-5-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-5-360.webp" data-srcset="assets/screens/en-light-5-360.webp 360w, assets/screens/en-light-5-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="Bedtime: Amy said goodnight and the bunny is asleep" decoding="async"></picture></div>
+              <div class="scr" data-step="5" data-l="en" style="--top:#FEF7EE;--top-dark:#27201E;--sb:#4A3A33;--sb-dark:#F6EBE2"><span class="sb">9:41</span><picture><source media="(prefers-color-scheme: dark)" data-srcset="assets/screens/en-dark-6-360.webp 360w, assets/screens/en-dark-6-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px"><img data-src="assets/screens/en-light-6-360.webp" data-srcset="assets/screens/en-light-6-360.webp 360w, assets/screens/en-light-6-720.webp 720w" sizes="(max-width: 760px) 44vw, 340px" width="720" height="1407" alt="Memories: photos kept by month" decoding="async"></picture></div>
+            </div>
+            <span class="island" aria-hidden="true"></span>
+          </div>
           <ol class="rail" aria-label="時間 Time of day">
             <li><button type="button">08:00</button></li>
             <li><button type="button">12:30</button></li>
@@ -332,28 +324,35 @@
     </div>
   </section>
 
-  <!-- 6. 晚安: the last page of the book -->
-  <section class="night" aria-labelledby="night-title">
-    <div class="wrap reveal">
-      <img class="critter sleeping" src="assets/art/bunny-sleep.webp" alt="" width="443" height="324" loading="lazy">
-      <h2 id="night-title"><span data-l="zh">今晚，從一聲晚安開始</span><span data-l="en">Start tonight, with a goodnight</span></h2>
-      <p><span data-l="zh">免費下載。iPhone 和 Android 都能用，也能互相配對。</span><span data-l="en">Free to download, on iPhone and Android, and they pair with each other.</span></p>
-      <div class="actions stores">
-        <a class="btn primary magnet" data-store="apple" href="https://apps.apple.com/tw/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
-        <a class="btn soft magnet" data-store="play" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat"><span data-l="zh">在 Google Play 下載</span><span data-l="en">Get it on Google Play</span></a>
+  <!-- 6. 晚安: scroll and the page turns to night; the two of them meet, hug, and fall asleep side by side -->
+  <section class="night" id="goodnight" aria-labelledby="night-title">
+    <div class="night-pin">
+      <div class="sky" aria-hidden="true">
+        <img class="moon" src="assets/night/spot-moon.webp" alt="" width="360" height="322" loading="lazy">
+        <img class="tw t1" src="assets/night/spot-twinkle.webp" alt="" width="360" height="335" loading="lazy">
+        <img class="tw t2" src="assets/night/spot-star.webp" alt="" width="360" height="343" loading="lazy">
+        <img class="tw t3" src="assets/night/spot-twinkle.webp" alt="" width="360" height="335" loading="lazy">
+        <img class="tw t4" src="assets/night/spot-star.webp" alt="" width="360" height="343" loading="lazy">
+      </div>
+      <div class="bed" aria-hidden="true">
+        <img class="sleeper-a critter flip" src="assets/art/bunny-hug.webp" data-awake="assets/art/bunny-hug.webp 387" data-asleep="assets/art/bunny-sleep.webp 443" style="--w:387" alt="" width="387" height="455" loading="lazy">
+        <img class="sleeper-b critter" src="assets/art/bear-hug.webp" data-awake="assets/art/bear-hug.webp 371" data-asleep="assets/night/critter-bear-sleep.webp 401" style="--w:371" alt="" width="371" height="373" loading="lazy">
+      </div>
+      <div class="wrap night-copy">
+        <span class="eyebrow"><span data-l="zh">23:30 · 最後一頁</span><span data-l="en">23:30 · The last page</span></span>
+        <h2 id="night-title"><span data-l="zh">今晚，從一聲晚安開始</span><span data-l="en">Start tonight, with a goodnight</span></h2>
+        <p><span data-l="zh">免費下載。iPhone 和 Android 都能用，也能互相配對。</span><span data-l="en">Free to download, on iPhone and Android, and they pair with each other.</span></p>
+        <div class="actions stores">
+          <a class="btn primary magnet" data-store="apple" href="https://apps.apple.com/tw/app/id6815943980"><span data-l="zh">在 App Store 下載</span><span data-l="en">Get it on the App Store</span></a>
+          <a class="btn soft magnet" data-store="play" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat"><span data-l="zh">在 Google Play 下載</span><span data-l="en">Get it on Google Play</span></a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site">
+<footer class="site night-foot">
   <div class="wrap">
-    <div class="cheer" aria-hidden="true">
-      <img class="critter flip" src="assets/art/cat-cheer.webp" alt="" width="387" height="391" loading="lazy">
-      <img class="critter flip" src="assets/art/bunny-cheer.webp" alt="" width="403" height="449" loading="lazy">
-      <img class="critter" src="assets/art/bear-cheer.webp" alt="" width="374" height="371" loading="lazy">
-      <img class="critter" src="assets/art/pup-cheer.webp" alt="" width="442" height="389" loading="lazy">
-    </div>
     <a href="couple-app/" lang="zh-Hant">情侶 App</a>
     <a href="privacy/"><span data-l="zh">隱私權政策</span><span data-l="en">Privacy Policy</span></a>
     <a href="terms/"><span data-l="zh">使用條款</span><span data-l="en">Terms of Use</span></a>

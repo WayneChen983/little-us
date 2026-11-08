@@ -24,6 +24,25 @@ What makes it feel expensive:
 - **The real thing.** Real App Store art, real stickers, real critter drawings. Nothing drawn in code.
 - **Finish.** Focus rings, reduced motion, dark mode, both languages, 375 px to 1440+, no layout shift.
 
+## Web extension (owner approved, option A, 2026-11-08)
+
+The app's design system still governs the site: its colours only, no emoji as icons or art, no characters or
+illustrations drawn in code, approved art and real app screenshots only, one primary action per section,
+accessibility and Reduce Motion. **For the website only** (never the apps) these are also allowed:
+
+- **Display type far beyond 44.** The wordmark fills the hero (≈ 300 px Jua on desktop, ≈ 25 vw on phones);
+  the hero line and chapter titles run 40–72 px (fluid with `clamp()`); the days counter 96 px.
+- **Editorial layouts**: asymmetric compositions, art at large scale, type and art layered (critters sit on and
+  peek from behind the letters).
+- **Cinematic scroll motion**: pinned sections, a phone that turns in 3D and pushes in, layered parallax,
+  scroll-driven scene changes (the page turns to night). Transforms and opacity only; 60 fps; off under
+  Reduce Motion.
+- **Depth**: soft shadows beyond paper/float and subtle gradients where they serve the art (the phone's glass
+  edge, the night sky). Never glassmorphism or blur, never a gradient to make a flat box look designed.
+
+Web type scale on top of the app's six: `hero-mark` clamp(96px, 24vw, 320px) Jua · `hero` clamp(32px, 4.4vw,
+64px) · `chapter` clamp(32px, 4vw, 56px) · `count` clamp(64px, 9vw, 112px). Body sizes stay the app's.
+
 ## Tokens (from DESIGN_SYSTEM.md; nothing new)
 
 Colour: `paper #FFF8EE / #221B19`, `paperDeep #FAEDDD / #2B2220`, `card #FFFDF8 / #2F2623`, `ink #4A3A33 /

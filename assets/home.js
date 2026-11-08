@@ -7,12 +7,74 @@
   // Only warm pictures in the language on screen (the other language's copies stay unloaded).
   var inLanguage = function (img) { var l = img.getAttribute("data-l"); return !l || l === lang(); };
   // Story pictures carry data-src until their chapter is near, so they never compete with the first screen.
-  var load = function (img) {
-    if (!img.hasAttribute("data-src") || !inLanguage(img)) return;
-    img.srcset = img.getAttribute("data-srcset");
-    img.src = img.getAttribute("data-src");
-    img.removeAttribute("data-src");
+  var load = function (scr) {
+    if (!inLanguage(scr)) return;
+    Array.prototype.forEach.call(scr.querySelectorAll("[data-srcset]"), function (el) {
+      el.srcset = el.getAttribute("data-srcset");
+      el.removeAttribute("data-srcset");
+      if (el.hasAttribute("data-src")) { el.src = el.getAttribute("data-src"); el.removeAttribute("data-src"); }
+    });
   };
+
+
+  // ------------------------------------------------------------------ 0. the wordmark: parallax, and a hop on tap
+  function mark() {
+    var el = document.querySelector(".mark");
+    if (!el) return;
+    if (/[?&]wm=upper/.test(location.search)) el.classList.add("upper");
+    el.addEventListener("click", function (event) {
+      var b = event.target.closest(".sit, .peek-in");
+      if (!b || still.matches) return;
+      var img = b.querySelector("img");
+      img.classList.remove("hop"); void img.offsetWidth; img.classList.add("hop");
+    });
+    if (still.matches) return;
+    var ticking = false;
+    function paint() {
+      ticking = false;
+      var y = Math.min(window.scrollY, window.innerHeight);
+      el.style.setProperty("--px", (y * 0.28).toFixed(1) + "px");
+      el.style.setProperty("--cx", (y * -0.06).toFixed(1) + "px");
+      el.style.setProperty("--cy", (y * 0.05).toFixed(1) + "px");
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; raf(paint); } }, { passive: true });
+  }
+
+  // ------------------------------------------------------------------ 5. goodnight: the page turns to night
+  function night() {
+    var section = document.querySelector(".night");
+    if (!section || !section.querySelector(".night-pin")) return;
+    var imgs = section.querySelectorAll(".bed img");
+    var asleep = false;
+    function sleep(on) {
+      if (on === asleep) return;
+      asleep = on;
+      section.classList.toggle("asleep", on);
+      Array.prototype.forEach.call(imgs, function (img) {
+        var v = img.getAttribute(on ? "data-asleep" : "data-awake").split(" ");
+        img.src = v[0];
+        img.style.setProperty("--w", v[1]);
+        img.classList.remove("pop");
+        if (!still.matches) { void img.offsetWidth; img.classList.add("pop"); }
+      });
+    }
+    function set(p) {
+      section.style.setProperty("--p", p.toFixed(3));
+      section.classList.toggle("dark", p > 0.42);
+      document.documentElement.classList.toggle("is-night", p > 0.42 && section.getBoundingClientRect().top < 64);
+      sleep(p > 0.78);
+    }
+    if (still.matches) { set(1); return; }
+    var ticking = false;
+    function paint() {
+      ticking = false;
+      var box = section.getBoundingClientRect();
+      var run = section.offsetHeight - window.innerHeight;
+      set(Math.min(1, Math.max(0, -box.top / Math.max(1, run * 0.8))));
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; raf(paint); } }, { passive: true });
+    paint();
+  }
 
   // ------------------------------------------------------------------ 1. hero: the two of them meet
   function hero() {
@@ -106,16 +168,34 @@
     var steps = section.querySelectorAll(".step");
     var rail = section.querySelectorAll(".rail button");
     var current = -1, z = 1;
+    var device = section.querySelector(".device");
+    // the camera pushes in as the chapter arrives
+    if (device && !still.matches) {
+      var pushTick = false;
+      var push = function () {
+        pushTick = false;
+        var box = section.getBoundingClientRect();
+        var k = Math.min(1, Math.max(0, 1 - box.top / window.innerHeight));
+        device.style.setProperty("--push", (0.86 + 0.14 * k).toFixed(3));
+      };
+      window.addEventListener("scroll", function () { if (!pushTick) { pushTick = true; raf(push); } }, { passive: true });
+      push();
+    }
 
     function show(n) {
       if (n === current) return;
       current = n;
       section.style.setProperty("--tint", "var(--" + steps[n].getAttribute("data-tint") + ")");
+      var turn = [[-12, 4], [10, -3], [-8, 2], [9, 3], [-10, -2], [0, 0]][n] || [0, 0];
+      if (device && !still.matches) {
+        device.style.setProperty("--ry", turn[0] + "deg");
+        device.style.setProperty("--rx", turn[1] + "deg");
+      }
       Array.prototype.forEach.call(steps, function (s, i) { s.classList.toggle("active", i === n); });
       Array.prototype.forEach.call(rail, function (b, i) {
         if (i === n) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
       });
-      var shots = section.querySelectorAll(".screens img[data-step='" + n + "']");
+      var shots = section.querySelectorAll(".glass .scr[data-step='" + n + "']");
       Array.prototype.forEach.call(shots, function (img) {
         load(img);
         z += 1;
@@ -142,10 +222,10 @@
     var near = new IntersectionObserver(function (entries) {
       if (!entries[0].isIntersecting) return;
       near.disconnect();
-      Array.prototype.forEach.call(section.querySelectorAll(".screens img"), load);
+      Array.prototype.forEach.call(section.querySelectorAll(".glass .scr"), load);
     }, { rootMargin: "25% 0px" });
     document.addEventListener("little-us-lang", function () {
-      Array.prototype.forEach.call(section.querySelectorAll(".screens img[data-step='" + current + "']"), load);
+      Array.prototype.forEach.call(section.querySelectorAll(".glass .scr[data-step='" + current + "']"), load);
     });
     near.observe(section);
 
@@ -341,6 +421,6 @@
     near.observe(odo);
   }
 
-  function start() { hero(); day(); hug(); days(); }
+  function start() { mark(); hero(); day(); hug(); days(); night(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();

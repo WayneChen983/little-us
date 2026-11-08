@@ -108,4 +108,4 @@ with open(os.path.join(SITE, "assets/fonts/rest.css"), "w", encoding="utf-8") as
   unicode-range: {ranges(rest)};
 }}
 """)
-subset(os.path.join(FONTS, "Jua-Regular.ttf"), os.path.join(SITE, "assets/fonts/little-us-wordmark.woff2"), set("Little Us"), "Little Us Wordmark")
+subset(os.path.join(FONTS, "Jua-Regular.ttf"), os.path.join(SITE, "assets/fonts/little-us-wordmark.woff2"), set("Little UsLITTLE US"), "Little Us Wordmark")

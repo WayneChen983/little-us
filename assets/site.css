@@ -507,3 +507,107 @@ footer.site a:hover { text-decoration-color: var(--rose); }
 
 /* Sections well below the first screen skip layout (and their lazy images) until they're near. */
 .later { content-visibility: auto; contain-intrinsic-size: auto 1400px; }
+
+/* ===================================================================== v2: web extension (DESIGN.md) */
+
+/* --- hero: the giant wordmark --- */
+.home .hero { padding-top: 24px; text-align: center; overflow: clip; }
+.mark-wrap { position: relative; padding: 0 20px; }
+.mark {
+  --fs: clamp(60px, 27vw, 330px);
+  font-family: "Little Us Wordmark", "Little Us Rounded", system-ui, sans-serif; font-size: var(--fs); line-height: .9;
+  letter-spacing: -.035em; margin: 0 auto; white-space: nowrap; color: var(--ink); padding-top: .32em;
+  translate: 0 var(--px, 0); will-change: translate;
+}
+.mark .ch { position: relative; display: inline-block; z-index: 0; animation: rise .9s cubic-bezier(.2, .9, .25, 1.05) both; animation-delay: calc(.12s + var(--i) * .06s); }
+.mark .us { color: var(--rose-ink); }
+.mark .gap { display: inline-block; width: .16em; }
+@keyframes rise { from { translate: 0 .55em; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+/* the bunny sits on the e's shoulder; the bear peeks out of the U's cup, behind its strokes */
+.mark .sit, .mark .peek-in { font-size: inherit; line-height: 0; position: absolute; border: 0; padding: 0; background: none; cursor: pointer; animation: land .7s cubic-bezier(.3, 1.4, .5, 1) both; }
+.mark .sit { left: 50%; bottom: .53em; width: .36em; translate: -42% var(--cx, 0); animation-delay: 1s; margin-bottom: .07em; }
+.mark .peek-in { z-index: -1; left: 50%; bottom: .2em; width: .44em; translate: -50% var(--cy, 0); animation-delay: 1.15s; }
+.mark .sit img, .mark .peek-in img { width: 100%; }
+@keyframes land { from { opacity: 0; translate: -46% -.35em; } 60% { opacity: 1; } to { opacity: 1; } }
+.mark .peek-in { animation-name: peekup; }
+@keyframes peekup { from { opacity: 0; translate: -50% .3em; } to { opacity: 1; translate: -50% 0; } }
+.mark.upper { text-transform: uppercase; letter-spacing: -.02em; font-size: calc(var(--fs) * .8); }
+.mark.upper .sit { bottom: .73em; }
+.hero-copy { position: relative; z-index: 1; margin-top: clamp(8px, 1.5vw, 24px); }
+.home .hero h1 { font-size: clamp(30px, 4.2vw, 60px); line-height: 1.2; letter-spacing: .02em; }
+.home .hero .lede { margin-top: 20px; }
+.nowrap { white-space: nowrap; }
+.platforms { font-size: var(--caption); color: var(--soft-ink); margin-top: 16px; }
+@media (max-width: 480px) { .home .hero h1 { letter-spacing: 0; } }
+@media (prefers-reduced-motion: reduce) { .mark .ch, .mark .sit, .mark .peek-in { animation: none; } .mark { translate: none; } }
+
+/* --- chapter titles at web scale --- */
+.chapter h2 { font-size: clamp(30px, 4vw, 56px); line-height: 1.2; }
+.chapter.left h2 { font-size: clamp(30px, 3.4vw, 48px); }
+.chapter { max-width: 40em; }
+
+/* --- a day of you two: a real phone with real screens, turning as the day goes --- */
+.day-stage { perspective: 1800px; }
+.device {
+  position: relative; height: calc(100% - 56px); max-width: 100%; aspect-ratio: .4945; border-radius: 13.5% / 6.6%;
+  background: #2B2220; padding: 3.2%;
+  box-shadow: 0 50px 90px -40px rgba(74, 58, 51, .55), 0 18px 30px -12px rgba(74, 58, 51, .25), inset 0 0 0 2px #4A3A33;
+  transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)) scale(var(--push, 1)); transition: transform 1s var(--ease);
+}
+/* a thin light edge on the frame, like the rim of a real phone */
+.device::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), inset 0 1px 0 rgba(255, 255, 255, .22); pointer-events: none; }
+.device .glass { position: relative; width: 100%; height: 100%; border-radius: 11% / 5.2%; overflow: hidden; background: var(--paper); transform: translateZ(0); }
+.device .island { position: absolute; z-index: 5; top: 4.4%; left: 50%; width: 29%; height: 3.4%; translate: -50% 0; border-radius: 999px; background: #000; }
+.scr { position: absolute; inset: 0; background: var(--top); clip-path: inset(100% 0 0 0); transition: clip-path .75s var(--ease); }
+.scr.shown, .scr.first { clip-path: inset(0 0 0 0); }
+.scr.first { transition: none; }
+.scr picture { position: absolute; left: 0; right: 0; bottom: 0; top: 6.62%; }
+.scr img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.scr .sb { position: absolute; top: 0; left: 10%; height: 6.62%; display: flex; align-items: center; font: 600 clamp(10px, 1vw, 15px)/1 -apple-system, "SF Pro Text", system-ui, sans-serif; color: var(--sb); }
+@media (prefers-color-scheme: dark) { .scr { background: var(--top-dark); } .scr .sb { color: var(--sb-dark); } }
+@media (prefers-reduced-motion: reduce) { .device { transform: none; transition: none; } .scr { transition: none; } }
+@media (max-width: 760px) { .device { height: calc(100% - 44px); } }
+
+/* --- days counter at web scale --- */
+.odometer { font-size: clamp(64px, 9vw, 112px); }
+.count { gap: 16px; font-size: var(--headline); }
+.days-card { max-width: 600px; }
+
+/* --- goodnight: the page turns to night --- */
+.night { --p: 0; position: relative; margin-top: var(--chapter); padding: 0; height: 240svh; background: none; text-align: center; }
+.night-pin {
+  position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  /* paper → lavender wash → the dark paper of night */
+  --a: clamp(0, calc(var(--p) / .4), 1); --b: clamp(0, calc((var(--p) - .3) / .45), 1);
+  /* dusk: a peach wash → lavender → the dark paper of night (flat colours mixed by scroll, not a gradient) */
+  background-color: color-mix(in oklab, #221B19 calc(var(--b) * 100%),
+    color-mix(in oklab, color-mix(in srgb, var(--lavender) 80%, #8F7FB0) calc(var(--a) * 100%), color-mix(in srgb, var(--peach) 45%, var(--paper))));
+}
+.sky { position: absolute; inset: 0; pointer-events: none; }
+.moon { position: absolute; right: 14%; top: 12%; width: clamp(88px, 11vw, 168px); translate: 0 calc((1 - var(--p)) * 95vh); rotate: calc((1 - var(--p)) * 20deg); opacity: clamp(0, calc(var(--p) * 4 - .5), 1); }
+.tw { position: absolute; width: clamp(20px, 2.4vw, 36px); opacity: clamp(0, calc(var(--p) * 3 - var(--k) * .5), 1); scale: clamp(.4, calc(var(--p) * 2 - var(--k) * .2), 1); }
+.t1 { left: 12%; top: 18%; --k: 2.2; } .t2 { left: 30%; top: 10%; --k: 2.6; } .t3 { left: 62%; top: 22%; --k: 3; } .t4 { left: 22%; top: 34%; --k: 3.4; }
+.bed { --u: clamp(.42px, .07vh + .045vw, .72px); position: relative; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 16px; }
+.bed img { width: calc(var(--w) * var(--u)); max-width: none; }
+.bed .sleeper-a { translate: calc((1 - min(var(--p) * 2.2, 1)) * -30vw) 0; margin-right: calc(-20 * var(--u)); }
+.bed .sleeper-b { translate: calc((1 - min(var(--p) * 2.2, 1)) * 30vw) 0; }
+html.is-night .top { background: #221B19; border-bottom-color: #40332E; color: #F6EBE2; }
+html.is-night .top .lang-switch { background: #2B2220; }
+html.is-night .top .lang-switch button[aria-pressed="true"] { background: #2F2623; color: #F6EBE2; }
+html.is-night .top .links a:hover { background: #2B2220; color: #F6EBE2; }
+.top { transition: border-color .3s, background-color .5s, color .5s; }
+.night-copy { position: relative; padding-bottom: clamp(48px, 9vh, 96px); color: var(--ink); transition: color .6s var(--ease); }
+.night-copy h2 { font-size: clamp(32px, 4.6vw, 64px); line-height: 1.2; }
+.night-copy p { color: var(--soft-ink); margin: 12px auto 24px; max-width: 28em; transition: color .6s var(--ease); }
+.night.dark .night-copy, .night.dark .night-copy h2 { color: #F6EBE2; }
+.night-copy .eyebrow { transition: color .6s; }
+.night.dark .night-copy p { color: #BDA99D; }
+.night.dark .eyebrow { color: #F28B9D; }
+.night.dark .btn.soft { background: #2F2623; color: #F6EBE2; }
+footer.site.night-foot { margin-top: 0; background: #221B19; border-top-color: #40332E; color: #BDA99D; }
+footer.site.night-foot a:hover { color: #F28B9D; }
+.night-copy .eyebrow { color: var(--ink); }
+@media (max-width: 760px) { .night { height: 220svh; } .moon { right: 8%; top: 9%; } .bed { --u: .4px; } .bed .sleeper-a { translate: calc((1 - min(var(--p) * 2.2, 1)) * -18vw) 0; } .bed .sleeper-b { translate: calc((1 - min(var(--p) * 2.2, 1)) * 18vw) 0; } }
+@media (prefers-reduced-motion: reduce) { .night { --p: 1; height: auto; } .night-pin { position: relative; min-height: 100svh; } }
+.step h3 { font-size: clamp(26px, 2.6vw, 40px); line-height: 1.25; }
+@media (max-width: 760px) { .step h3 { font-size: var(--headline); } }
