@@ -584,7 +584,7 @@ footer.site a:hover { text-decoration-color: var(--rose); }
     color-mix(in oklab, color-mix(in srgb, var(--lavender) 80%, #8F7FB0) calc(var(--a) * 100%), color-mix(in srgb, var(--peach) 45%, var(--paper))));
 }
 .sky { position: absolute; inset: 0; pointer-events: none; }
-.moon { position: absolute; right: 14%; top: 12%; width: clamp(88px, 11vw, 168px); translate: 0 calc((1 - var(--p)) * 95vh); rotate: calc((1 - var(--p)) * 20deg); opacity: clamp(0, calc(var(--p) * 4 - .5), 1); }
+.moon { position: absolute; right: 14%; top: 12%; width: clamp(88px, 11vw, 168px); translate: 0 calc((1 - var(--p)) * 32vh); rotate: calc((1 - var(--p)) * 20deg); opacity: clamp(0, calc(var(--p) * 3 - .6), 1); }
 .tw { position: absolute; width: clamp(20px, 2.4vw, 36px); opacity: clamp(0, calc(var(--p) * 3 - var(--k) * .5), 1); scale: clamp(.4, calc(var(--p) * 2 - var(--k) * .2), 1); }
 .t1 { left: 12%; top: 18%; --k: 2.2; } .t2 { left: 30%; top: 10%; --k: 2.6; } .t3 { left: 62%; top: 22%; --k: 3; } .t4 { left: 22%; top: 34%; --k: 3.4; }
 .bed { --u: clamp(.42px, .07vh + .045vw, .72px); position: relative; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 16px; }

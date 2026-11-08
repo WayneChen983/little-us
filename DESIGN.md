@@ -131,8 +131,8 @@ pages (`/privacy/`, `/terms/`, `/delete-account/`) keep their text word for word
 ## Assets
 
 - `assets/art/` — the app's approved critter, plant and spot drawings (unchanged).
-- `assets/story/` — App Store art (`docs/app-store/screenshots` in the app repo) cropped below the headline,
-  480 and 880 wide, zh and en. Built by `tools/build-assets.py`.
+- `assets/screens/` — real app screens from the demo build (`tools/capture-screens.sh` → `tools/build-assets.py
+  --screens`), 360 and 720 wide, zh/en, light/dark.
 - `assets/stickers/` — the app's animated stickers (`ios/CoupleChat/Resources/Stickers`), the still frame the
   app shows under Reduce Motion, and the last frame it rests on. Loaded only when the demo is near.
 - `assets/faces/` — the critters' mood faces (`ios/Shared/Art`), for the picker.
@@ -159,3 +159,18 @@ only when the demo is near or you press Send. No third-party requests, cookies o
    morning message and Amy's sticker (facing the other way, as the app draws theirs).
 6. Performance: story pictures (both languages) loaded with the first screen → deferred; header icon 23 KB PNG
    → 1 KB WebP; font split into first-screen and later halves.
+
+## Round 2 (2026-11-08)
+
+- **Hero**: the wordmark "Little Us" in Jua fills the width (mixed case: it is the logo's own letterforms and
+  reads warmer; `?wm=upper` shows LITTLE US for comparison). Letters rise in one by one, the bunny lands on
+  the "e", the bear peeks out of the "U" (it sits behind the letter). The mark drifts at 0.28× scroll.
+- **一天的你們**: real screens captured from the demo build (`tools/capture-screens.sh`, simulator
+  3A87F5FB only), zh/en × light/dark, shown in a CSS phone (status bar redrawn as 9:41). The phone turns a
+  little for each step and pushes in as the chapter arrives. Screens chosen to show only shipped features
+  (no 小屋, no distance widget, no streaks, no shared board).
+- **Wow: the page turns to night.** The last chapter is pinned for two screens: a peach dusk turns lavender,
+  then night; the moon rises, stars come out, the bunny and bear walk in, hug, and cut to their sleeping
+  drawings side by side; the header turns dark with it. Reduce Motion shows the night at once.
+- **No old promo art anywhere**: the App Store promo crops are deleted; `shot-*.webp` and `share.png` are
+  regenerated from fresh captures and the new hero. Critters were zoom-checked (no cheek tufts).
