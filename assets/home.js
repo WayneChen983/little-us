@@ -215,6 +215,12 @@
       if (still.matches) sent += 1;
       count.textContent = lang() === "zh" ? "今天送出了 " + sent + " 個" : sent + " sent today";
 
+      // On a phone the chat sits under the form: bring it into view so you see your sticker arrive.
+      var phone = thread.closest(".phone"), box = phone.getBoundingClientRect();
+      if (box.top < 0 || box.bottom > window.innerHeight) {
+        phone.scrollIntoView({ block: "center", behavior: still.matches ? "auto" : "smooth" });
+      }
+
       clearTimeout(replyTimer);
       replyTimer = setTimeout(function () {
         receipt.textContent = lang() === "zh" ? "已讀" : "Read";
