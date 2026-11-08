@@ -512,9 +512,9 @@ footer.site a:hover { text-decoration-color: var(--rose); }
 
 /* --- hero: the giant wordmark --- */
 .home .hero { padding-top: 24px; text-align: center; overflow: clip; }
-.mark-wrap { position: relative; padding: 0 20px; }
+.mark-wrap { position: relative; padding: 0 16px; }
 .mark {
-  --fs: clamp(60px, 27vw, 330px);
+  --fs: clamp(60px, calc((100vw - 32px) / 3.5), 330px); /* fits between 16 px gutters: the mark is 3.47 em wide */
   font-family: "Little Us Wordmark", "Little Us Rounded", system-ui, sans-serif; font-size: var(--fs); line-height: .9;
   letter-spacing: -.035em; margin: 0 auto; white-space: nowrap; color: var(--ink); padding-top: .32em;
   translate: 0 var(--px, 0); will-change: translate;
@@ -611,3 +611,8 @@ footer.site.night-foot a:hover { color: #F28B9D; }
 @media (prefers-reduced-motion: reduce) { .night { --p: 1; height: auto; } .night-pin { position: relative; min-height: 100svh; } }
 .step h3 { font-size: clamp(26px, 2.6vw, 40px); line-height: 1.25; }
 @media (max-width: 760px) { .step h3 { font-size: var(--headline); } }
+@media (max-width: 360px) {
+  .rail { gap: 0; }
+  .rail button { padding: 4px 6px; }
+  .phone { max-width: calc(100% - 24px); }
+}
