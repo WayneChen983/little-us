@@ -41,143 +41,184 @@
   }
 
 
-  // ------------------------------------------------------------------ 0b. the bear in the U says hello
-  // DESIGN.md "Bear in the U". One gesture, done carefully: anticipation, a soft rise, two paw swings, a happy
-  // beat with one small heart, settle, blink. Positions are the bear's base above the baseline, in em.
-  var BEAR = { neutral: 232, blink: 232, wave: 264, happy: 234 };   // drawn widths in px (one scale)
-  // PEEK: eyes and nose over the lip. UP: the waving paw (95–169 px up the wave drawing) clears the stems' tops
-  // (.715 em), so the bear sits up in the mouth of the U with its head, shoulders and paw above the letter.
-  var PEEK = 0.02, UP = 0.59;
+  // ------------------------------------------------------------------ 0b. the bear in the U
+  // DESIGN.md "Bear in the U". Three concepts behind ?bear=a|b|c; one gesture each, done carefully.
+  var BEAR_DEFAULT = "c";
+  var SPRITE = { neutral: 232, blink: 232, wave: 264, happy: 234, hug: 281 };  // drawn widths, px
   function bear() {
-    var hit = document.querySelector(".mark .u-hit");
+    var mark = document.querySelector(".mark"), hit = document.querySelector(".mark .u-hit");
     if (!hit) return;
-    var pos = document.querySelector(".mark .b-pos"), tilt = document.querySelector(".mark .b-tilt");
-    var fx = document.querySelector(".mark .b-fx"), stage = document.querySelector(".mark .u-stage");
-    var pa = document.querySelector(".mark .b-breath .pa"), pb = document.querySelector(".mark .b-breath .pb");
-    var y = PEEK, pose = "neutral", busy = false, queued = false, inside = false, leaveTimer = null, blinkTimer = null;
-    for (var k in BEAR) new Image().src = "assets/mark/bear-" + k + ".webp";
+    var q = /[?&]bear=([abc])/.exec(location.search);
+    var concept = q ? q[1] : BEAR_DEFAULT;
+    mark.setAttribute("data-bear", concept);
+    var u = document.querySelector(".mark .u");
+    var stage = u.querySelector(".u-stage");
+    var chains = [stage.querySelector(".b-pos")];
+    if (concept === "b") chains.push(u.querySelector(".u-paws .b-pos"));
+    var tilts = chains.map(function (c) { return c.querySelector(".b-tilt"); });
+    var fxs = chains.map(function (c) { return c.querySelector(".b-fx"); });
+    var pawR = u.querySelector(".paw.r");
+    var pa = stage.querySelector(".pa"), pb = stage.querySelector(".pb");
+    var REST = { a: 0.02, b: 0, c: 0.0 }[concept];
+    var y = REST, pose = null, busy = false, queued = false, inside = false, leaveTimer = null, started = 0;
+    var rest = concept === "b" ? "hug" : "neutral";
+    var poses = concept === "b" ? ["hug"] : concept === "a" ? ["neutral", "blink", "wave", "happy"] : ["neutral", "blink", "happy"];
+    poses.forEach(function (n) { new Image().src = "assets/mark/bear-" + n + ".webp"; });
     new Image().src = "assets/art/heart-particle.webp";
     var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
     var ty = function (v, px) { return "0 calc(" + (-v).toFixed(3) + "em" + (px ? " + " + px + "px" : "") + ")"; };
+    var all = function (els, frames, opts) { return Promise.all(els.map(function (el) { return el.animate(frames, opts).finished; })); };
 
     function setPose(name) {
       if (name === pose) return;
+      var first = pose === null;
       pose = name;
-      if (still.matches) {
-        // cross-fade (120 ms): the new drawing on the top layer, then it becomes the base
-        pb.src = pa.src; pb.style.setProperty("--pw", pa.style.getPropertyValue("--pw")); pb.style.opacity = 1;
-        pa.src = "assets/mark/bear-" + name + ".webp"; pa.style.setProperty("--pw", BEAR[name]);
+      var src = "assets/mark/bear-" + name + ".webp";
+      if (still.matches && !first) {
+        pb.src = pa.src; pb.style.setProperty("--pw", pa.style.getPropertyValue("--pw")); pb.style.setProperty("--dx", pa.style.getPropertyValue("--dx") || 0); pb.style.opacity = 1;
         pb.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, fill: "forwards" });
-      } else {
-        pa.src = "assets/mark/bear-" + name + ".webp"; pa.style.setProperty("--pw", BEAR[name]);
       }
+      pa.src = src; pa.style.setProperty("--pw", SPRITE[name]);
+      // the wave drawing is wider on the paw's side: keep its body (head centre at 108 of 264 px) in the middle
+      pa.style.setProperty("--dx", name === "wave" ? 24 : 0);
     }
-    function move(to, ms, easing, dip) {
+    setPose(rest);
+    chains.forEach(function (c) { c.style.translate = ty(REST); });
+
+    function move(to, ms, easing, dip, over) {
       var from = y; y = to;
-      if (still.matches) { pos.style.translate = ty(to); return Promise.resolve(); }
+      if (still.matches) { chains.forEach(function (c) { c.style.translate = ty(to); }); return Promise.resolve(); }
       var frames;
       if (dip) {
-        // the rise: a 3 px dip, then up with a soft overshoot capped at .03 em (a long rise must not fling the
-        // bear clear of the U), settling onto its seat
         var d = dip / (dip + ms);
         frames = [{ translate: ty(from) }, { translate: ty(from, 3), offset: d, easing: "cubic-bezier(.3,.9,.4,1)" },
-                  { translate: ty(to + 0.03), offset: d + (1 - d) * 0.68, easing: "cubic-bezier(.45,0,.55,1)" }, { translate: ty(to) }];
-      } else {
-        frames = [{ translate: ty(from), easing: easing }, { translate: ty(to) }];
-      }
-      var a = pos.animate(frames, { duration: ms + (dip || 0), fill: "forwards", easing: "linear" });
-      return a.finished.then(function () { pos.style.translate = ty(to); a.cancel(); });
+                  { translate: ty(to + (over || 0)), offset: d + (1 - d) * 0.66, easing: "cubic-bezier(.45,0,.55,1)" }, { translate: ty(to) }];
+      } else frames = [{ translate: ty(from), easing: easing }, { translate: ty(to) }];
+      return all(chains, frames, { duration: ms + (dip || 0), fill: "forwards" }).then(function () {
+        chains.forEach(function (c) { c.style.translate = ty(to); c.getAnimations().forEach(function (a) { a.cancel(); }); });
+      });
     }
-    function blink() {
-      if (busy || pose !== "neutral") return;
-      setPose("blink"); setTimeout(function () { if (pose === "blink") setPose("neutral"); }, 120);
+    function blinkOnce() {
+      if (pose !== "neutral") return Promise.resolve();
+      setPose("blink");
+      return wait(120).then(function () { if (pose === "blink") setPose("neutral"); });
     }
-    function scheduleBlink() {
-      clearTimeout(blinkTimer);
-      blinkTimer = setTimeout(function () { blink(); scheduleBlink(); }, 3000 + Math.random() * 3000);
-    }
-    function heart() {
+    (function scheduleBlink() {
+      setTimeout(function () { if (!busy && concept !== "b") blinkOnce(); scheduleBlink(); }, 3000 + Math.random() * 3000);
+    })();
+    function heart(x, yb) {
       if (still.matches) return;
       var h = new Image();
       h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "b-heart";
-      h.style.top = (0.75 - UP - 0.44) + "em";
-      stage.appendChild(h);
-      h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.06em", scale: 1, offset: .25 },
-                 { opacity: 0, translate: "-50% -.26em", scale: .9 }], { duration: 900, easing: "cubic-bezier(.2,.7,.3,1)" })
+      h.style.left = x + "em"; h.style.top = (0.75 - yb) + "em";
+      u.appendChild(h);
+      h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.05em", scale: 1, offset: .25 },
+                 { opacity: 0, translate: "-50% -.24em", scale: .9 }], { duration: 950, easing: "cubic-bezier(.2,.7,.3,1)" })
         .finished.then(function () { h.remove(); });
     }
-    function settle() {
-      tilt.style.rotate = "0deg";
-      return move(PEEK, 240, "cubic-bezier(.4,0,.2,1)").then(function () {
-        setPose("neutral"); return wait(80);
-      }).then(function () {
-        setPose("blink");   // blink once as it settles
-        return wait(120).then(function () { if (pose === "blink") setPose("neutral"); });
-      });
+    function squash(amount, ms) {
+      return all(fxs, [{ scale: "1 1" }, { scale: (1 + amount / 2) + " " + (1 - amount), offset: .35 }, { scale: (1 - amount / 4) + " " + (1 + amount / 3), offset: .7 }, { scale: "1 1" }],
+                 { duration: ms, easing: "ease-out" });
     }
-    var started = 0;
+
+    // ---- the three hellos
+    var HELLO = {
+      // a: cup wave — perk up ≤ 12 % of its height, wave over the rim, happy beat, settle
+      a: function () {
+        squash(0.04, 360);
+        all(fxs, [{ rotate: "0deg" }, { rotate: "0deg", offset: .25 }, { rotate: "-2deg", offset: .62 }, { rotate: ".6deg", offset: .82 }, { rotate: "0deg" }], { duration: 520, easing: "ease-out" });
+        setTimeout(function () { setPose("wave"); }, 250);
+        return move(0.074, 280, null, 80, 0.012).then(function () {
+          return all(fxs, [{ rotate: "0deg" }, { rotate: "5deg", offset: .25 }, { rotate: "-1deg", offset: .5 }, { rotate: "3deg", offset: .75 }, { rotate: "0deg" }],
+                     { duration: 520, easing: "ease-in-out" });
+        }).then(function () {
+          setPose("happy"); heart(0.315, 0.074 + 0.47); squash(0.03, 260);
+          return wait(400);
+        }).then(function () {
+          if (inside) return;
+          return move(REST, 240, "cubic-bezier(.4,0,.2,1)").then(function () { setPose("neutral"); return wait(60); }).then(blinkOnce);
+        });
+      },
+      // b: hug — lean toward its right a little, the right paw (in front of the stroke) waves twice
+      b: function () {
+        all(tilts.map(function (t) { return t; }), [{ rotate: "0deg" }, { rotate: "-1.2deg", offset: .25 }, { rotate: "3deg", offset: .7 }, { rotate: "2.4deg" }],
+            { duration: 360, easing: "cubic-bezier(.34,1.56,.64,1)", fill: "forwards" });
+        return wait(200).then(function () {
+          return pawR.animate([{ rotate: "0deg" }, { rotate: "-24deg", offset: .22, easing: "ease-in-out" }, { rotate: "-6deg", offset: .5, easing: "ease-in-out" },
+                               { rotate: "-18deg", offset: .74, easing: "ease-in-out" }, { rotate: "0deg" }], { duration: 760 }).finished;
+        }).then(function () {
+          heart(0.53, 0.33);
+          return wait(380);
+        }).then(function () {
+          if (inside) return;
+          return all(tilts, [{ rotate: "2.4deg" }, { rotate: "-.6deg", offset: .6 }, { rotate: "0deg" }], { duration: 320, easing: "cubic-bezier(.4,0,.2,1)" })
+            .then(function () { tilts.forEach(function (t) { t.getAnimations().forEach(function (a) { a.cancel(); }); }); });
+        });
+      },
+      // c: nod — a happy squint caught on the first dip, two little nods, one tiny heart
+      c: function () {
+        var nod = function (depth, ms) {
+          return Promise.all([
+            all(chains, [{ translate: ty(REST) }, { translate: ty(REST, depth), offset: .4, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(REST, -1), offset: .78 }, { translate: ty(REST) }], { duration: ms }),
+            all(fxs, [{ rotate: "0deg", scale: "1 1" }, { rotate: "2.5deg", scale: "1.02 .97", offset: .4 }, { rotate: "-.5deg", scale: "1 1.01", offset: .78 }, { rotate: "0deg", scale: "1 1" }], { duration: ms })
+          ]);
+        };
+        setTimeout(function () { setPose("happy"); }, 110);    // on the first dip's lowest point
+        return nod(5, 300).then(function () { return nod(3.5, 280); }).then(function () {
+          heart(0.315, REST + 0.47);
+          return wait(520);
+        }).then(function () {
+          if (inside) return;
+          setPose("neutral"); return wait(90).then(blinkOnce);
+        });
+      }
+    };
+    var STILL = {
+      a: function () { setPose("wave"); return wait(700).then(function () { setPose("happy"); return wait(400); }).then(function () { if (!inside) setPose("neutral"); }); },
+      b: function () { return wait(10); },
+      c: function () { setPose("happy"); return wait(900).then(function () { if (!inside) setPose("neutral"); }); }
+    };
+
     function hello(e) {
-      // the pointer arriving and its click a moment later are one hello, not two
       if (e && e.type === "click" && busy && Date.now() - started < 700) return;
       if (busy) { queued = true; return; }
       busy = true; started = Date.now(); clearTimeout(leaveTimer);
-      var run;
-      if (still.matches) {
-        run = Promise.resolve().then(function () { setPose("wave"); return wait(700); })
-          .then(function () { setPose("happy"); return wait(400); })
-          .then(function () { if (!inside) setPose("neutral"); });
-      } else {
-        var fromUp = y > PEEK + 0.01;
-        // 1) anticipation 80 ms: a 3 px dip and a slight squash; 2) the rise, soft overshoot, 280 ms;
-        //    the drawing follows through with a 2° counter-rotation that settles
-        fx.animate([{ scale: "1 1" }, { scale: "1.02 .96", offset: .22 }, { scale: ".99 1.02", offset: .5 }, { scale: "1 1" }],
-                   { duration: 360, easing: "ease-out" });
-        fx.animate([{ rotate: "0deg" }, { rotate: "0deg", offset: .25 }, { rotate: "-2deg", offset: .62 }, { rotate: ".6deg", offset: .82 }, { rotate: "0deg" }],
-                   { duration: 520, easing: "ease-out" });
-        var rise = fromUp ? Promise.resolve() : move(UP, 280, "cubic-bezier(.34,1.56,.64,1)", 80);
-        // 3) the wave pose at the top of the rise (≈ the overshoot's peak), then two paw swings about the base
-        setTimeout(function () { setPose("wave"); }, fromUp ? 0 : 245);
-        run = rise.then(function () {
-          return fx.animate([{ rotate: "0deg" }, { rotate: "5deg", offset: .25 }, { rotate: "-1deg", offset: .5 }, { rotate: "3deg", offset: .75 }, { rotate: "0deg" }],
-                            { duration: 520, easing: "ease-in-out" }).finished;
-        }).then(function () {
-          // 4) the happy beat: a tiny bounce carries the swap, and one small heart rises
-          setPose("happy"); heart();
-          fx.animate([{ scale: "1 1" }, { scale: "1.03 .97", offset: .3 }, { scale: "1 1" }], { duration: 260, easing: "ease-out" });
-          return wait(400);
-        }).then(function () { if (!inside) return settle(); });
-      }
-      run.then(function () {
+      (still.matches ? STILL[concept]() : HELLO[concept]()).then(function () {
         busy = false;
         if (queued) { queued = false; hello(); }
       });
     }
+    function settleAfterLeave() {
+      if (busy) return;
+      busy = true;
+      tilts.forEach(function (t) { t.style.rotate = "0deg"; });
+      var done;
+      if (concept === "a") done = move(REST, 240, "cubic-bezier(.4,0,.2,1)").then(function () { setPose("neutral"); return wait(60); }).then(blinkOnce);
+      else if (concept === "b") done = all(tilts, [{ rotate: "2.4deg" }, { rotate: "0deg" }], { duration: 320, easing: "cubic-bezier(.4,0,.2,1)" })
+        .then(function () { tilts.forEach(function (t) { t.getAnimations().forEach(function (a) { a.cancel(); }); }); });
+      else { setPose("neutral"); done = wait(90).then(blinkOnce); }
+      done.then(function () { busy = false; });
+    }
 
-    // desktop: the pointer arriving says hello; while it stays the bear watches it; it sinks 1.5 s after it leaves
     hit.addEventListener("pointerenter", function (e) {
       if (e.pointerType !== "mouse") return;
       inside = true; clearTimeout(leaveTimer);
-      if (y < UP - 0.01 && !busy) hello();
+      if (!busy) hello();
     });
     hit.addEventListener("pointermove", function (e) {
-      if (e.pointerType !== "mouse" || still.matches || y < UP - 0.01) return;
+      if (e.pointerType !== "mouse" || still.matches || busy || concept === "b") return;
       var r = hit.getBoundingClientRect();
       var dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 1.5)));
-      tilt.style.rotate = (dx * 6).toFixed(1) + "deg";
+      tilts.forEach(function (t) { t.style.rotate = (dx * 6).toFixed(1) + "deg"; });
     });
     hit.addEventListener("pointerleave", function (e) {
       if (e.pointerType !== "mouse") return;
-      inside = false; tilt.style.rotate = "0deg";
-      leaveTimer = setTimeout(function () {
-        if (busy) return;
-        busy = true;
-        (still.matches ? Promise.resolve(setPose("neutral")) : settle()).then(function () { busy = false; });
-      }, 1500);
+      inside = false;
+      if (concept !== "b") tilts.forEach(function (t) { t.style.rotate = "0deg"; });
+      leaveTimer = setTimeout(settleAfterLeave, 1500);
     });
-    hit.addEventListener("click", hello);   // mouse, touch, Enter and Space
-    scheduleBlink();
+    hit.addEventListener("click", hello);
 
-    // phones: one hello by itself the first time the hero is on screen
     if (window.matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
       var seen = new IntersectionObserver(function (entries) {
         if (!entries[0].isIntersecting) return;

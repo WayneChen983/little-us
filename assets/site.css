@@ -617,25 +617,41 @@ footer.site.night-foot a:hover { color: #F28B9D; }
   .phone { max-width: calc(100% - 24px); }
 }
 
-/* --- the bear in the U says hello (DESIGN.md "Bear in the U"). Layers inside the U, back to front: the whole U
-   (U-back); the bear, masked to the U's opening — the counter traced from Jua's U, its rounded floor and both
-   inner edges, extended straight up and opening out above the stems' tops — so the bowl below the floor is the
-   lip in front of it and nothing can show beside or under the strokes; then a clear hit area. 1 px of art = .00144 em. */
+/* --- the bear in the U (DESIGN.md "Bear in the U"). Three concepts behind ?bear=a|b|c (data-bear on .mark):
+   a  cup wave: in the U's bowl, in front of the stems, behind the bottom lip (a copy of the U below .17 em
+      over the baseline), masked so nothing shows under the lip; perks up and waves over the rim.
+   b  hug: behind the U, its two front paws (crops of the same hug drawing) in front of the strokes; the right
+      paw waves.
+   c  nod: in the bowl like a, a happy squint and two little nods.
+   Contact shadows: the lip onto the bear (a, c), the paws onto the letter (b). 1 px of art = --k em. */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.mark { --k: .0016em; }
+.mark[data-bear="b"] { --k: .00189em; }
 .mark .u { pointer-events: none; }
-.u-stage { position: absolute; left: 0; top: 0; width: .63em; height: .9em; z-index: 1;
-  clip-path: polygon(-0.500em -3.000em, -0.500em 0.035em, 0.146em 0.039em, 0.185em 0.079em, 0.189em 0.119em, 0.190em 0.159em, 0.191em 0.199em, 0.191em 0.239em, 0.190em 0.279em, 0.189em 0.319em, 0.188em 0.359em, 0.188em 0.399em, 0.190em 0.439em, 0.194em 0.479em, 0.202em 0.519em, 0.220em 0.559em, 0.267em 0.599em, 0.284em 0.603em, 0.308em 0.607em, 0.332em 0.603em, 0.346em 0.599em, 0.403em 0.559em, 0.423em 0.519em, 0.431em 0.479em, 0.434em 0.439em, 0.437em 0.399em, 0.439em 0.359em, 0.441em 0.319em, 0.443em 0.279em, 0.444em 0.239em, 0.444em 0.199em, 0.444em 0.159em, 0.443em 0.119em, 0.449em 0.079em, 0.491em 0.039em, 1.200em 0.035em, 1.200em -3.000em); animation: bearin .6s var(--ease) 1.1s both; }
+.u-back { position: relative; z-index: 1; }
+.u-stage { position: absolute; left: 0; top: 0; width: .63em; height: .9em; z-index: 2; animation: bearin .6s var(--ease) 1.1s both; }
+.mark:not([data-bear="b"]) .u-stage { clip-path: polygon(-0.500em -3.000em, 1.200em -3.000em, 1.200em 0.580em, 0.382em 0.580em, 0.375em 0.585em, 0.367em 0.590em, 0.356em 0.595em, 0.343em 0.600em, 0.332em 0.603em, 0.317em 0.605em, 0.308em 0.607em, 0.300em 0.605em, 0.284em 0.603em, 0.271em 0.600em, 0.258em 0.595em, 0.249em 0.590em, 0.242em 0.585em, 0.237em 0.580em, -0.500em 0.580em); }
+.mark[data-bear="b"] .u-stage { z-index: 0; }
 @keyframes bearin { from { opacity: 0; } to { opacity: 1; } }
-.b-pos { position: absolute; left: .315em; top: .75em; width: 0; height: 0; translate: 0 -.02em; } /* PEEK */
-.b-tilt, .b-fx, .b-breath { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+.b-pos { position: absolute; left: .315em; top: .75em; width: 0; height: 0; }
+.b-tilt, .b-fx, .b-breath, .paw { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
 .b-tilt { transition: rotate .35s cubic-bezier(.25, .8, .3, 1); }
 .b-breath { animation: breathe2 3.2s ease-in-out infinite; }
 @keyframes breathe2 { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2px; } }
-.b-breath img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * .00144em); max-width: none; translate: -50% 0; }
+.u-stage img, .u-paws img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * var(--k)); max-width: none; translate: calc(-50% + var(--dx, 0) * var(--k)) 0; }
 .b-breath .pb { opacity: 0; }
-.b-heart { position: absolute; left: .315em; width: .09em; pointer-events: none; }
-.u-hit { font-size: inherit; position: absolute; z-index: 3; left: .146em; top: -.45em; width: .345em; height: 1.05em; padding: 0; border: 0; background: none;
+.u-lip, .u-paws { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; display: none; }
+.mark:not([data-bear="b"]) .u-lip { display: block; filter: drop-shadow(0 -.005em .012em rgba(74, 58, 51, .34)); }
+.u-lip-g { display: block; clip-path: inset(.58em -.3em -.3em -.3em); }
+.mark[data-bear="b"] .u-paws { display: block; filter: drop-shadow(0 .006em .01em rgba(74, 58, 51, .32)); animation: bearin .6s var(--ease) 1.1s both; }
+/* the paws, cut from the hug drawing with ellipses that end at the wrists (sprite px 281 × 283) */
+.paw.l img { clip-path: ellipse(calc(25 * var(--k)) calc(40 * var(--k)) at calc(25 * var(--k)) calc(163 * var(--k))); }
+.paw.r img { clip-path: ellipse(calc(26 * var(--k)) calc(34 * var(--k)) at calc(256 * var(--k)) calc(162 * var(--k))); }
+.paw.r { transform-origin: calc((230 - 140.5) * var(--k)) calc((162 - 283) * var(--k)); }
+.mark[data-bear="b"] .u-paws .b-breath { animation: none; }
+.b-heart { position: absolute; width: .09em; pointer-events: none; z-index: 4; }
+.u-hit { font-size: inherit; position: absolute; z-index: 5; left: .1em; top: -.45em; width: .44em; height: 1.15em; padding: 0; border: 0; background: none;
   border-radius: .06em; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
 .u-hit:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { .u-stage { animation: none; } .b-breath { animation: none; } .b-tilt { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .u-stage, .u-paws { animation: none; } .b-breath { animation: none; } .b-tilt { transition: none; } }
 

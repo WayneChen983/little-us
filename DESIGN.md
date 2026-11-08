@@ -207,3 +207,15 @@ Owner, 2026-11-08: 「不用那麼多動作 一個打招呼的就好 你把一�
 - **Reduced motion**: nothing moves — peek → wave → happy → peek with 120 ms cross-fades.
 - 60 fps, transform and opacity only. Art: the app's bear poses (neutral, blink, wave, happy, from Android
   `drawable-nodpi` via `tools/build-assets.py`) and the app's heart particle.
+
+### Three concepts (2026-11-08, `?bear=a|b|c`; default **c**)
+
+- **a · Cup wave** — in the bowl, in front of the stems, behind the bottom lip (a copy of the U below .17 em over
+  the baseline; the mask follows the counter's floor below that); perks up 12 % of its height with anticipation and
+  a capped overshoot, waves over the rim (wave drawing re-centred on its body), happy + one heart, settles, blinks.
+- **b · Hug** — behind the U on the baseline, the hug drawing's two paws (cut out with ellipses that end at the
+  wrists) in front of the strokes; it leans a little and the right paw waves twice (rotating about the wrist),
+  one heart from the paw.
+- **c · Nod** (default) — as a, a happy squint caught on the first dip, two little nods (5 px, 3.5 px) with a
+  slight squash, one heart, back to neutral and a blink. The calmest; nothing crosses the letter's edges.
+- Contact shadows: the lip casts a soft shadow onto the bear (a, c); the paws onto the strokes (b).
