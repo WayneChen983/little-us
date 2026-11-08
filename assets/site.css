@@ -617,39 +617,25 @@ footer.site.night-foot a:hover { color: #F28B9D; }
   .phone { max-width: calc(100% - 24px); }
 }
 
-/* --- the bear in the U: say hi (home.js bear()). Only transforms and opacity move. --- */
+/* --- the bear in the U says hello (DESIGN.md "Bear in the U"). Layers inside the U, back to front: the whole U
+   (U-back); the bear, masked to the U's opening — the counter traced from Jua's U, its rounded floor and both
+   inner edges, extended straight up and opening out above the stems' tops — so the bowl below the floor is the
+   lip in front of it and nothing can show beside or under the strokes; then a clear hit area. 1 px of art = .0016 em. */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-/* The bear sits IN the U: the whole U behind it, then a copy of the U's lower part (below the rim line, .3 em
-   over the baseline) in front, so its belly is inside the cup and anything above the rim shows whole. Glyph
-   numbers measured from Jua's U: the opening is centred .3165 em from the glyph's origin, .25 em wide; the
-   inside floor is .16 em over the baseline; the line box starts .75 em over the baseline. */
 .mark .u { pointer-events: none; }
-.mark .u .bear { pointer-events: auto; }
-.mark .u-front { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; clip-path: inset(.45em -.2em -.3em -.2em); }
-.mark .peek-in.bear { z-index: 1; left: .1565em; width: .32em; height: .5em; bottom: .31em; translate: none; border-radius: .08em; animation-name: bearin; }
-@keyframes bearin { from { opacity: 0; translate: 0 .25em; } to { opacity: 1; translate: 0 0; } }
-.mark .peek-in.bear:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: .02em; }
-.bear-body { position: absolute; inset: 0; transform-origin: 50% 100%; transition: translate .45s cubic-bezier(.3, 1.5, .5, 1), rotate .45s var(--ease); translate: 0 var(--by, 0); rotate: var(--bt, 0deg); }
-.mark .peek-in.bear img { position: absolute; bottom: 0; left: 0; right: 0; margin: 0 auto; width: calc(var(--iw) / 353 * 100%); }
-.bear.noticed .bear-body { --by: -.12em; }
-.bear.idle .bear-body { animation: idlepeek 1.6s var(--ease) 1; }
-.bear.pop .bear-body { animation: bearpop 1.5s cubic-bezier(.3, 1.4, .5, 1) 1; }
-.bear.jump .bear-body { animation: bearjump 1.3s linear 1; }
-.bear.shy .bear-body { animation: bearshy 1.9s var(--ease) 1; }
-@keyframes idlepeek { 0%, 100% { translate: 0 0; } 35%, 60% { translate: 0 -.09em; } }
-@keyframes bearpop {
-  0% { translate: 0 0; scale: 1; } 10% { translate: 0 .03em; scale: 1.06 .92; } 28% { translate: 0 -.46em; scale: .96 1.05; }
-  40% { translate: 0 -.38em; scale: 1.03 .97; } 50%, 72% { translate: 0 -.4em; scale: 1; } 100% { translate: 0 0; scale: 1; }
-}
-@keyframes bearjump {
-  0% { translate: 0 0; scale: 1; animation-timing-function: ease-out; } 12% { translate: 0 .03em; scale: 1.08 .9; animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
-  42% { translate: 0 -.66em; scale: .95 1.06; animation-timing-function: cubic-bezier(.6, 0, .9, .5); } 70% { translate: 0 -.02em; scale: 1.06 .94; }
-  84% { translate: 0 -.06em; scale: 1; } 100% { translate: 0 0; scale: 1; }
-}
-@keyframes bearshy { 0% { translate: 0 0; rotate: 0deg; } 18%, 55% { translate: 0 .15em; rotate: 0deg; } 75%, 88% { translate: 0 .07em; rotate: 0deg; } 100% { translate: 0 0; rotate: 0deg; } }
-.float-heart { position: absolute; z-index: 3; left: .3165em; bottom: .75em; width: .12em; pointer-events: none; animation: floatheart 1.4s ease-out 1 both; }
-@keyframes floatheart { 0% { opacity: 0; translate: -50% 0; scale: .5; } 20% { opacity: 1; scale: 1; } 100% { opacity: 0; translate: calc(-50% + var(--dx, 0em)) -.45em; scale: .9; } }
-@media (prefers-reduced-motion: reduce) {
-  .bear-body { transition: none; }
-  .bear.idle .bear-body, .bear.pop .bear-body, .bear.jump .bear-body, .bear.shy .bear-body { animation: none; }
-}
+.u-stage { position: absolute; left: 0; top: 0; width: .63em; height: .9em; z-index: 1;
+  clip-path: polygon(-0.500em -3.000em, -0.500em 0.035em, 0.146em 0.039em, 0.185em 0.079em, 0.189em 0.119em, 0.190em 0.159em, 0.191em 0.199em, 0.191em 0.239em, 0.190em 0.279em, 0.189em 0.319em, 0.188em 0.359em, 0.188em 0.399em, 0.190em 0.439em, 0.194em 0.479em, 0.202em 0.519em, 0.220em 0.559em, 0.267em 0.599em, 0.284em 0.603em, 0.308em 0.607em, 0.332em 0.603em, 0.346em 0.599em, 0.403em 0.559em, 0.423em 0.519em, 0.431em 0.479em, 0.434em 0.439em, 0.437em 0.399em, 0.439em 0.359em, 0.441em 0.319em, 0.443em 0.279em, 0.444em 0.239em, 0.444em 0.199em, 0.444em 0.159em, 0.443em 0.119em, 0.449em 0.079em, 0.491em 0.039em, 1.200em 0.035em, 1.200em -3.000em); animation: bearin .6s var(--ease) 1.1s both; }
+@keyframes bearin { from { opacity: 0; } to { opacity: 1; } }
+.b-pos { position: absolute; left: .315em; top: .75em; width: 0; height: 0; translate: 0 -.01em; } /* PEEK */
+.b-tilt, .b-fx, .b-breath { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+.b-tilt { transition: rotate .35s cubic-bezier(.25, .8, .3, 1); }
+.b-breath { animation: breathe2 3.2s ease-in-out infinite; }
+@keyframes breathe2 { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2px; } }
+.b-breath img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * .0016em); max-width: none; translate: -50% 0; }
+.b-breath .pb { opacity: 0; }
+.b-heart { position: absolute; left: .315em; width: .09em; pointer-events: none; }
+.u-hit { position: absolute; z-index: 3; left: .146em; top: -.45em; width: .345em; height: 1.05em; padding: 0; border: 0; background: none;
+  border-radius: .06em; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+.u-hit:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .u-stage { animation: none; } .b-breath { animation: none; } .b-tilt { transition: none; } }
+

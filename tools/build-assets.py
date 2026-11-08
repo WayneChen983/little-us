@@ -61,6 +61,18 @@ def stickers():
             print(kind, sid, "ms", total)
 
 
+MARK_POSES = {"bear": ["neutral", "blink", "wave", "happy"]}
+
+
+def mark_poses():
+    """The bear in the U: the app's own pose drawings (Android drawable-nodpi), all at one pixel scale."""
+    src = os.path.join(APP, "android/app/src/main/res/drawable-nodpi")
+    for kind, poses in MARK_POSES.items():
+        for pose in poses:
+            with open(os.path.join(src, f"critter_{kind}_{pose}.webp"), "rb") as f, open(out("mark", f"{kind}-{pose}.webp"), "wb") as g:
+                g.write(f.read())
+
+
 def faces():
     for kind in KINDS:
         im = Image.open(os.path.join(APP, "ios/Shared/Art", f"face-{kind}-happy.webp")).convert("RGBA")
@@ -104,4 +116,4 @@ if __name__ == "__main__":
     if "--screens" in sys.argv:
         screens(sys.argv[sys.argv.index("--screens") + 1])
     else:
-        stickers(); faces(); widgets()
+        stickers(); faces(); widgets(); mark_poses()

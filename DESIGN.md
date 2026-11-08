@@ -175,13 +175,33 @@ only when the demo is near or you press Send. No third-party requests, cookies o
 - **No old promo art anywhere**: the App Store promo crops are deleted; `shot-*.webp` and `share.png` are
   regenerated from fresh captures and the new hero. Critters were zoom-checked (no cheek tufts).
 
-- **The bear in the U says hi** (owner's ask): a real `<button>` (「跟熊熊打招呼」 / "Say hi to Bear", Enter/Space,
-  focus ring). Hover or a first tap: it rises a little and tilts toward you. Each press, in turn: wave (pops up
-  with a springy bounce), heart (two of the app's heart particles float up), shy (ducks into the U, peeks back),
-  jump (cheer pose, a big hop); every fifth press the bunny on the "e" holds up its heart. A quiet peek every 8 s
-  when nobody's playing. It sits IN the U: the whole U behind it, a copy of the U's lower part (below a rim line .3 em over the
-  baseline) in front, centred on the opening (measured from Jua's U), so nothing is ever cut by a box.
-  Reduce Motion: the pose changes for a moment, nothing moves. Art: bear-happy/wave/heart/cheer (site art),
-  bear-loved (app critter), spot-particleHeart (app spot).
-
+- **The bear in the U**: see "Bear in the U — interaction spec" below.
 - The night chapter's small "23:30 · 最後一頁" label is gone (owner's ask).
+
+## Bear in the U — interaction spec
+
+Owner, 2026-11-08: 「不用那麼多動作 一個打招呼的就好 你把一個做好做到極致就好」 — one hello, done to perfection.
+
+- **Construction.** U-back (the whole glyph) behind the bear; the bear masked to the U's inner counter — traced
+  from Jua's U (both inner edges and the rounded floor) and extended upward — so the bowl under the floor is the
+  U-lip in front of it. The bear is centred in the opening (.315 em from the glyph's origin), never floats, is
+  never cut by a straight line, never shows outside the strokes. A clear `<button>` over the opening and above it
+  (「跟熊熊打招呼」 / "Say hi to Bear"; Enter and Space work; focus ring).
+- **Positions** (the bear's base above the baseline): PEEK = eyes and nose over the rim (rest); UP = head,
+  shoulders and paws resting on the lip.
+- **IDLE**: PEEK, neutral; breathing 2 px over 3.2 s; a blink (blink pose, 120 ms) every 3–6 s. Nothing else.
+- **HELLO** (desktop: the pointer enters the U area, or click/Enter/Space; phones: tap, plus one automatic hello
+  the first time the hero is in view, after 1.2 s):
+  1. anticipation: dip 3 px and a slight squash (scaleY .96), 80 ms;
+  2. rise to UP with a soft overshoot, cubic-bezier(.34,1.56,.64,1), 280 ms; follow-through faked with a 2°
+     counter-rotation that settles (the art moves as one sprite);
+  3. the wave pose at the top of the rise; two paw swings, ±5° about the bear's base, 2 × 260 ms, in-out,
+     the second smaller;
+  4. the happy beat: happy pose for 400 ms carried by a tiny bounce; one small heart particle rises and fades;
+  5. settle to PEEK, cubic-bezier(.4,0,.2,1), 240 ms, then blink once. Total ≈ 1.7 s.
+  On desktop, while the pointer stays, the bear stays UP and happy, its head tilting toward the pointer
+  (±6°, eased); it sinks to PEEK 1.5 s after the pointer leaves. Repeated clicks replay the hello (queue max 1,
+  no stacking; the pointer arriving and its click count once).
+- **Reduced motion**: nothing moves — peek → wave → happy → peek with 120 ms cross-fades.
+- 60 fps, transform and opacity only. Art: the app's bear poses (neutral, blink, wave, happy, from Android
+  `drawable-nodpi` via `tools/build-assets.py`) and the app's heart particle.
