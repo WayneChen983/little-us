@@ -23,7 +23,7 @@
     if (!el) return;
     if (/[?&]wm=upper/.test(location.search)) el.classList.add("upper");
     el.addEventListener("click", function (event) {
-      var b = event.target.closest(".sit");
+      var b = event.target.closest(".sit:not(.bear)");
       if (!b || still.matches) return;
       var img = b.querySelector("img");
       img.classList.remove("hop"); void img.offsetWidth; img.classList.add("hop");
@@ -41,123 +41,20 @@
   }
 
 
-  // ------------------------------------------------------------------ 0b. the bear in the U
-  // DESIGN.md "Bear in the U": behind the letter, seen through its opening. Rest: head, eyes, nose and a little
-  // cheek over the U's round inner floor, blinking now and then. Hello: a slight perk-up, a happy squint caught on
-  // the first dip, two small nods, one tiny heart rising out of the opening; then back, and a blink.
-  var SPRITE = { neutral: 232, blink: 232, happy: 234 };   // drawn widths, px
-  var REST = 0.52, PERK = 0.012, NOD = 0.018;              // base above the baseline, em; NOD ≈ 4 % of its height
-  // At REST the eyes' lower edge is .232 em up the drawing → .752 em, clear of the stems' tops (.715) even at a nod's lowest point.
+  // ------------------------------------------------------------------ 0b. the bear on the "s" waves when tapped
   function bear() {
-    var u = document.querySelector(".mark .u"), hit = u && u.querySelector(".u-hit");
-    if (!hit) return;
-    var pos = u.querySelector(".b-pos"), tilt = u.querySelector(".b-tilt"), fx = u.querySelector(".b-fx");
-    var pa = u.querySelector(".pa"), pb = u.querySelector(".pb");
-    var pose = "neutral", busy = false, queued = false, inside = false, leaveTimer = null, started = 0;
-    ["neutral", "blink", "happy"].forEach(function (n) { new Image().src = "assets/mark/bear-" + n + ".webp"; });
-    new Image().src = "assets/art/heart-particle.webp";
-    var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
-    var ty = function (v, px) { return "0 calc(" + (-v).toFixed(3) + "em" + (px ? " + " + px + "px" : "") + ")"; };
-    pos.style.translate = ty(REST);
-
-    function setPose(name) {
-      if (name === pose) return;
-      if (still.matches) {
-        pb.src = pa.src; pb.style.setProperty("--pw", pa.style.getPropertyValue("--pw")); pb.style.opacity = 1;
-        pb.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, fill: "forwards" });
-      }
-      pose = name;
-      pa.src = "assets/mark/bear-" + name + ".webp"; pa.style.setProperty("--pw", SPRITE[name]);
-    }
-    function blinkOnce() {
-      if (pose !== "neutral") return Promise.resolve();
-      setPose("blink");
-      return wait(120).then(function () { if (pose === "blink") setPose("neutral"); });
-    }
-    (function scheduleBlink() {
-      setTimeout(function () { if (!busy && !inside) blinkOnce(); scheduleBlink(); }, 3000 + Math.random() * 3000);
-    })();
-    function heart() {
-      if (still.matches) return;
-      var h = new Image();
-      h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "b-heart";
-      h.style.left = "0.315em"; h.style.top = (0.75 - REST - 0.45) + "em";
-      u.appendChild(h);
-      h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.06em", scale: 1, offset: .25 },
-                 { opacity: 0, translate: "-50% -.34em", scale: .9 }], { duration: 1100, easing: "cubic-bezier(.2,.7,.3,1)" })
-        .finished.then(function () { h.remove(); });
-    }
-    function play(el, frames, opts) { return el.animate(frames, opts).finished; }
-
-    function hello(e) {
-      if (e && e.type === "click" && busy && Date.now() - started < 700) return;
-      if (busy) { queued = true; return; }
-      busy = true; started = Date.now(); clearTimeout(leaveTimer);
-      var run;
-      if (still.matches) {
-        setPose("happy");
-        run = wait(900).then(function () { if (!inside) setPose("neutral"); });
-      } else {
-        // perk up (anticipation dip 2 px, a soft rise), then two nods: the head dips and tips 2.5°, the second smaller
-        var up = REST + PERK;
-        run = play(pos, [{ translate: ty(REST) }, { translate: ty(REST, 2), offset: .25, easing: "cubic-bezier(.34,1.56,.64,1)" }, { translate: ty(up) }],
-                   { duration: 300, fill: "forwards" })
-          .then(function () {
-            var nod = function (depth, rot, ms) {
-              return Promise.all([
-                play(pos, [{ translate: ty(up) }, { translate: ty(up - depth), offset: .42, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(up + depth * 0.15), offset: .8 }, { translate: ty(up) }], { duration: ms, fill: "forwards" }),
-                play(fx, [{ rotate: "0deg", scale: "1 1" }, { rotate: rot + "deg", scale: "1.015 .975", offset: .42 }, { rotate: (-rot / 5) + "deg", scale: "1 1", offset: .8 }, { rotate: "0deg", scale: "1 1" }], { duration: ms })
-              ]);
-            };
-            setTimeout(function () { setPose("happy"); }, 120);    // on the first dip's low point
-            return nod(NOD, 2.5, 300).then(function () { return nod(NOD * 0.62, 1.6, 280); });
-          })
-          .then(function () { heart(); return wait(480); })
-          .then(function () {
-            if (inside) return;
-            return play(pos, [{ translate: ty(up) }, { translate: ty(REST) }], { duration: 240, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" })
-              .then(function () { pos.style.translate = ty(REST); pos.getAnimations().forEach(function (a) { a.cancel(); }); setPose("neutral"); return wait(80); })
-              .then(blinkOnce);
-          });
-      }
-      run.then(function () { busy = false; if (queued) { queued = false; hello(); } });
-    }
-    function settle() {
+    var btn = document.querySelector(".mark .sit.bear");
+    if (!btn) return;
+    var img = btn.querySelector("img"), busy = false;
+    new Image().src = "assets/art/bear-wave.webp";
+    function pose(src, w) { img.src = src; btn.style.setProperty("--iw", w); }
+    btn.addEventListener("click", function () {
       if (busy) return;
       busy = true;
-      tilt.style.rotate = "0deg";
-      var cur = getComputedStyle(pos).translate;
-      play(pos, [{ translate: cur }, { translate: ty(REST) }], { duration: 240, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" })
-        .then(function () { pos.style.translate = ty(REST); pos.getAnimations().forEach(function (a) { a.cancel(); }); setPose("neutral"); return wait(80); })
-        .then(blinkOnce).then(function () { busy = false; });
-    }
-
-    hit.addEventListener("pointerenter", function (e) {
-      if (e.pointerType !== "mouse") return;
-      inside = true; clearTimeout(leaveTimer);
-      if (!busy) hello();
+      pose("assets/art/bear-wave.webp", 353);
+      if (!still.matches) img.animate([{ translate: "0 0" }, { translate: "0 -4px", offset: .35, easing: "ease-in" }, { translate: "0 0" }], { duration: 320, easing: "ease-out" });
+      setTimeout(function () { pose("assets/art/bear-happy.webp", 313); busy = false; }, 1200);
     });
-    hit.addEventListener("pointermove", function (e) {
-      if (e.pointerType !== "mouse" || still.matches) return;
-      var r = hit.getBoundingClientRect();
-      var dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 1.5)));
-      tilt.style.rotate = (dx * 5).toFixed(1) + "deg";
-    });
-    hit.addEventListener("pointerleave", function (e) {
-      if (e.pointerType !== "mouse") return;
-      inside = false; tilt.style.rotate = "0deg";
-      leaveTimer = setTimeout(settle, 1500);
-    });
-    hit.addEventListener("click", hello);
-
-    if (window.matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
-      var seen = new IntersectionObserver(function (entries) {
-        if (!entries[0].isIntersecting) return;
-        seen.disconnect();
-        setTimeout(hello, 1200);
-      }, { threshold: 0.6 });
-      seen.observe(hit);
-    }
   }
 
   // ------------------------------------------------------------------ 5. goodnight: the page turns to night

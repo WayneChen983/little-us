@@ -116,4 +116,4 @@ if __name__ == "__main__":
     if "--screens" in sys.argv:
         screens(sys.argv[sys.argv.index("--screens") + 1])
     else:
-        stickers(); faces(); widgets(); mark_poses()
+        stickers(); faces(); widgets()
