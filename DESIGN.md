@@ -174,3 +174,11 @@ only when the demo is near or you press Send. No third-party requests, cookies o
   drawings side by side; the header turns dark with it. Reduce Motion shows the night at once.
 - **No old promo art anywhere**: the App Store promo crops are deleted; `shot-*.webp` and `share.png` are
   regenerated from fresh captures and the new hero. Critters were zoom-checked (no cheek tufts).
+
+- **The bear in the U says hi** (owner's ask): a real `<button>` (「跟熊熊打招呼」 / "Say hi to Bear", Enter/Space,
+  focus ring). Hover or a first tap: it rises a little and tilts toward you. Each press, in turn: wave (pops up
+  with a springy bounce), heart (two of the app's heart particles float up), shy (ducks into the U, peeks back),
+  jump (cheer pose, a big hop); every fifth press the bunny on the "e" holds up its heart. A quiet peek every 8 s
+  when nobody's playing. It's clipped to the U's bowl, so it never drops below the letter or widens the page.
+  Reduce Motion: the pose changes for a moment, nothing moves. Art: bear-happy/wave/heart/cheer (site art),
+  bear-loved (app critter), spot-particleHeart (app spot).

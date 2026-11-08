@@ -23,7 +23,7 @@
     if (!el) return;
     if (/[?&]wm=upper/.test(location.search)) el.classList.add("upper");
     el.addEventListener("click", function (event) {
-      var b = event.target.closest(".sit, .peek-in");
+      var b = event.target.closest(".sit");
       if (!b || still.matches) return;
       var img = b.querySelector("img");
       img.classList.remove("hop"); void img.offsetWidth; img.classList.add("hop");
@@ -38,6 +38,88 @@
       el.style.setProperty("--cy", (y * 0.05).toFixed(1) + "px");
     }
     window.addEventListener("scroll", function () { if (!ticking) { ticking = true; raf(paint); } }, { passive: true });
+  }
+
+
+  // ------------------------------------------------------------------ 0b. the bear in the U says hi
+  // Hover or a first tap: it notices you (rises a little, tilts toward you). Each press: wave, heart, shy, jump,
+  // in turn, then it ducks back. The fifth press: the bunny on the "e" waves back. Only the app's drawings.
+  var POSES = { happy: ["assets/art/bear-happy.webp", 313], wave: ["assets/art/bear-wave.webp", 353],
+    heart: ["assets/art/bear-heart.webp", 271], shy: ["assets/art/bear-loved.webp", 311], jump: ["assets/art/bear-cheer.webp", 374] };
+  var REACTIONS = [["wave", "pop", 0], ["heart", "pop", 2], ["shy", "shy", 0], ["jump", "jump", 1]];
+  function bear() {
+    var b = document.querySelector(".mark .bear");
+    if (!b) return;
+    var img = b.querySelector("img"), body = b.querySelector(".bear-body");
+    var n = 0, busy = false, noticed = false, last = Date.now(), timer = null;
+    function pose(name) {
+      img.src = POSES[name][0];
+      img.style.setProperty("--iw", POSES[name][1]);
+    }
+    for (var k in POSES) new Image().src = POSES[k][0];
+    new Image().src = "assets/art/heart-particle.webp";
+    function lookAt(x) {
+      var r = b.getBoundingClientRect();
+      var dx = Math.max(-1, Math.min(1, (x - (r.left + r.width / 2)) / 300));
+      b.style.setProperty("--bt", (dx * 6).toFixed(1) + "deg");
+    }
+    function hearts(count) {
+      for (var i = 0; i < count; i++) {
+        var h = new Image();
+        h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "float-heart";
+        h.style.setProperty("--dx", (i ? .1 : -.08) + "em");
+        h.style.animationDelay = (0.25 + i * 0.25) + "s";
+        h.addEventListener("animationend", function () { this.remove(); });
+        b.parentNode.appendChild(h);  // in front of the letter, not behind it with the bear
+      }
+    }
+    function react() {
+      last = Date.now();
+      if (busy) return;
+      var r = REACTIONS[n % REACTIONS.length];
+      n += 1;
+      busy = true;
+      b.classList.remove("idle", "pop", "jump", "shy");
+      pose(r[0]);
+      if (still.matches) {
+        setTimeout(function () { pose("happy"); busy = false; }, 1200);
+      } else {
+        void body.offsetWidth;
+        b.classList.add(r[1]);
+        if (r[2]) hearts(r[2]);
+      }
+      if (n % 5 === 0) {
+        // the bunny on the "e" waves back
+        var bunny = document.querySelector(".mark .bunny img");
+        if (bunny) {
+          var was = bunny.src;
+          bunny.src = "assets/art/bunny-heart.webp";
+          if (!still.matches) { bunny.classList.remove("hop"); void bunny.offsetWidth; bunny.classList.add("hop"); }
+          setTimeout(function () { bunny.src = was; }, 1600);
+        }
+      }
+    }
+    body.addEventListener("animationend", function (e) {
+      if (e.animationName === "idlepeek") { b.classList.remove("idle"); return; }
+      b.classList.remove("pop", "jump", "shy");
+      pose("happy");
+      busy = false;
+    });
+    b.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { noticed = true; b.classList.add("noticed"); } });
+    b.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { noticed = false; b.classList.remove("noticed"); b.style.removeProperty("--bt"); } });
+    b.addEventListener("pointermove", function (e) { if (noticed) lookAt(e.clientX); });
+    b.addEventListener("click", function (e) {
+      // a first tap on a touch screen only gets noticed; the next one says hi
+      if (e.pointerType === "touch" && !noticed) { noticed = true; b.classList.add("noticed"); lookAt(e.clientX); last = Date.now(); return; }
+      react();
+    });
+    // a quiet peek now and then, when nobody's playing and the bear is on screen
+    if (!still.matches) {
+      timer = setInterval(function () {
+        if (busy || noticed || Date.now() - last < 8000 || document.hidden || window.scrollY > window.innerHeight) return;
+        b.classList.add("idle");
+      }, 8000);
+    }
   }
 
   // ------------------------------------------------------------------ 5. goodnight: the page turns to night
@@ -421,6 +503,6 @@
     near.observe(odo);
   }
 
-  function start() { mark(); hero(); day(); hug(); days(); night(); }
+  function start() { mark(); bear(); hero(); day(); hug(); days(); night(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
