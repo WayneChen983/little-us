@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["7VU5V3FF8W.tw.tw466376.couplechat"],
+        "components": [
+          { "/": "/i", "comment": "Invite: /i/?c=CODE opens Little Us (security audit M1)" },
+          { "/": "/i/*" },
+          { "/": "/r", "comment": "Referral: /r/?c=CODE" },
+          { "/": "/r/*" }
+        ]
+      }
+    ]
+  }
+}
