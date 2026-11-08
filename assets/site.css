@@ -504,3 +504,6 @@ footer.site a:hover { text-decoration-color: var(--rose); }
 .shot:nth-child(even) { rotate: 1.5deg; }
 .shot img { border-radius: var(--r-card); box-shadow: var(--shadow-paper); }
 @media (min-width: 960px) { .shots { justify-content: center; overflow: visible; } }
+
+/* Sections well below the first screen skip layout (and their lazy images) until they're near. */
+.later { content-visibility: auto; contain-intrinsic-size: auto 1400px; }
