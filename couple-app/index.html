@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant-TW" class="home" data-fixed-lang>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +22,11 @@
 <meta name="theme-color" content="#221B19" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="../assets/icon.png">
 <link rel="apple-touch-icon" href="../assets/icon.png">
-<link rel="preload" href="../assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/little-us-rounded.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
+<link rel="preload" href="../assets/fonts/little-us-wordmark.woff2" as="font" type="font/woff2" crossorigin fetchpriority="low">
 <link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js" defer></script>
+<script src="../assets/home.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -79,7 +82,7 @@
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="../"><img src="../assets/icon.png" alt="">Little Us</a>
+    <a class="brand" href="../"><img src="../assets/icon-108.webp" alt="" width="36" height="36"><span class="wordmark">Little <b>Us</b></span></a>
     <nav class="links" aria-label="Little Us">
       <a href="./" aria-current="page">情侶 App</a>
       <a href="#faq">常見問題</a>
@@ -89,82 +92,142 @@
   </div>
 </header>
 
-<main class="wrap">
-  <section class="hero">
-    <div class="scene" aria-hidden="true">
-      <img class="plant" src="../assets/art/plant-classic-6.webp" alt="" width="132" height="240" style="--w:132">
-      <img class="critter flip" src="../assets/art/bunny-hug.webp" alt="" width="387" height="455" style="--w:387">
-      <img class="critter heart" src="../assets/art/spot-two-hearts.webp" alt="" width="200" height="154" style="--w:120">
-      <img class="critter" src="../assets/art/bear-hug.webp" alt="" width="371" height="373" style="--w:371">
-      <img class="plant" src="../assets/art/plant-blossom-6.webp" alt="" width="193" height="240" style="--w:193">
-    </div>
+<main>
+  <section class="hero wrap">
     <h1 class="display">Little Us <span style="white-space:nowrap">情侶 App</span></h1>
     <p class="tagline">遠距離、異地戀也天天親近</p>
     <p class="lede">只屬於你和另一半的小天地：情侶聊天、語音通話、手寫紙條桌面小工具、交往天數和每日一問。不放廣告、不賣資料，iPhone 和 Android 可以互相配對。</p>
-    <div class="actions">
-      <a class="btn primary" href="https://apps.apple.com/tw/app/id6815943980">在 App Store 下載</a>
-      <a class="btn soft" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat">在 Google Play 下載</a>
+    <div class="actions stores">
+      <a class="btn primary magnet" data-store="apple" href="https://apps.apple.com/tw/app/id6815943980">在 App Store 下載</a>
+      <a class="btn soft magnet" data-store="play" href="https://play.google.com/store/apps/details?id=tw.tw466376.couplechat">在 Google Play 下載</a>
     </div>
+    <div class="stage" aria-hidden="true">
+      <img class="plant critter" src="../assets/art/plant-classic-6.webp" alt="" width="132" height="240" style="--x:-780;--w:132" loading="lazy">
+      <button class="mate a" type="button" tabindex="-1" style="--x:-371;--w:387;--h:459;--iw:302"
+        data-wave="../assets/art/bunny-wave.webp" data-wave-w="302" data-hug="../assets/art/bunny-hug.webp" data-hug-w="387">
+        <img class="critter flip" src="../assets/art/bunny-wave.webp" alt="" width="302" height="459" loading="lazy">
+      </button>
+      <img class="hearts" src="../assets/art/spot-two-hearts.webp" alt="" width="200" height="154" style="--x:-56;--w:112" loading="lazy">
+      <button class="mate b" type="button" tabindex="-1" style="--x:-16;--w:371;--h:388;--iw:353"
+        data-wave="../assets/art/bear-wave.webp" data-wave-w="353" data-hug="../assets/art/bear-hug.webp" data-hug-w="371">
+        <img class="critter" src="../assets/art/bear-wave.webp" alt="" width="353" height="388" loading="lazy">
+      </button>
+      <img class="plant critter" src="../assets/art/plant-blossom-6.webp" alt="" width="193" height="240" style="--x:587;--w:193" loading="lazy">
+    </div>
+    <p class="stage-hint" aria-hidden="true">往下滑，讓牠們見面</p>
   </section>
 
-  <section class="block" aria-labelledby="features">
-    <h2 class="section-title heading" id="features">每天一起用的情侶 App<img class="critter perch" src="../assets/art/cat-neutral.webp" alt="" width="378" height="400"></h2>
+  <section class="block wrap" aria-labelledby="features" style="padding-top:96px">
+    <h2 class="section-title heading" id="features">每天一起用的情侶 App<img loading="lazy" class="critter perch" src="../assets/art/cat-neutral.webp" alt="" width="378" height="400"></h2>
     <div class="features">
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-calendar.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-calendar.webp" alt="" width="200" height="176">
         <h3>交往天數和紀念日</h3>
         <p>打開就看到在一起第幾天、紀念日倒數和下次見面倒數，還有對方現在的心情。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-love-letter.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-love-letter.webp" alt="" width="200" height="153">
         <h3>手寫紙條桌面小工具</h3>
         <p>對方寫的手寫紙條直接出現在你的主畫面。小工具也能顯示天數、心情和見面倒數，一鍵傳愛心或說晚安。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-phone.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-phone.webp" alt="" width="191" height="200">
         <h3>遠距離也在身邊</h3>
         <p>情侶聊天、貼圖、語音訊息和照片，語音通話免費；Couple Plus 可以視訊。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-heartbeat.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-heartbeat.webp" alt="" width="200" height="171">
         <h3>抱抱、暗號和心跳</h3>
         <p>想對方的時候，傳一個抱抱、親親、只有你們懂的敲敲暗號，或是你現在的心跳。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-question-card.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-question-card.webp" alt="" width="199" height="200">
         <h3>每日一問和情侶小遊戲</h3>
         <p>每天一題、每日小挑戰，還有輪流畫給對方猜的你畫我猜，和一起編輯的約會轉盤。</p>
       </div>
       <div class="card feature tape">
         <div class="crew" aria-hidden="true">
-          <img class="critter flip" src="../assets/art/cat-neutral.webp" alt="" width="378" height="400">
-          <img class="critter flip" src="../assets/art/bunny-wave.webp" alt="" width="302" height="459">
-          <img class="critter" src="../assets/art/bear-happy.webp" alt="" width="313" height="375">
-          <img class="critter" src="../assets/art/pup-happy.webp" alt="" width="436" height="398">
+          <img loading="lazy" class="critter flip" src="../assets/art/cat-neutral.webp" alt="" width="378" height="400">
+          <img loading="lazy" class="critter flip" src="../assets/art/bunny-wave.webp" alt="" width="302" height="459">
+          <img loading="lazy" class="critter" src="../assets/art/bear-happy.webp" alt="" width="313" height="375">
+          <img loading="lazy" class="critter" src="../assets/art/pup-happy.webp" alt="" width="436" height="398">
         </div>
         <h3>陪你們的小動物</h3>
         <p>選貓咪、兔兔、熊熊或狗狗代表自己，牠們跟著心情換表情；互道晚安後也會一起睡著。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-hourglass.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-hourglass.webp" alt="" width="134" height="200">
         <h3>收藏你們的回憶</h3>
         <p>回憶相簿、回憶地圖、時光膠囊、心情月曆和年度回顧，還能一起養一盆植物。</p>
       </div>
       <div class="card feature tape">
-        <img class="sticker" src="../assets/art/spot-padlock.webp" alt="">
+        <img loading="lazy" class="sticker" src="../assets/art/spot-padlock.webp" alt="" width="170" height="200">
         <h3>只有你們兩個人</h3>
         <p>沒有動態牆、沒有陌生人。內容只有你們兩個人看得到，不放廣告、不賣資料。</p>
       </div>
     </div>
   </section>
 
-  <section class="block" aria-labelledby="inside">
-    <h2 class="section-title heading" id="inside">看看裡面</h2>
-    <div class="shots">
-      <figure class="shot tape"><img src="../assets/art/shot-zh-1-us.webp" alt="「我們」頁：在一起的天數和兩隻小動物" width="540" height="960" loading="lazy"></figure>
-      <figure class="shot tape"><img src="../assets/art/shot-zh-2-chat.webp" alt="情侶聊天室：訊息和貼圖" width="540" height="960" loading="lazy"></figure>
-      <figure class="shot tape"><img src="../assets/art/shot-zh-3-onboarding.webp" alt="選一隻小動物代表你" width="540" height="960" loading="lazy"></figure>
-      <figure class="shot tape"><img src="../assets/art/shot-zh-4-pairing.webp" alt="用邀請碼和另一半配對" width="540" height="960" loading="lazy"></figure>
+  <section class="day" id="day" aria-labelledby="day-title">
+    <div class="wrap">
+      <header class="chapter reveal">
+        <span class="eyebrow">第一章</span>
+        <h2 class="heading" id="day-title">一天的你們</h2>
+        <p>從早安到晚安，Little Us 陪在你們中間。</p>
+      </header>
+      <div class="day-grid">
+        <div class="day-stage">
+          <figure class="screens">
+          <noscript><img loading="lazy" class="first" src="../assets/story/zh-1-480.webp" width="880" height="1444" alt=""></noscript>
+        <img data-step="0" class="first" data-src="../assets/story/zh-1-480.webp" data-srcset="../assets/story/zh-1-480.webp 480w, ../assets/story/zh-1-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="「我們」頁：在一起 827 天，兩隻小動物跟著心情換表情" loading="lazy" decoding="async">
+        <img data-step="1" class="" data-src="../assets/story/zh-2-480.webp" data-srcset="../assets/story/zh-2-480.webp 480w, ../assets/story/zh-2-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="聊天室：訊息、貼圖和手寫紙條" loading="lazy" decoding="async">
+        <img data-step="2" class="" data-src="../assets/story/zh-3-480.webp" data-srcset="../assets/story/zh-3-480.webp 480w, ../assets/story/zh-3-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="約會轉盤：轉到「夜市小吃巡禮」" loading="lazy" decoding="async">
+        <img data-step="3" class="" data-src="../assets/story/zh-4-480.webp" data-srcset="../assets/story/zh-4-480.webp 480w, ../assets/story/zh-4-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="每日小挑戰、今日紙條和回憶照片" loading="lazy" decoding="async">
+        <img data-step="4" class="" data-src="../assets/story/zh-5-480.webp" data-srcset="../assets/story/zh-5-480.webp 480w, ../assets/story/zh-5-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="睡前：對方說晚安了，兔兔已經睡著" loading="lazy" decoding="async">
+        <img data-step="5" class="" data-src="../assets/story/zh-6-480.webp" data-srcset="../assets/story/zh-6-480.webp 480w, ../assets/story/zh-6-880.webp 880w" sizes="(max-width: 760px) 34vh, 460px" width="880" height="1444" alt="我們的小天地：共同清單、約會轉盤、時光膠囊和回憶地圖" loading="lazy" decoding="async">
+          </figure>
+          <ol class="rail" aria-label="時間">
+            <li><button type="button">08:00</button></li>
+            <li><button type="button">12:30</button></li>
+            <li><button type="button">18:00</button></li>
+            <li><button type="button">21:00</button></li>
+            <li><button type="button">23:30</button></li>
+            <li><button type="button">多年後</button></li>
+          </ol>
+        </div>
+        <ol class="steps-list">
+          <li class="step" data-tint="sky"><div class="inner">
+            <span class="time">08:00 · 早安</span>
+            <h3>打開就看到彼此</h3>
+            <p>在一起的天數、紀念日和下次見面的倒數。你們化身成兩隻小動物，跟著心情換表情。</p>
+          </div></li>
+          <li class="step" data-tint="butter"><div class="inner">
+            <span class="time">12:30 · 午休</span>
+            <h3>想你的時候，馬上說</h3>
+            <p>聊天、貼圖、語音訊息和照片，再傳一張手寫紙條。語音通話免費；Couple Plus 可以視訊。</p>
+          </div></li>
+          <li class="step" data-tint="peach"><div class="inner">
+            <span class="time">18:00 · 下班</span>
+            <h3>約會去哪裡？轉一下就知道</h3>
+            <p>一起編輯的約會轉盤：今天去哪、吃什麼，轉一下就決定。想去的地方和想吃的店，記在共同清單裡。</p>
+          </div></li>
+          <li class="step" data-tint="sage"><div class="inner">
+            <span class="time">21:00 · 晚上</span>
+            <h3>每天一點點，一起長大</h3>
+            <p>每日一問和每日小挑戰，越聊越懂對方；再一起養一盆植物，從種子陪到開花。</p>
+          </div></li>
+          <li class="step" data-tint="lavender"><div class="inner">
+            <span class="time">23:30 · 睡前</span>
+            <h3>睡前，說聲晚安</h3>
+            <p>互道晚安，兩隻小動物也會一起睡著。</p>
+          </div></li>
+          <li class="step" data-tint="blush"><div class="inner">
+            <span class="time">很多年後</span>
+            <h3>收藏每一個第一次</h3>
+            <p>回憶相簿與回憶地圖、時光膠囊、感謝小本本，還有只有你們懂的暗號辭典。</p>
+          </div></li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -206,7 +269,7 @@
     <div class="peek-host">
     <img class="critter peek rock" src="../assets/art/bear-wave.webp" alt="" width="353" height="388" aria-hidden="true" loading="lazy">
     <div class="card contact tape" style="--tape-x:56px;--tape:var(--peach)">
-      <img class="sticker" src="../assets/art/spot-mailbox.webp" alt="">
+      <img loading="lazy" class="sticker" src="../assets/art/spot-mailbox.webp" alt="" width="184" height="200">
       <div>
         <h2>還有其他問題？</h2>
         <p>問題、建議或想回報錯誤，請寫信到 <a href="mailto:tw466376@gmail.com">tw466376@gmail.com</a>，我們通常會在 2 個工作天內回覆。</p>

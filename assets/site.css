@@ -1,102 +1,133 @@
-/* Little Us website. Tokens from design/DESIGN_SYSTEM.md in the app repo: same colours, type sizes,
-   spacing, radii and the two shadows. A picture book open on a desk: cream paper, cocoa ink,
-   washi tape and stickers. All art is the app's approved drawings; code only moves and layers it. */
+/* Little Us website. Concept, type scale, motion and storyboard: DESIGN.md.
+   Tokens from design/DESIGN_SYSTEM.md in the app repo, nothing else: the same colours, six type sizes, the
+   spacing steps, three radii and two shadows. A picture book that moves: cream paper, cocoa ink, washi tape
+   and the app's approved drawings. Code only moves, layers and masks them. */
 
+/* fonts:start (written by tools/subset-font.py) */
 @font-face {
   /* jf open huninn (SIL OFL 1.1), cut down to the characters this site uses and renamed as the
-     licence asks for a modified copy. See fonts/OFL.txt. */
+     licence asks for a modified copy. See fonts/OFL.txt. Two files: the first screens, then the rest. */
   font-family: "Little Us Rounded";
   src: url("fonts/little-us-rounded.woff2") format("woff2");
+  font-display: swap;
+  unicode-range: U+20-7E, U+B7, U+D7, U+F7, U+2013-2014, U+2018-2019, U+201C-201D, U+2026-2027, U+2190, U+2192, U+2194, U+3001-3002, U+3008-300F, U+30FB, U+4E00, U+4E0A-4E0B, U+4E0D, U+4E26, U+4E2D, U+4E3B, U+4E5F, U+4E86, U+4E92, U+4E9B, U+4EA4, U+4EBA, U+4EE5, U+4EF6, U+4F4D, U+4F4F, U+4F60, U+4F7F, U+4F9B, U+4FB6, U+4FDD, U+4FE1, U+500B, U+5011, U+50B3, U+5165, U+5167, U+5169, U+5177, U+5206, U+5225, U+522A, U+5230, U+534A, U+5373, U+53CA-53CB, U+53E6, U+53EA, U+53EF, U+540C-540D, U+544A, U+548C, U+54EA, U+554F, U+555F, U+5728, U+5730, U+5929, U+5B50, U+5B57, U+5B89, U+5B9A, U+5BB6, U+5BB9, U+5BEB, U+5C0D, U+5C0F, U+5C31, U+5C6C, U+5DE5, U+5DF2, U+5E33, U+5E38, U+5E74, U+5E7E, U+5EE3, U+5F7C, U+5F80, U+5F97, U+5FC5, U+5FEB, U+600E, U+60C5, U+60F3, U+610F, U+6200, U+6210-6211, U+6216, U+624B, U+6253, U+628A, U+62B1, U+6388, U+63A8, U+63D0, U+6536, U+653E-653F, U+6548, U+6578, U+6587, U+6599, U+65B9, U+65BC, U+65E5, U+660E, U+662F, U+6642, U+6700, U+6708-6709, U+670B, U+671F, U+672A, U+672C, U+683C, U+684C, U+689D, U+6A19, U+6B0A, U+6B3E, U+6B64, U+6B72, U+6BCF, U+6E96, U+6EFF, U+7372, U+751F, U+7528, U+7559, U+756B, U+7570, U+767B, U+7684, U+76E3, U+76F8, U+770B, U+78BC, U+793A, U+79C1, U+7A31, U+7B2C, U+7B56, U+7BB1, U+7D19, U+7D44, U+7D66, U+7D93, U+804A, U+80FD, U+8207, U+85A6, U+85CF, U+865F, U+8868, U+88DD, U+88E1, U+88FD, U+8907, U+898B, U+89AA, U+8A00, U+8A2D, U+8A71, U+8A9E, U+8AAA, U+8ACB, U+8B58, U+8B77, U+8CC7, U+8CE3, U+8D77, U+8DDD, U+8DE8, U+8DF3, U+8E64, U+8F09, U+8F38, U+8FD1, U+8FFD, U+9001, U+9019-901A, U+9047, U+9060, U+9069, U+9080, U+90E8, U+90F5, U+90FD, U+914D, U+9577, U+958B, U+9664, U+96B1, U+96C6, U+96E2, U+96FB, U+9762, U+97F3, U+9808, U+9818, U+984C, U+9EBC, U+FF01, U+FF05, U+FF08-FF09, U+FF0B-FF0C, U+FF10-FF1B, U+FF1F;
+}
+/* fonts:end */
+@font-face {
+  /* Jua (SIL OFL 1.1), the launch screen's wordmark face, cut down to "Little Us". */
+  font-family: "Little Us Wordmark";
+  src: url("fonts/little-us-wordmark.woff2") format("woff2");
   font-display: swap;
 }
 
 :root {
-  --paper: #FFF8EE; --paper-deep: #FAEDDD; --card: #FFFDF8; --ink: #4A3A33; --soft-ink: #9A857A;
-  --line: #EFDFCD; --cocoa: #4A3A33; --rose: #EC8698; --blush: #F7B3BD; --peach: #FFCFAE;
-  --butter: #FFE39B; --sage: #C5DDB9; --sky: #BFE0F4; --lavender: #DCCDF4;
+  --paper: #FFF8EE; --paper-deep: #FAEDDD; --card: #FFFDF8; --ink: #4A3A33; --soft-ink: #76635A;
+  --line: #EFDFCD; --cocoa: #4A3A33; --rose: #F28B9D; --rose-end: #F49AA4; --rose-ink: #AB4C60; --on-rose: #4A3A33;
+  --blush: #F7B3BD; --peach: #FFCFAE; --butter: #FFE39B; --sage: #C5DDB9; --leaf: #8CBB82; --sky: #BFE0F4;
+  --lavender: #DCCDF4;
+  --wash: 38%;  /* how much of a pastel tints a band of paper */
   --shadow-paper: 0 3px 0 rgba(74, 58, 51, .08), 0 8px 14px rgba(74, 58, 51, .06);
   --shadow-float: 0 6px 16px rgba(74, 58, 51, .12);
   --display: 44px; --title: 26px; --headline: 18px; --body: 16px; --subhead: 14px; --caption: 12px;
+  --r-small: 10px; --r-card: 20px; --r-sheet: 28px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --chapter: 96px; /* two 48s: the gap between chapters */
   color-scheme: light;
+  interpolate-size: allow-keywords;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #221B19; --paper-deep: #2B2220; --card: #2F2623; --ink: #F6EBE2; --soft-ink: #BDA99D; --line: #40332E;
+    --rose-ink: #F28B9D; --wash: 9%;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #221B19; --paper-deep: #2B2220; --card: #2F2623; --ink: #F6EBE2; --soft-ink: #BDA99D; --line: #40332E;
+  --rose-ink: #F28B9D; --wash: 9%;
   color-scheme: dark;
 }
 
 /* One language at a time once the script has picked it; both without JavaScript. */
 html[data-lang="zh"] [data-l="en"], html[data-lang="en"] [data-l="zh"] { display: none !important; }
 
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .25s; }
+
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
 body {
-  margin: 0; color: var(--ink); overflow-x: hidden;
+  margin: 0; color: var(--ink); overflow-x: clip;
   /* The app's paper (StoryBackground): cream with a faint dot grid, like a journal. */
   background-color: var(--paper);
   background-image: radial-gradient(circle, var(--line) .8px, transparent 1.2px);
   background-size: 22px 22px;
   font: var(--body)/1.75 "Little Us Rounded", "PingFang TC", "Noto Sans TC", -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: underline; text-decoration-color: var(--rose); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-a:hover { color: var(--rose); }
+a:hover { color: var(--rose-ink); }
 h1, h2, h3 { font-weight: 400; line-height: 1.35; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 p + p { margin-top: 12px; }
 p, li { text-wrap: pretty; }
-:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; border-radius: 10px; }
+:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: 3px; border-radius: var(--r-small); }
+.skip { position: absolute; left: 20px; top: -64px; z-index: 30; background: var(--card); padding: 8px 16px; border-radius: 999px; box-shadow: var(--shadow-float); }
+.skip:focus { top: 12px; }
 
-.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 .narrow { max-width: 720px; }
 
-/* --- top bar --- */
-.top { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--line); }
+/* --- the wordmark (launch screen: Jua, "Little" in ink, "Us" in the accent as text) --- */
+.wordmark { font-family: "Little Us Wordmark", "Little Us Rounded", system-ui, sans-serif; letter-spacing: .01em; }
+.wordmark b { font-weight: 400; color: var(--rose-ink); }
+
+/* --- top bar: clear over the hero, paper with a hairline once you scroll --- */
+.top { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line); transition: border-color .3s; }
+.top.at-top { border-bottom-color: transparent; }
 .top .wrap { display: flex; align-items: center; gap: 16px; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: var(--headline); }
 .brand:hover { color: var(--ink); }
-.brand img { width: 36px; height: 36px; border-radius: 10px; transition: rotate .2s; }
+.brand img { width: 36px; height: 36px; border-radius: var(--r-small); transition: rotate .25s var(--ease); }
 .brand:hover img { rotate: -8deg; }
 .links { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
-.links a { text-decoration: none; padding: 4px 12px; border-radius: 999px; font-size: var(--subhead); white-space: nowrap; }
+.links a { text-decoration: none; padding: 4px 12px; border-radius: 999px; font-size: var(--subhead); white-space: nowrap; transition: background-color .2s; }
 .links a:hover { background: var(--paper-deep); color: var(--ink); }
-.links a[aria-current="page"] { background: var(--paper-deep); }
+.links a[aria-current="page"], .links a.here { background: var(--paper-deep); }
 .lang-switch { display: flex; background: var(--paper-deep); border-radius: 999px; padding: 4px; }
 .lang-switch button {
-  font: inherit; font-size: var(--subhead); color: var(--soft-ink); background: none; border: 0; border-radius: 999px;
-  padding: 0 12px; min-height: 32px; cursor: pointer;
+  font: inherit; font-size: var(--subhead); color: var(--soft-ink); background: none; border: 0;
+  border-radius: 999px; padding: 0 12px; min-height: 32px; min-width: 48px; cursor: pointer; transition: color .25s, background-color .25s;
 }
 .lang-switch button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: var(--shadow-paper); }
 @media (max-width: 640px) {
   .links { order: 3; width: 100%; margin: 0 -12px; padding: 0 0 4px; }
   .lang-switch { margin-left: auto; }
 }
+@media (max-width: 760px) { .home .links { display: none; } .home .lang-switch { margin-left: auto; } }
 
-/* --- buttons --- */
+/* --- buttons (Press: primary .97, soft .95; down at once, back on a .25 s spring) --- */
 .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px;
   border-radius: 999px; font: inherit; font-size: var(--body); text-decoration: none; border: 0; cursor: pointer;
-  transition: scale .2s;
+  transition: scale .25s var(--ease), translate .4s var(--ease), background-color .2s;
+  translate: var(--mx, 0) var(--my, 0);
 }
-.btn:active { scale: .97; }
-/* The one allowed gradient on a control: rose → peach, subtle. */
+.btn:active { scale: .95; transition-duration: .06s; }
+/* The one allowed gradient on a control: rose → its end, subtle. Text on rose is cocoa. */
 .btn.primary {
-  background-color: var(--rose);
-  background-image: linear-gradient(135deg, var(--rose) 30%, color-mix(in srgb, var(--rose) 72%, var(--peach)));
-  color: #fff; box-shadow: var(--shadow-float);
+  background-color: var(--rose); background-image: linear-gradient(135deg, var(--rose) 30%, var(--rose-end));
+  color: var(--on-rose); box-shadow: var(--shadow-float);
 }
-.btn.primary:hover { color: #fff; filter: brightness(1.03); }
+.btn.primary:active { scale: .97; }
+.btn.primary:hover { color: var(--on-rose); }
 .btn.soft { background: var(--paper-deep); color: var(--ink); }
 .btn.soft:hover { color: var(--ink); background: var(--line); }
 
 /* --- paper card --- */
-.card { position: relative; background: var(--card); border-radius: 20px; padding: 24px; box-shadow: var(--shadow-paper); }
+.card { position: relative; background: var(--card); border-radius: var(--r-card); padding: 24px; box-shadow: var(--shadow-paper); }
 @media (max-width: 480px) { .card { padding: 20px 16px; } }
 
 /* --- section heading (the app's StoryHeading): a rose squiggle under the title --- */
@@ -107,8 +138,9 @@ p, li { text-wrap: pretty; }
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M1.5 4Q6.75 .5 12 4T22.5 4' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 24px 8px round no-repeat;
   -webkit-mask-repeat: round no-repeat; mask-repeat: round no-repeat;
 }
+.chapter .heading { margin-left: auto; margin-right: auto; }
 
-/* --- washi tape: one strip, only on pinned paper (cards, screenshots, the code slip) --- */
+/* --- washi tape: one strip, only on pinned paper --- */
 .tape::before {
   content: ""; position: absolute; z-index: 2; top: -11px; left: var(--tape-x, 50%); width: 78px; height: 22px;
   margin-left: -39px; background: var(--tape, var(--butter)); opacity: .78; rotate: var(--tilt, -4deg); pointer-events: none;
@@ -124,15 +156,16 @@ p, li { text-wrap: pretty; }
 .tape:nth-child(6n+6):is(.features > *, .shots > *) { --tape: var(--peach); --tilt: 2deg; }
 
 /* --- spot art as stickers: stuck on a little crooked --- */
-.sticker { rotate: var(--lean, -4deg); transition: rotate .25s; }
+.sticker { rotate: var(--lean, -4deg); transition: rotate .25s var(--ease); }
 .features > :nth-child(even) .sticker, .sticker.lean-right { --lean: 4deg; }
 
-/* --- critters: code only moves them. Idle breathe (3.6 s); a hop on hover or tap; waving ones
-   rock ±4° now and then. The drawings face left; .flip turns the ones on the left to face right. --- */
+/* --- critters: code only moves them. Idle breathe (3.6 s); a hop on hover or tap; waving ones rock ±4° now
+   and then. The drawings face left; .flip turns the ones on the left to face right. --- */
 .critter { transform-origin: 50% 100%; animation: breathe 3.6s ease-in-out infinite; }
 .flip { transform: scaleX(-1); }
 .critter.rock { animation: breathe 3.6s ease-in-out infinite, rock 7.5s ease-in-out infinite; }
 .critter.hop { animation: hop .95s linear 1; }
+.critter.pop { animation: pop .32s var(--ease) 1; }
 @keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.02; } }
 @keyframes rock {
   0%, 74%, 100% { rotate: 0deg; }
@@ -146,44 +179,228 @@ p, li { text-wrap: pretty; }
   85% { translate: 0 0; scale: .98 1.02; }
   100% { translate: 0 0; scale: 1 1; }
 }
+/* A held pose cuts in with a quick squash and pop (never a crossfade between two drawings). */
+@keyframes pop { 0% { scale: 1.06 .92; } 55% { scale: .97 1.04; } 100% { scale: 1 1; } }
 .critter:nth-child(2) { animation-delay: -.9s; }
 .critter:nth-child(3) { animation-delay: -1.8s; }
 .critter:nth-child(4) { animation-delay: -2.7s; }
 .critter:nth-child(5) { animation-delay: -1.3s; }
-.critter.hop { animation-delay: 0s; }
+.critter.hop, .critter.pop { animation-delay: 0s; }
+
+/* --- reveal: rises 16 and fades in once (only with JS and motion) --- */
+.js .reveal { opacity: 0; translate: 0 16px; transition: opacity .6s var(--ease), translate .6s var(--ease); transition-delay: var(--d, 0s); }
+.js .reveal.in { opacity: 1; translate: 0 0; }
+
 @media (prefers-reduced-motion: reduce) {
-  .critter, .critter.rock, .critter.hop { animation: none; }
+  .critter, .critter.rock, .critter.hop, .critter.pop { animation: none; }
   .btn, .sticker, .brand img { transition: none; }
+  .js .reveal { opacity: 1; translate: none; transition: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 
-/* A critter peeking over the top edge of the card after it: it sits behind the card. */
-.peek-host { position: relative; }
-.peek-host > .card { z-index: 1; }
-.peek { position: absolute; z-index: 0; right: var(--peek-x, 32px); bottom: calc(100% - var(--hide, 40px)); width: var(--peek-w, 96px); }
+/* ===================================================================== home */
 
-/* A critter sitting at the end of a section title, on the squiggle. */
-/* The title and its critter are centred together. */
-.section-title:has(.perch) { left: calc(var(--perch-h, 64px) / -2 - 4px); }
-.perch { position: absolute; left: 100%; bottom: 6px; margin-left: 8px; height: var(--perch-h, 64px); width: auto; max-width: none; }
+/* chapter heads: a small eyebrow, the title with its squiggle, one line under it */
+.chapter { text-align: center; margin: 0 auto 48px; max-width: 36em; }
+.eyebrow { display: block; font-size: var(--caption); letter-spacing: .16em; color: var(--rose-ink); margin-bottom: 8px; }
+.chapter h2 { font-size: var(--title); }
+.chapter p { color: var(--soft-ink); margin-top: 16px; }
+section.chapter-block { padding: var(--chapter) 0 0; }
 
-/* --- home hero --- */
-.hero { text-align: center; padding: 48px 0 32px; }
-.scene { display: flex; justify-content: center; align-items: flex-end; margin: 0 auto 24px; max-width: 600px; }
-/* Everything in the scene shares one scale, so each takes its own drawn width. */
-.scene > img { width: calc(var(--w) / 1310 * 100%); }
-.scene .heart { align-self: center; margin: 0 2% 8%; }
-.scene .plant { margin-bottom: 1%; }
-.display { font-size: var(--display); line-height: 1.15; }
-.hero .tagline { font-size: var(--title); margin-top: 8px; }
-.hero .lede { color: var(--soft-ink); margin: 12px auto 24px; max-width: 32em; }
-.hero .note { color: var(--soft-ink); font-size: var(--caption); margin-top: 12px; text-wrap: balance; }
+/* --- 1. hero: the two of them meet --- */
+.hero { text-align: center; padding-top: 48px; }
+.hero .eyebrow { margin-bottom: 16px; }
+.hero h1 { font-size: var(--display); line-height: 1.2; letter-spacing: .02em; }
+.hero h1 .line { display: block; }
+.hero .lede { color: var(--soft-ink); margin: 16px auto 24px; max-width: 30em; }
+@media (max-width: 480px) { .hero { padding-top: 32px; } .hero h1 { letter-spacing: 0; } }
+:lang(zh) .eyebrow { letter-spacing: .08em; }
 
-/* --- sections --- */
+/* One scale for the whole stage: --u is one pixel of the drawings. Positions are offsets from the middle. */
+.stage {
+  --u: min(calc((100vw - 40px) / 1000), .64px);
+  position: relative; height: calc(600 * var(--u)); margin: 32px auto 0; border-bottom: 1px solid var(--line);
+}
+.stage > * { position: absolute; bottom: 0; left: calc(50% + var(--x) * var(--u)); width: calc(var(--w) * var(--u)); }
+.stage .plant { z-index: 0; }
+.stage .mate {
+  z-index: 1; height: calc(var(--h) * var(--u)); border: 0; padding: 0; background: none; cursor: pointer; border-radius: var(--r-card);
+  translate: calc(var(--away) * (1 - var(--t, 0)) * var(--u)) 0; rotate: var(--lean, 0deg); transform-origin: 50% 100%; transition: rotate .6s var(--ease);
+}
+.stage .mate img { position: absolute; bottom: 0; left: 50%; width: calc(var(--iw) / var(--w) * 100%); translate: -50% 0; }
+.stage .mate img.flip { translate: -50% 0; }
+.stage .mate.a { --away: -260; }
+.stage .mate.b { --away: 260; }
+.stage .hearts { z-index: 2; bottom: calc(392 * var(--u)); opacity: 0; scale: .4; transition: opacity .2s, scale .5s cubic-bezier(.3, 1.6, .5, 1); }
+.stage.together .hearts { opacity: 1; scale: 1; }
+@media (max-width: 640px) {
+  .stage { --u: calc((100vw - 40px) / 860); }
+  .stage .plant { display: none; }
+  .stage .mate.a { --away: -64; }
+  .stage .mate.b { --away: 64; }
+}
+.stage-hint { font-size: var(--caption); color: var(--soft-ink); margin: 12px 0 0; transition: opacity .4s; }
+.stage.together + .stage-hint { opacity: 0; }
+
+/* --- 2. promises --- */
+.promises-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 32px 0 0; list-style: none; }
+.promises-row li { display: flex; align-items: center; gap: 12px; font-size: var(--subhead); color: var(--soft-ink); justify-content: center; }
+.promises-row img { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; }
+@media (max-width: 720px) { .promises-row { grid-template-columns: 1fr; gap: 12px; max-width: 300px; margin: 0 auto; } .promises-row li { justify-content: flex-start; } }
+
+/* --- 3. a day of you two: pinned screens, steps scroll by --- */
+.day { --tint: var(--sky); margin-top: var(--chapter); padding: var(--chapter) 0; background-color: color-mix(in srgb, var(--tint) var(--wash), var(--paper)); transition: background-color .8s var(--ease); }
+.day-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.day-stage { position: sticky; top: 88px; height: calc(100svh - 112px); max-height: 780px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+.screens { position: relative; margin: 0; flex: 0 1 auto; height: calc(100% - 56px); aspect-ratio: 1320 / 2165; max-width: 100%; border-radius: var(--r-sheet); overflow: hidden; box-shadow: var(--shadow-float); background: var(--card); }
+.screens img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; clip-path: inset(100% 0 0 0); transition: clip-path .7s var(--ease); }
+.screens img.shown { clip-path: inset(0 0 0 0); }
+.screens img.first { clip-path: inset(0 0 0 0); transition: none; }
+.rail { display: flex; gap: 4px; justify-content: center; list-style: none; margin: 0; padding: 4px; background: var(--card); border-radius: 999px; box-shadow: var(--shadow-paper); }
+.rail button { font: inherit; font-size: var(--caption); color: var(--soft-ink); background: none; border: 0; border-radius: 999px; padding: 4px 12px; min-height: 32px; cursor: pointer; font-variant-numeric: tabular-nums; transition: background-color .3s, color .3s; white-space: nowrap; }
+.rail button[aria-current="step"] { background: var(--butter); color: var(--cocoa); }
+.steps-list { list-style: none; margin: 0; padding: 0; }
+.step { min-height: 80svh; display: flex; flex-direction: column; justify-content: center; max-width: 420px; color: var(--soft-ink); transition: color .5s var(--ease); }
+.step:first-child { min-height: 70svh; }
+.step.active { color: var(--ink); }
+.step:not(.active) .time { color: var(--soft-ink); }
+.step .time { font-size: var(--caption); color: var(--rose-ink); letter-spacing: .12em; font-variant-numeric: tabular-nums; }
+.step h3 { font-size: var(--title); margin: 8px 0 12px; }
+.step p { color: var(--soft-ink); }
+@media (max-width: 760px) {
+  .day { padding-top: 64px; }
+  .day-grid { display: block; }
+  .day-stage { top: 64px; height: 56svh; z-index: 2; padding: 8px 0 12px; gap: 12px; background-color: color-mix(in srgb, var(--tint) var(--wash), var(--paper)); transition: background-color .8s var(--ease); }
+  .screens { height: calc(100% - 44px); }
+  .step { min-height: 30svh; max-width: none; justify-content: flex-start; padding-top: 16px; }
+  .step:first-child { min-height: 30svh; }
+  .step:last-child { min-height: 44svh; }
+  .step .inner { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow-paper); padding: 16px; }
+  .step h3 { font-size: var(--headline); margin: 4px 0 4px; }
+  .step p { font-size: var(--subhead); line-height: 1.65; }
+  .rail button { padding: 4px 8px; }
+  .day .chapter { margin-bottom: 24px; }
+}
+
+/* --- 4. send a hug --- */
+.hug-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px 96px; align-items: center; max-width: 960px; margin: 0 auto; }
+.chapter.left { text-align: left; margin: 0 0 32px; }
+.chapter.left .heading { margin-left: 0; }
+.choices.hug-choices-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hug-controls { display: grid; gap: 24px; }
+.hug-controls fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.hug-controls legend { font-size: var(--headline); padding: 0; margin-bottom: 12px; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { position: relative; display: block; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; z-index: 1; }
+.choice span {
+  display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 4px 16px 4px 4px; border-radius: 999px; background: var(--paper-deep);
+  font-size: var(--subhead); transition: background-color .2s, scale .25s var(--ease), box-shadow .2s;
+}
+.choice span img { width: 40px; height: 40px; object-fit: contain; }
+.choice.face span { padding: 4px; }
+.choice.face span img { width: 52px; height: 52px; }
+.choice input:checked + span { background: var(--card); box-shadow: inset 0 0 0 2px var(--rose); }
+.choice input:focus-visible + span { outline: 3px solid var(--rose-ink); outline-offset: 2px; }
+.choice input:active + span { scale: .95; }
+.send-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.sent-count { font-size: var(--subhead); color: var(--soft-ink); }
+
+/* a phone drawn as UI (a frame and a chat), not as an illustration */
+.phone {
+  position: relative; width: 100%; max-width: 340px; height: 580px; margin: 0 auto; border-radius: 48px; background: var(--paper);
+  border: 10px solid var(--cocoa); box-shadow: var(--shadow-float); overflow: hidden; display: flex; flex-direction: column; rotate: 2deg;
+}
+.phone::before { content: ""; position: absolute; top: 10px; left: 50%; width: 88px; height: 26px; margin-left: -44px; border-radius: 999px; background: var(--cocoa); z-index: 2; }
+.phone .bar { display: flex; align-items: center; gap: 8px; padding: 48px 16px 12px; border-bottom: 1px solid var(--line); background: var(--card); }
+.phone .bar img { width: 36px; height: 36px; }
+.phone .bar span { font-size: var(--body); line-height: 1.3; }
+.phone .bar small { display: block; font-size: var(--caption); color: var(--soft-ink); }
+.thread { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 12px; overflow: hidden; }
+.msg { max-width: 80%; padding: 8px 12px; border-radius: var(--r-card); font-size: var(--subhead); line-height: 1.5; animation: arrive .45s var(--ease) both; flex: 0 0 auto; }
+.msg.theirs { align-self: flex-start; background: var(--card); box-shadow: var(--shadow-paper); }
+.msg.mine { align-self: flex-end; background-color: var(--rose); background-image: linear-gradient(135deg, var(--rose) 30%, var(--rose-end)); color: var(--on-rose); }
+.msg.live { background: none; padding: 0; width: 132px; height: 132px; }
+.msg.live img { width: 132px; height: 132px; }
+.receipt { align-self: flex-end; font-size: var(--caption); color: var(--soft-ink); margin-top: -4px; flex: 0 0 auto; }
+.day-label { align-self: center; font-size: var(--caption); color: var(--soft-ink); }
+.phone .composer { margin: 0 12px 20px; min-height: 44px; border-radius: 23px; border: 1px solid var(--line); background: var(--card); color: var(--soft-ink); font-size: var(--subhead); display: flex; align-items: center; padding: 0 16px; }
+@keyframes arrive { from { opacity: 0; translate: 0 12px; scale: .96; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@media (max-width: 860px) {
+  .hug-grid { grid-template-columns: 1fr; gap: 32px; }
+  .chapter.left { text-align: center; }
+  .chapter.left .heading { margin-left: auto; }
+  .phone { max-width: 320px; height: 520px; }
+}
+@media (prefers-reduced-motion: reduce) { .msg { animation: none; } .phone { rotate: none; } }
+
+/* --- 5. days together: an odometer, laid out like the app's hero ("在一起 827 天") --- */
+.days-wrap { position: relative; max-width: 800px; margin: 0 auto; }
+.days-card { max-width: 520px; margin: 0 auto; text-align: center; padding: 32px 24px; z-index: 1; }
+.days-card label { display: block; font-size: var(--subhead); color: var(--soft-ink); margin-bottom: 8px; }
+.days-card input[type="date"] {
+  font: inherit; font-size: var(--body); color: var(--ink); background: var(--paper-deep); border: 0; border-radius: var(--r-small);
+  padding: 8px 16px; min-height: 44px; min-width: 200px; text-align: center;
+}
+.count { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 24px 0 4px; font-size: var(--headline); }
+.odometer { display: inline-flex; font-size: var(--display); line-height: 1.15; height: 1.15em; overflow: hidden; }
+.digit { display: block; height: 1.15em; overflow: hidden; }
+.digit > span { display: flex; flex-direction: column; transition: translate 1.1s var(--ease); transition-delay: var(--d, 0s); translate: 0 calc(var(--n, 0) * -1.15em); }
+.digit > span > span { height: 1.15em; display: block; }
+.since { font-size: var(--caption); color: var(--soft-ink); }
+.next { margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line); font-size: var(--subhead); }
+.next b { font-weight: 400; color: var(--rose-ink); }
+.local-note { margin-top: 8px; font-size: var(--caption); color: var(--soft-ink); }
+.days-wrap .cheerer { position: absolute; bottom: 0; width: 132px; }
+.days-wrap .cheerer.l { left: 0; }
+.days-wrap .cheerer.r { right: 0; }
+@media (max-width: 760px) {
+  .days-wrap .pair { display: flex; justify-content: center; align-items: flex-end; gap: 16px; margin-bottom: -6px; position: relative; z-index: 0; }
+  .days-wrap .cheerer { position: static; width: 84px; }
+}
+@media (prefers-reduced-motion: reduce) { .digit > span { transition: none; } }
+
+/* --- 6. contents of the book (DashedDivider between rows, spots as stickers) --- */
+.contents { list-style: none; margin: 0 auto; padding: 0; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; counter-reset: ch; }
+.contents li { counter-increment: ch; display: grid; grid-template-columns: 28px 56px 1fr; gap: 0 16px; align-items: center; padding: 20px 0; border-bottom: 1px dashed var(--line); }
+.contents li::before { content: counter(ch, decimal-leading-zero); font-size: var(--caption); color: var(--rose-ink); letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.contents img { width: 56px; height: 56px; object-fit: contain; }
+.contents h3 { font-size: var(--headline); line-height: 1.5; }
+.contents p { font-size: var(--subhead); color: var(--soft-ink); line-height: 1.65; margin-top: 4px; }
+.contents li:nth-child(even) .sticker { --lean: 4deg; }
+.contents li:hover .sticker { rotate: 0deg; }
+@media (max-width: 760px) { .contents { grid-template-columns: 1fr; } .contents li { grid-template-columns: 24px 48px 1fr; gap: 0 12px; padding: 16px 0; } .contents img { width: 48px; height: 48px; } }
+
+/* --- 7. widget wall (hidden until the MVP widgets ship) --- */
+.widgets-wall img { border-radius: var(--r-sheet); box-shadow: var(--shadow-paper); max-width: 420px; margin: 0 auto; }
+
+/* --- 9. goodnight --- */
+.night { margin-top: var(--chapter); padding: 64px 0 160px; background-color: color-mix(in srgb, var(--lavender) var(--wash), var(--paper)); text-align: center; }
+.night .sleeping { width: 200px; margin: 0 auto 24px; }
+.night h2 { font-size: var(--title); }
+.night p { color: var(--soft-ink); margin: 12px auto 24px; max-width: 28em; }
+
+/* --- questions --- */
+.faq { display: grid; gap: 12px; }
+.faq details { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow-paper); }
+.faq summary { list-style: none; cursor: pointer; padding: 16px 48px 16px 20px; font-size: var(--headline); position: relative; border-radius: var(--r-card); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; position: absolute; right: 22px; top: 50%; width: 9px; height: 9px; margin-top: -7px;
+  border-right: 2px solid var(--rose-ink); border-bottom: 2px solid var(--rose-ink); rotate: 45deg; transition: rotate .3s var(--ease), margin .3s var(--ease);
+}
+.faq details[open] summary::after { rotate: 225deg; margin-top: -2px; }
+.faq .answer { padding: 0 20px 20px; color: var(--ink); }
+.faq details::details-content { block-size: 0; overflow: hidden; transition: block-size .35s var(--ease), content-visibility .35s allow-discrete; }
+.faq details[open]::details-content { block-size: auto; }
+@media (prefers-reduced-motion: reduce) { .faq details::details-content { transition: none; } }
+
+/* sections shared with /couple-app/ */
 section.block { padding: 32px 0; }
 .section-title { font-size: var(--title); text-align: center; margin: 0 auto 32px; }
-.section-sub { color: var(--soft-ink); text-align: center; margin: -16px 0 24px; }
-
-.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px 16px; padding-top: 12px; }
+.section-title:has(.perch) { left: calc(var(--perch-h, 64px) / -2 - 4px); }
+.perch { position: absolute; left: 100%; bottom: 6px; margin-left: 8px; height: var(--perch-h, 64px); width: auto; max-width: none; }
+.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px 16px; padding-top: 12px; }
 .feature { display: flex; flex-direction: column; gap: 4px; padding-top: 28px; }
 .feature > img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
 .feature h3 { font-size: var(--headline); }
@@ -192,7 +409,6 @@ section.block { padding: 32px 0; }
 .feature .crew img { height: 52px; width: auto; }
 .feature .crew img:nth-child(2) { height: 60px; }
 @media (max-width: 560px) {
-  /* Phones: picture beside the words, so eight cards don't run for pages. */
   .feature { display: grid; grid-template-columns: 56px 1fr; column-gap: 16px; row-gap: 4px; align-items: start; padding-top: 24px; }
   .feature > img { width: 56px; height: 56px; grid-row: span 2; margin: 0; }
   .feature .crew { grid-column: 1 / -1; height: 56px; margin: 0 0 4px; }
@@ -201,27 +417,11 @@ section.block { padding: 32px 0; }
   .feature .crew ~ h3, .feature .crew ~ p { grid-column: 1 / -1; }
 }
 
-/* Screenshots, pinned to the page like photos. */
-.shots { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 20px 20px; margin: 0 -20px; scrollbar-width: thin; }
-.shot { position: relative; flex: 0 0 auto; width: min(212px, 60vw); margin: 0; scroll-snap-align: center; rotate: -1.5deg; }
-.shot:nth-child(even) { rotate: 1.5deg; }
-.shot img { border-radius: 20px; box-shadow: var(--shadow-paper); }
-@media (min-width: 960px) { .shots { justify-content: center; overflow: visible; } }
-
-/* --- questions --- */
-.faq { display: grid; gap: 12px; }
-.faq details { background: var(--card); border-radius: 20px; box-shadow: var(--shadow-paper); }
-.faq summary {
-  list-style: none; cursor: pointer; padding: 16px 48px 16px 20px; font-size: var(--headline); position: relative;
-}
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after {
-  content: "+"; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--rose); font-size: var(--title);
-}
-.faq details[open] summary::after { content: "−"; }
-.faq .answer { padding: 0 20px 20px; color: var(--ink); }
-
-.contact-block { padding-top: 80px !important; }
+/* A critter peeking over the top edge of the card after it: it sits behind the card. */
+.peek-host { position: relative; }
+.peek-host > .card { z-index: 1; }
+.peek { position: absolute; z-index: 0; right: var(--peek-x, 32px); bottom: calc(100% - var(--hide, 40px)); width: var(--peek-w, 96px); }
+.contact-block { margin-top: 96px; }
 .contact { display: flex; gap: 20px; align-items: center; }
 .contact > img { width: 88px; flex: 0 0 auto; }
 .contact h2 { font-size: var(--headline); margin-bottom: 4px; }
@@ -245,15 +445,17 @@ section.block { padding: 32px 0; }
 }
 
 .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
-.promise { background: var(--card); border-radius: 20px; box-shadow: var(--shadow-paper); padding: 16px; text-align: center; font-size: var(--subhead); }
+.promise { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow-paper); padding: 16px; text-align: center; font-size: var(--subhead); }
 .promise img { width: 56px; height: 56px; object-fit: contain; margin: 0 auto 8px; }
 .promise:nth-child(even) img { --lean: 4deg; }
 @media (max-width: 560px) { .promises { grid-template-columns: 1fr; } .promise { display: flex; align-items: center; gap: 12px; text-align: left; } .promise img { margin: 0; width: 44px; height: 44px; } }
 
-.doc { --tape-x: 64px; --tape: var(--sky); --tilt: -3deg; }
+.doc { --tape-x: 64px; --tape: var(--sky); --tilt: -3deg; padding: 32px; }
+@media (max-width: 480px) { .doc { padding: 24px 16px; } }
 .doc .intro { font-size: var(--headline); line-height: 1.7; }
 .doc section { padding-top: 32px; }
 .doc section:first-child { padding-top: 8px; }
+.doc section + section { border-top: 1px dashed var(--line); margin-top: 32px; }
 .doc h2 { font-size: var(--headline); display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .doc h2 img { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; rotate: -5deg; }
 .doc section:nth-child(even) h2 img { rotate: 5deg; }
@@ -274,11 +476,13 @@ section.block { padding: 32px 0; }
 
 /* --- footer: the critters stand on its top line --- */
 footer.site { border-top: 1px solid var(--line); margin-top: 112px; padding: 32px 0 48px; color: var(--soft-ink); font-size: var(--subhead); }
+.night + footer.site { margin-top: 0; background: var(--paper); }
 footer.site .wrap { position: relative; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
 footer.site .end { margin-left: auto; }
 footer.site a { text-decoration-color: var(--line); }
 footer.site a:hover { text-decoration-color: var(--rose); }
 .cheer { position: absolute; bottom: calc(100% + 32px); left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; gap: 4px; pointer-events: none; }
+.night + footer.site .cheer { bottom: calc(100% + 32px); }
 .cheer img { height: 84px; width: auto; pointer-events: auto; }
 .sleeper { position: absolute; bottom: calc(100% + 31px); right: 32px; height: 60px; width: auto; }
 @media (max-width: 560px) {
@@ -286,3 +490,15 @@ footer.site a:hover { text-decoration-color: var(--rose); }
   .cheer img { height: 68px; }
   .sleeper { right: 20px; height: 52px; }
 }
+
+/* the picture-book hero still used by /couple-app/ */
+.scene { display: flex; justify-content: center; align-items: flex-end; margin: 0 auto 24px; max-width: 600px; }
+.scene > img { width: calc(var(--w) / 1310 * 100%); }
+.scene .heart { align-self: center; margin: 0 2% 8%; }
+.display { font-size: var(--display); line-height: 1.15; }
+.hero .tagline { font-size: var(--title); margin-top: 8px; }
+.shots { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 20px 20px; margin: 0 -20px; scrollbar-width: thin; }
+.shot { position: relative; flex: 0 0 auto; width: min(212px, 60vw); margin: 0; scroll-snap-align: center; rotate: -1.5deg; }
+.shot:nth-child(even) { rotate: 1.5deg; }
+.shot img { border-radius: var(--r-card); box-shadow: var(--shadow-paper); }
+@media (min-width: 960px) { .shots { justify-content: center; overflow: visible; } }
