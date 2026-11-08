@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "tw.tw466376.couplechat",
-      "sha256_cert_fingerprints": ["REPLACE_WITH_PLAY_APP_SIGNING_SHA256 (Play Console → Test and release → App integrity → App signing key certificate)"]
+      "sha256_cert_fingerprints": ["20:B4:57:A8:62:2B:52:3B:A7:CE:AE:D6:36:FB:39:02:D7:88:A3:19:94:BF:78:5F:F9:D9:B2:DC:A3:65:76:DC"]
     }
   }
 ]
