@@ -183,19 +183,17 @@ only when the demo is near or you press Send. No third-party requests, cookies o
 Owner, 2026-11-08: one greeting, done to perfection; concept C (the nod) chosen, then recomposed so the "Us" still
 reads instantly as a word.
 
-- **Composition.** The bear sits BEHIND the whole U: every stroke of the letter is in front of it, and it shows
-  only through the U's opening. The stage is masked to the counter traced from Jua's U (both inner edges and the
-  round inner floor, open above the stems), so the occluding edge is the letter's own curve — no lip layer, no
-  straight clip. The bear is small enough (1 px of art = .00085 em) that its face is ≈ 75 % of the opening's
-  width at eye level; the ears may tuck behind the stems, the face never touches them, and the U's round inside
-  stays readable around it.
-- **Rest**: the top of the head, eyes, nose and a little cheek over the inner floor, the chin just disappearing
-  behind the curve; breathing 1.5 px over 3.2 s; a blink every 3–6 s.
+- **Composition.** The bear stands BEHIND the whole U at the bunny's scale (1 px of art = .0016 em, the same head
+  size as the bunny on the "e") and peeks over the letter like over a fence: ears, head and eyes above the stems'
+  tops, the stems overlapping its cheeks, nose and mouth in the top of the opening. Nothing is in front of the
+  strokes. Its body is hidden: the stage shows the bear above the stems' tops and, inside the opening, only down
+  to a soft arc at its chin, so nothing hangs in the hole and the U's round inside stays clear.
+- **Rest**: eyes fully above the stems' tops (also at a nod's lowest point); breathing 1.5 px over 3.2 s; a blink
+  every 3–6 s.
 - **Hello** (pointer entering, click, Enter/Space, tap; one automatic hello on phones the first time the hero is in
-  view): a 2 px anticipation dip and a soft perk-up of ≈ 5 % of its height; a happy squint caught on the first dip;
-  two small nods (4 px and 2.5 px, tipping 2.5° and 1.6°, with a slight squash), one tiny heart rising out of the
-  opening; then back down (240 ms) and a blink. While a mouse stays over the U the bear stays happy and tilts
-  toward it (±5°); it settles 1.5 s after the pointer leaves.
+  view): a 2 px anticipation dip and a perk-up of ≈ 3 % of its height; a happy squint caught on the first dip; two
+  nods (≈ 4 % and 2.5 % of its height, tipping 2.5° and 1.6°, slight squash); one tiny heart rising from behind the
+  U; back down and a blink. While a mouse stays over the U it stays happy and tilts toward it (±5°).
 - **Grounding**: a copy of the U with a soft shadow, kept only inside the opening, so the letter's inner edge
   casts a faint shadow onto the bear.
 - **Reduced motion**: happy for a moment with 120 ms cross-fades, nothing moves.

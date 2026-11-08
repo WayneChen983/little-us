@@ -46,7 +46,8 @@
   // cheek over the U's round inner floor, blinking now and then. Hello: a slight perk-up, a happy squint caught on
   // the first dip, two small nods, one tiny heart rising out of the opening; then back, and a blink.
   var SPRITE = { neutral: 232, blink: 232, happy: 234 };   // drawn widths, px
-  var REST = 0.058, PERK = 0.011;                           // base above the baseline, em (perk-up ≈ 5 % of its height)
+  var REST = 0.52, PERK = 0.012, NOD = 0.018;              // base above the baseline, em; NOD ≈ 4 % of its height
+  // At REST the eyes' lower edge is .232 em up the drawing → .752 em, clear of the stems' tops (.715) even at a nod's lowest point.
   function bear() {
     var u = document.querySelector(".mark .u"), hit = u && u.querySelector(".u-hit");
     if (!hit) return;
@@ -80,7 +81,7 @@
       if (still.matches) return;
       var h = new Image();
       h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "b-heart";
-      h.style.left = "0.315em"; h.style.top = (0.75 - REST - 0.25) + "em";
+      h.style.left = "0.315em"; h.style.top = (0.75 - REST - 0.45) + "em";
       u.appendChild(h);
       h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.06em", scale: 1, offset: .25 },
                  { opacity: 0, translate: "-50% -.34em", scale: .9 }], { duration: 1100, easing: "cubic-bezier(.2,.7,.3,1)" })
@@ -104,12 +105,12 @@
           .then(function () {
             var nod = function (depth, rot, ms) {
               return Promise.all([
-                play(pos, [{ translate: ty(up) }, { translate: ty(up, depth), offset: .42, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(up, -1), offset: .8 }, { translate: ty(up) }], { duration: ms, fill: "forwards" }),
+                play(pos, [{ translate: ty(up) }, { translate: ty(up - depth), offset: .42, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(up + depth * 0.15), offset: .8 }, { translate: ty(up) }], { duration: ms, fill: "forwards" }),
                 play(fx, [{ rotate: "0deg", scale: "1 1" }, { rotate: rot + "deg", scale: "1.015 .975", offset: .42 }, { rotate: (-rot / 5) + "deg", scale: "1 1", offset: .8 }, { rotate: "0deg", scale: "1 1" }], { duration: ms })
               ]);
             };
             setTimeout(function () { setPose("happy"); }, 120);    // on the first dip's low point
-            return nod(4, 2.5, 300).then(function () { return nod(2.5, 1.6, 280); });
+            return nod(NOD, 2.5, 300).then(function () { return nod(NOD * 0.62, 1.6, 280); });
           })
           .then(function () { heart(); return wait(480); })
           .then(function () {

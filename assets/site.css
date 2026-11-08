@@ -617,16 +617,17 @@ footer.site.night-foot a:hover { color: #F28B9D; }
   .phone { max-width: calc(100% - 24px); }
 }
 
-/* --- the bear in the U (DESIGN.md "Bear in the U"). It sits BEHIND the whole U and shows only through the U's
-   opening: the stage is masked to the counter traced from Jua's U (its two inner edges and round floor, open
-   above the stems), so the letter's own curve is what hides its body. Small enough that its face clears the
-   inner edges (1 px of art = .00085 em); a soft shadow from the counter's inner edge falls onto it. */
+/* --- the bear in the U (DESIGN.md "Bear in the U"). It stands BEHIND the whole U, at the bunny's scale
+   (1 px of art = .0016 em), and peeks over it like over a fence: ears, head and eyes above the stems' tops, the
+   stems overlapping its cheeks, nose and mouth in the top of the opening. The stage shows the bear above the
+   stems' tops and, inside the opening, down to a soft arc at its chin, so its body is never seen hanging in the
+   hole. A faint shadow from the letter's inner edge falls onto it. */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.mark { --k: .00085em; }
+.mark { --k: .0016em; }
 .mark .u { pointer-events: none; }
 .u-back { position: relative; z-index: 1; }
 .u-stage { position: absolute; left: 0; top: 0; width: .63em; height: .9em; z-index: 0;
-  clip-path: polygon(-0.500em -3.000em, -0.500em 0.035em, 0.146em 0.039em, 0.185em 0.079em, 0.189em 0.119em, 0.190em 0.159em, 0.191em 0.199em, 0.191em 0.239em, 0.190em 0.279em, 0.189em 0.319em, 0.188em 0.359em, 0.188em 0.399em, 0.190em 0.439em, 0.194em 0.479em, 0.202em 0.519em, 0.220em 0.559em, 0.267em 0.599em, 0.284em 0.603em, 0.308em 0.607em, 0.332em 0.603em, 0.346em 0.599em, 0.403em 0.559em, 0.423em 0.519em, 0.431em 0.479em, 0.434em 0.439em, 0.437em 0.399em, 0.439em 0.359em, 0.441em 0.319em, 0.443em 0.279em, 0.444em 0.239em, 0.444em 0.199em, 0.444em 0.159em, 0.443em 0.119em, 0.449em 0.079em, 0.491em 0.039em, 1.200em 0.035em, 1.200em -3.000em); animation: bearin .6s var(--ease) 1.1s both; }
+  clip-path: polygon(-0.500em -3.000em, 1.200em -3.000em, 1.200em 0.035em, 0.443em 0.035em, 0.440em 0.035em, 0.419em 0.068em, 0.398em 0.080em, 0.378em 0.087em, 0.357em 0.092em, 0.336em 0.094em, 0.315em 0.095em, 0.294em 0.094em, 0.273em 0.092em, 0.253em 0.087em, 0.232em 0.080em, 0.211em 0.068em, 0.190em 0.035em, 0.187em 0.035em, -0.500em 0.035em); animation: bearin .6s var(--ease) 1.1s both; }
 @keyframes bearin { from { opacity: 0; } to { opacity: 1; } }
 /* the inner shadow: a copy of the U, shadowed, kept only inside the opening */
 .u-shade { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none;
@@ -644,4 +645,5 @@ footer.site.night-foot a:hover { color: #F28B9D; }
   border-radius: .06em; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
 .u-hit:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .u-stage { animation: none; } .b-breath { animation: none; } .b-tilt { transition: none; } }
+
 
