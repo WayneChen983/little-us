@@ -634,7 +634,7 @@ footer.site.night-foot a:hover { color: #F28B9D; }
 .b-breath img { position: absolute; bottom: 0; left: 0; width: calc(var(--pw) * .00144em); max-width: none; translate: -50% 0; }
 .b-breath .pb { opacity: 0; }
 .b-heart { position: absolute; left: .315em; width: .09em; pointer-events: none; }
-.u-hit { position: absolute; z-index: 3; left: .146em; top: -.45em; width: .345em; height: 1.05em; padding: 0; border: 0; background: none;
+.u-hit { font-size: inherit; position: absolute; z-index: 3; left: .146em; top: -.45em; width: .345em; height: 1.05em; padding: 0; border: 0; background: none;
   border-radius: .06em; cursor: pointer; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
 .u-hit:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .u-stage { animation: none; } .b-breath { animation: none; } .b-tilt { transition: none; } }
