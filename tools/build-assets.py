@@ -61,7 +61,7 @@ def stickers():
             print(kind, sid, "ms", total)
 
 
-MARK_POSES = {"bear": ["neutral", "blink", "wave", "happy", "hug"]}
+MARK_POSES = {"bear": ["neutral", "blink", "happy"]}
 
 
 def mark_poses():

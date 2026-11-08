@@ -42,61 +42,31 @@
 
 
   // ------------------------------------------------------------------ 0b. the bear in the U
-  // DESIGN.md "Bear in the U". Three concepts behind ?bear=a|b|c; one gesture each, done carefully.
-  var BEAR_DEFAULT = "c";
-  var SPRITE = { neutral: 232, blink: 232, wave: 264, happy: 234, hug: 281 };  // drawn widths, px
+  // DESIGN.md "Bear in the U": behind the letter, seen through its opening. Rest: head, eyes, nose and a little
+  // cheek over the U's round inner floor, blinking now and then. Hello: a slight perk-up, a happy squint caught on
+  // the first dip, two small nods, one tiny heart rising out of the opening; then back, and a blink.
+  var SPRITE = { neutral: 232, blink: 232, happy: 234 };   // drawn widths, px
+  var REST = 0.058, PERK = 0.011;                           // base above the baseline, em (perk-up ≈ 5 % of its height)
   function bear() {
-    var mark = document.querySelector(".mark"), hit = document.querySelector(".mark .u-hit");
+    var u = document.querySelector(".mark .u"), hit = u && u.querySelector(".u-hit");
     if (!hit) return;
-    var q = /[?&]bear=([abc])/.exec(location.search);
-    var concept = q ? q[1] : BEAR_DEFAULT;
-    mark.setAttribute("data-bear", concept);
-    var u = document.querySelector(".mark .u");
-    var stage = u.querySelector(".u-stage");
-    var chains = [stage.querySelector(".b-pos")];
-    if (concept === "b") chains.push(u.querySelector(".u-paws .b-pos"));
-    var tilts = chains.map(function (c) { return c.querySelector(".b-tilt"); });
-    var fxs = chains.map(function (c) { return c.querySelector(".b-fx"); });
-    var pawR = u.querySelector(".paw.r");
-    var pa = stage.querySelector(".pa"), pb = stage.querySelector(".pb");
-    var REST = { a: 0.02, b: 0, c: 0.0 }[concept];
-    var y = REST, pose = null, busy = false, queued = false, inside = false, leaveTimer = null, started = 0;
-    var rest = concept === "b" ? "hug" : "neutral";
-    var poses = concept === "b" ? ["hug"] : concept === "a" ? ["neutral", "blink", "wave", "happy"] : ["neutral", "blink", "happy"];
-    poses.forEach(function (n) { new Image().src = "assets/mark/bear-" + n + ".webp"; });
+    var pos = u.querySelector(".b-pos"), tilt = u.querySelector(".b-tilt"), fx = u.querySelector(".b-fx");
+    var pa = u.querySelector(".pa"), pb = u.querySelector(".pb");
+    var pose = "neutral", busy = false, queued = false, inside = false, leaveTimer = null, started = 0;
+    ["neutral", "blink", "happy"].forEach(function (n) { new Image().src = "assets/mark/bear-" + n + ".webp"; });
     new Image().src = "assets/art/heart-particle.webp";
     var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
     var ty = function (v, px) { return "0 calc(" + (-v).toFixed(3) + "em" + (px ? " + " + px + "px" : "") + ")"; };
-    var all = function (els, frames, opts) { return Promise.all(els.map(function (el) { return el.animate(frames, opts).finished; })); };
+    pos.style.translate = ty(REST);
 
     function setPose(name) {
       if (name === pose) return;
-      var first = pose === null;
-      pose = name;
-      var src = "assets/mark/bear-" + name + ".webp";
-      if (still.matches && !first) {
-        pb.src = pa.src; pb.style.setProperty("--pw", pa.style.getPropertyValue("--pw")); pb.style.setProperty("--dx", pa.style.getPropertyValue("--dx") || 0); pb.style.opacity = 1;
+      if (still.matches) {
+        pb.src = pa.src; pb.style.setProperty("--pw", pa.style.getPropertyValue("--pw")); pb.style.opacity = 1;
         pb.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 120, fill: "forwards" });
       }
-      pa.src = src; pa.style.setProperty("--pw", SPRITE[name]);
-      // the wave drawing is wider on the paw's side: keep its body (head centre at 108 of 264 px) in the middle
-      pa.style.setProperty("--dx", name === "wave" ? 24 : 0);
-    }
-    setPose(rest);
-    chains.forEach(function (c) { c.style.translate = ty(REST); });
-
-    function move(to, ms, easing, dip, over) {
-      var from = y; y = to;
-      if (still.matches) { chains.forEach(function (c) { c.style.translate = ty(to); }); return Promise.resolve(); }
-      var frames;
-      if (dip) {
-        var d = dip / (dip + ms);
-        frames = [{ translate: ty(from) }, { translate: ty(from, 3), offset: d, easing: "cubic-bezier(.3,.9,.4,1)" },
-                  { translate: ty(to + (over || 0)), offset: d + (1 - d) * 0.66, easing: "cubic-bezier(.45,0,.55,1)" }, { translate: ty(to) }];
-      } else frames = [{ translate: ty(from), easing: easing }, { translate: ty(to) }];
-      return all(chains, frames, { duration: ms + (dip || 0), fill: "forwards" }).then(function () {
-        chains.forEach(function (c) { c.style.translate = ty(to); c.getAnimations().forEach(function (a) { a.cancel(); }); });
-      });
+      pose = name;
+      pa.src = "assets/mark/bear-" + name + ".webp"; pa.style.setProperty("--pw", SPRITE[name]);
     }
     function blinkOnce() {
       if (pose !== "neutral") return Promise.resolve();
@@ -104,100 +74,61 @@
       return wait(120).then(function () { if (pose === "blink") setPose("neutral"); });
     }
     (function scheduleBlink() {
-      setTimeout(function () { if (!busy && concept !== "b") blinkOnce(); scheduleBlink(); }, 3000 + Math.random() * 3000);
+      setTimeout(function () { if (!busy && !inside) blinkOnce(); scheduleBlink(); }, 3000 + Math.random() * 3000);
     })();
-    function heart(x, yb) {
+    function heart() {
       if (still.matches) return;
       var h = new Image();
       h.src = "assets/art/heart-particle.webp"; h.alt = ""; h.className = "b-heart";
-      h.style.left = x + "em"; h.style.top = (0.75 - yb) + "em";
+      h.style.left = "0.315em"; h.style.top = (0.75 - REST - 0.25) + "em";
       u.appendChild(h);
-      h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.05em", scale: 1, offset: .25 },
-                 { opacity: 0, translate: "-50% -.24em", scale: .9 }], { duration: 950, easing: "cubic-bezier(.2,.7,.3,1)" })
+      h.animate([{ opacity: 0, translate: "-50% 0", scale: .6 }, { opacity: 1, translate: "-50% -.06em", scale: 1, offset: .25 },
+                 { opacity: 0, translate: "-50% -.34em", scale: .9 }], { duration: 1100, easing: "cubic-bezier(.2,.7,.3,1)" })
         .finished.then(function () { h.remove(); });
     }
-    function squash(amount, ms) {
-      return all(fxs, [{ scale: "1 1" }, { scale: (1 + amount / 2) + " " + (1 - amount), offset: .35 }, { scale: (1 - amount / 4) + " " + (1 + amount / 3), offset: .7 }, { scale: "1 1" }],
-                 { duration: ms, easing: "ease-out" });
-    }
-
-    // ---- the three hellos
-    var HELLO = {
-      // a: cup wave — perk up ≤ 12 % of its height, wave over the rim, happy beat, settle
-      a: function () {
-        squash(0.04, 360);
-        all(fxs, [{ rotate: "0deg" }, { rotate: "0deg", offset: .25 }, { rotate: "-2deg", offset: .62 }, { rotate: ".6deg", offset: .82 }, { rotate: "0deg" }], { duration: 520, easing: "ease-out" });
-        setTimeout(function () { setPose("wave"); }, 250);
-        return move(0.074, 280, null, 80, 0.012).then(function () {
-          return all(fxs, [{ rotate: "0deg" }, { rotate: "5deg", offset: .25 }, { rotate: "-1deg", offset: .5 }, { rotate: "3deg", offset: .75 }, { rotate: "0deg" }],
-                     { duration: 520, easing: "ease-in-out" });
-        }).then(function () {
-          setPose("happy"); heart(0.315, 0.074 + 0.47); squash(0.03, 260);
-          return wait(400);
-        }).then(function () {
-          if (inside) return;
-          return move(REST, 240, "cubic-bezier(.4,0,.2,1)").then(function () { setPose("neutral"); return wait(60); }).then(blinkOnce);
-        });
-      },
-      // b: hug — lean toward its right a little, the right paw (in front of the stroke) waves twice
-      b: function () {
-        all(tilts.map(function (t) { return t; }), [{ rotate: "0deg" }, { rotate: "-1.2deg", offset: .25 }, { rotate: "3deg", offset: .7 }, { rotate: "2.4deg" }],
-            { duration: 360, easing: "cubic-bezier(.34,1.56,.64,1)", fill: "forwards" });
-        return wait(200).then(function () {
-          return pawR.animate([{ rotate: "0deg" }, { rotate: "-24deg", offset: .22, easing: "ease-in-out" }, { rotate: "-6deg", offset: .5, easing: "ease-in-out" },
-                               { rotate: "-18deg", offset: .74, easing: "ease-in-out" }, { rotate: "0deg" }], { duration: 760 }).finished;
-        }).then(function () {
-          heart(0.53, 0.33);
-          return wait(380);
-        }).then(function () {
-          if (inside) return;
-          return all(tilts, [{ rotate: "2.4deg" }, { rotate: "-.6deg", offset: .6 }, { rotate: "0deg" }], { duration: 320, easing: "cubic-bezier(.4,0,.2,1)" })
-            .then(function () { tilts.forEach(function (t) { t.getAnimations().forEach(function (a) { a.cancel(); }); }); });
-        });
-      },
-      // c: nod — a happy squint caught on the first dip, two little nods, one tiny heart
-      c: function () {
-        var nod = function (depth, ms) {
-          return Promise.all([
-            all(chains, [{ translate: ty(REST) }, { translate: ty(REST, depth), offset: .4, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(REST, -1), offset: .78 }, { translate: ty(REST) }], { duration: ms }),
-            all(fxs, [{ rotate: "0deg", scale: "1 1" }, { rotate: "2.5deg", scale: "1.02 .97", offset: .4 }, { rotate: "-.5deg", scale: "1 1.01", offset: .78 }, { rotate: "0deg", scale: "1 1" }], { duration: ms })
-          ]);
-        };
-        setTimeout(function () { setPose("happy"); }, 110);    // on the first dip's lowest point
-        return nod(5, 300).then(function () { return nod(3.5, 280); }).then(function () {
-          heart(0.315, REST + 0.47);
-          return wait(520);
-        }).then(function () {
-          if (inside) return;
-          setPose("neutral"); return wait(90).then(blinkOnce);
-        });
-      }
-    };
-    var STILL = {
-      a: function () { setPose("wave"); return wait(700).then(function () { setPose("happy"); return wait(400); }).then(function () { if (!inside) setPose("neutral"); }); },
-      b: function () { return wait(10); },
-      c: function () { setPose("happy"); return wait(900).then(function () { if (!inside) setPose("neutral"); }); }
-    };
+    function play(el, frames, opts) { return el.animate(frames, opts).finished; }
 
     function hello(e) {
       if (e && e.type === "click" && busy && Date.now() - started < 700) return;
       if (busy) { queued = true; return; }
       busy = true; started = Date.now(); clearTimeout(leaveTimer);
-      (still.matches ? STILL[concept]() : HELLO[concept]()).then(function () {
-        busy = false;
-        if (queued) { queued = false; hello(); }
-      });
+      var run;
+      if (still.matches) {
+        setPose("happy");
+        run = wait(900).then(function () { if (!inside) setPose("neutral"); });
+      } else {
+        // perk up (anticipation dip 2 px, a soft rise), then two nods: the head dips and tips 2.5°, the second smaller
+        var up = REST + PERK;
+        run = play(pos, [{ translate: ty(REST) }, { translate: ty(REST, 2), offset: .25, easing: "cubic-bezier(.34,1.56,.64,1)" }, { translate: ty(up) }],
+                   { duration: 300, fill: "forwards" })
+          .then(function () {
+            var nod = function (depth, rot, ms) {
+              return Promise.all([
+                play(pos, [{ translate: ty(up) }, { translate: ty(up, depth), offset: .42, easing: "cubic-bezier(.3,0,.3,1)" }, { translate: ty(up, -1), offset: .8 }, { translate: ty(up) }], { duration: ms, fill: "forwards" }),
+                play(fx, [{ rotate: "0deg", scale: "1 1" }, { rotate: rot + "deg", scale: "1.015 .975", offset: .42 }, { rotate: (-rot / 5) + "deg", scale: "1 1", offset: .8 }, { rotate: "0deg", scale: "1 1" }], { duration: ms })
+              ]);
+            };
+            setTimeout(function () { setPose("happy"); }, 120);    // on the first dip's low point
+            return nod(4, 2.5, 300).then(function () { return nod(2.5, 1.6, 280); });
+          })
+          .then(function () { heart(); return wait(480); })
+          .then(function () {
+            if (inside) return;
+            return play(pos, [{ translate: ty(up) }, { translate: ty(REST) }], { duration: 240, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" })
+              .then(function () { pos.style.translate = ty(REST); pos.getAnimations().forEach(function (a) { a.cancel(); }); setPose("neutral"); return wait(80); })
+              .then(blinkOnce);
+          });
+      }
+      run.then(function () { busy = false; if (queued) { queued = false; hello(); } });
     }
-    function settleAfterLeave() {
+    function settle() {
       if (busy) return;
       busy = true;
-      tilts.forEach(function (t) { t.style.rotate = "0deg"; });
-      var done;
-      if (concept === "a") done = move(REST, 240, "cubic-bezier(.4,0,.2,1)").then(function () { setPose("neutral"); return wait(60); }).then(blinkOnce);
-      else if (concept === "b") done = all(tilts, [{ rotate: "2.4deg" }, { rotate: "0deg" }], { duration: 320, easing: "cubic-bezier(.4,0,.2,1)" })
-        .then(function () { tilts.forEach(function (t) { t.getAnimations().forEach(function (a) { a.cancel(); }); }); });
-      else { setPose("neutral"); done = wait(90).then(blinkOnce); }
-      done.then(function () { busy = false; });
+      tilt.style.rotate = "0deg";
+      var cur = getComputedStyle(pos).translate;
+      play(pos, [{ translate: cur }, { translate: ty(REST) }], { duration: 240, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" })
+        .then(function () { pos.style.translate = ty(REST); pos.getAnimations().forEach(function (a) { a.cancel(); }); setPose("neutral"); return wait(80); })
+        .then(blinkOnce).then(function () { busy = false; });
     }
 
     hit.addEventListener("pointerenter", function (e) {
@@ -206,16 +137,15 @@
       if (!busy) hello();
     });
     hit.addEventListener("pointermove", function (e) {
-      if (e.pointerType !== "mouse" || still.matches || busy || concept === "b") return;
+      if (e.pointerType !== "mouse" || still.matches) return;
       var r = hit.getBoundingClientRect();
       var dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 1.5)));
-      tilts.forEach(function (t) { t.style.rotate = (dx * 6).toFixed(1) + "deg"; });
+      tilt.style.rotate = (dx * 5).toFixed(1) + "deg";
     });
     hit.addEventListener("pointerleave", function (e) {
       if (e.pointerType !== "mouse") return;
-      inside = false;
-      if (concept !== "b") tilts.forEach(function (t) { t.style.rotate = "0deg"; });
-      leaveTimer = setTimeout(settleAfterLeave, 1500);
+      inside = false; tilt.style.rotate = "0deg";
+      leaveTimer = setTimeout(settle, 1500);
     });
     hit.addEventListener("click", hello);
 

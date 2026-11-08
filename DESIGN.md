@@ -180,42 +180,24 @@ only when the demo is near or you press Send. No third-party requests, cookies o
 
 ## Bear in the U — interaction spec
 
-Owner, 2026-11-08: 「不用那麼多動作 一個打招呼的就好 你把一個做好做到極致就好」 — one hello, done to perfection.
+Owner, 2026-11-08: one greeting, done to perfection; concept C (the nod) chosen, then recomposed so the "Us" still
+reads instantly as a word.
 
-- **Construction.** U-back (the whole glyph) behind the bear; the bear masked to the U's inner counter — traced
-  from Jua's U (both inner edges and the rounded floor) and extended upward — so the bowl under the floor is the
-  U-lip in front of it. The bear is centred in the opening (.315 em from the glyph's origin), never floats, is
-  never cut by a straight line, never shows outside the strokes. A clear `<button>` over the opening and above it
-  (「跟熊熊打招呼」 / "Say hi to Bear"; Enter and Space work; focus ring).
-- **Positions** (the bear's base above the baseline): PEEK = eyes and nose over the lip (rest); UP = the bear sits
-  up in the mouth of the U, high enough that the waving paw is fully above the stems' tops (derived from the wave
-  drawing: the paw is 95–169 px up a 290 px sprite), head and shoulders clearly above the letter. The bear is
-  drawn 10% smaller than the app's 1:1 (1 px = .00144 em) so ears and paw clear the stems.
-- **IDLE**: PEEK, neutral; breathing 2 px over 3.2 s; a blink (blink pose, 120 ms) every 3–6 s. Nothing else.
-- **HELLO** (desktop: the pointer enters the U area, or click/Enter/Space; phones: tap, plus one automatic hello
-  the first time the hero is in view, after 1.2 s):
-  1. anticipation: dip 3 px and a slight squash (scaleY .96), 80 ms;
-  2. rise to UP with a soft overshoot, cubic-bezier(.34,1.56,.64,1), 280 ms; follow-through faked with a 2°
-     counter-rotation that settles (the art moves as one sprite);
-  3. the wave pose at the top of the rise; two paw swings, ±5° about the bear's base, 2 × 260 ms, in-out,
-     the second smaller;
-  4. the happy beat: happy pose for 400 ms carried by a tiny bounce; one small heart particle rises and fades;
-  5. settle to PEEK, cubic-bezier(.4,0,.2,1), 240 ms, then blink once. Total ≈ 1.7 s.
-  On desktop, while the pointer stays, the bear stays UP and happy, its head tilting toward the pointer
-  (±6°, eased); it sinks to PEEK 1.5 s after the pointer leaves. Repeated clicks replay the hello (queue max 1,
-  no stacking; the pointer arriving and its click count once).
-- **Reduced motion**: nothing moves — peek → wave → happy → peek with 120 ms cross-fades.
-- 60 fps, transform and opacity only. Art: the app's bear poses (neutral, blink, wave, happy, from Android
-  `drawable-nodpi` via `tools/build-assets.py`) and the app's heart particle.
-
-### Three concepts (2026-11-08, `?bear=a|b|c`; default **c**)
-
-- **a · Cup wave** — in the bowl, in front of the stems, behind the bottom lip (a copy of the U below .17 em over
-  the baseline; the mask follows the counter's floor below that); perks up 12 % of its height with anticipation and
-  a capped overshoot, waves over the rim (wave drawing re-centred on its body), happy + one heart, settles, blinks.
-- **b · Hug** — behind the U on the baseline, the hug drawing's two paws (cut out with ellipses that end at the
-  wrists) in front of the strokes; it leans a little and the right paw waves twice (rotating about the wrist),
-  one heart from the paw.
-- **c · Nod** (default) — as a, a happy squint caught on the first dip, two little nods (5 px, 3.5 px) with a
-  slight squash, one heart, back to neutral and a blink. The calmest; nothing crosses the letter's edges.
-- Contact shadows: the lip casts a soft shadow onto the bear (a, c); the paws onto the strokes (b).
+- **Composition.** The bear sits BEHIND the whole U: every stroke of the letter is in front of it, and it shows
+  only through the U's opening. The stage is masked to the counter traced from Jua's U (both inner edges and the
+  round inner floor, open above the stems), so the occluding edge is the letter's own curve — no lip layer, no
+  straight clip. The bear is small enough (1 px of art = .00085 em) that its face is ≈ 75 % of the opening's
+  width at eye level; the ears may tuck behind the stems, the face never touches them, and the U's round inside
+  stays readable around it.
+- **Rest**: the top of the head, eyes, nose and a little cheek over the inner floor, the chin just disappearing
+  behind the curve; breathing 1.5 px over 3.2 s; a blink every 3–6 s.
+- **Hello** (pointer entering, click, Enter/Space, tap; one automatic hello on phones the first time the hero is in
+  view): a 2 px anticipation dip and a soft perk-up of ≈ 5 % of its height; a happy squint caught on the first dip;
+  two small nods (4 px and 2.5 px, tipping 2.5° and 1.6°, with a slight squash), one tiny heart rising out of the
+  opening; then back down (240 ms) and a blink. While a mouse stays over the U the bear stays happy and tilts
+  toward it (±5°); it settles 1.5 s after the pointer leaves.
+- **Grounding**: a copy of the U with a soft shadow, kept only inside the opening, so the letter's inner edge
+  casts a faint shadow onto the bear.
+- **Reduced motion**: happy for a moment with 120 ms cross-fades, nothing moves.
+- The clear `<button>` (「跟熊熊打招呼」 / "Say hi to Bear") covers the opening and the bear; real mouse and touch hit it.
+- Art: the app's bear poses neutral, blink and happy (Android `drawable-nodpi`) and its heart particle.
