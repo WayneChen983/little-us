@@ -117,9 +117,26 @@ pages (`/privacy/`, `/terms/`, `/delete-account/`) keep their text word for word
 - `assets/stickers/` — the app's animated stickers (`ios/CoupleChat/Resources/Stickers`), the still frame the
   app shows under Reduce Motion, and the last frame it rests on. Loaded only when the demo is near.
 - `assets/faces/` — the critters' mood faces (`ios/Shared/Art`), for the picker.
-- `assets/fonts/` — huninn subset (`tools/subset-font.py`) and the Jua wordmark subset.
+- `assets/fonts/` — huninn in two subsets (`tools/subset-font.py`): the first screens' characters, preloaded,
+  and the rest (`rest.css`, added by site.js after `load`), plus the Jua wordmark subset (2 KB).
 
 ## Budgets
 
-Lighthouse mobile ≥ 95 performance / accessibility / SEO. Initial JS < 60 KB gzipped (it's ~10). Every image
-has width and height; nothing above the fold is lazy; everything below is. No third-party requests at all.
+Lighthouse mobile ≥ 95 performance / accessibility / SEO. Initial JS < 60 KB gzipped (site.js + home.js ≈ 7 KB).
+Every image has width and height. Story pictures carry `data-src` until their chapter is near; stickers load
+only when the demo is near or you press Send. No third-party requests, cookies or analytics at all.
+
+## Review log (art direction passes on the screenshots)
+
+1. Hero: padding on the hero dropped the 20 px page edge on phones → fixed; the Chinese line now breaks
+   「只屬於你們 / 兩個人的小天地」 so it never orphans one character on a phone.
+2. Hero: the hug happened only as the hero left the screen → they now meet a third of the way down, and the
+   two-hearts sit between their heads instead of under the top bar.
+3. Story on phones: the caption under the pinned screen described the *next* screen → trigger line moved to
+   84 % and steps shortened to 30 svh, so the picture and the words always match.
+4. Story: dimmed steps used opacity and failed contrast → they use softInk (AA) and turn ink when current.
+5. Hug demo: the title sat above the whole grid and the phone ran off a 900 px screen → title in the left
+   column, phone 580 tall; nested spans picked up the chip style → `.choice > span`; the chat opens with a
+   morning message and Amy's sticker (facing the other way, as the app draws theirs).
+6. Performance: story pictures (both languages) loaded with the first screen → deferred; header icon 23 KB PNG
+   → 1 KB WebP; font split into first-screen and later halves.
