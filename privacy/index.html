@@ -60,9 +60,10 @@
         <li><strong>你們的內容</strong>：訊息、照片、語音訊息、聊天室塗鴉、手寫紙條、貼圖、心情、回憶與照片的拍攝地點（用於回憶地圖）、共同清單、時光膠囊、每日一問的回答；以及你選擇開啟時的生理期資料。</li>
         <li><strong>只看一次與可重看的照片</strong>：存放在私人資料夾，連你們兩個人的 App 都不能直接下載，只能在 App 裡打開；每次打開都會產生一個很快失效的連結。看的人在看這張照片時截圖，我們會記錄截圖的時間並通知傳送的人。</li>
         <li><strong>相機與麥克風</strong>：只有在你打開 App 裡的相機或按住錄音時才會使用；照片和語音只有在你按下傳送後才會上傳。</li>
-        <li><strong>通話</strong>：語音與視訊通話以點對點加密傳輸；無法直連時會經由 Cloudflare 的中繼伺服器加密轉送。我們不錄音、不錄影，也不保存通話內容，只保存通話紀錄（時間與長度）。</li>
-        <li><strong>心跳</strong>：只有在你按下「傳送心跳」時，App 才會從 Apple「健康」讀取當下的心率，把數字傳給另一半，不會另外保存。</li>
-        <li><strong>裝置與推播</strong>：推播通知所需的裝置代碼。</li>
+        <li><strong>通話</strong>：語音與視訊通話以點對點加密傳輸；無法直連時會經由 Cloudflare 的中繼伺服器加密轉送。我們不錄音、不錄影，也不保存通話內容，只保存通話紀錄（時間、長度與建立連線用的技術資料）。</li>
+        <li><strong>心跳</strong>：只有在你按下「傳送心跳」時，App 才會從 Apple「健康」讀取當下的心率，把數字傳給另一半；這個數字會和那則心跳一起存在你們的空間裡，和其他內容一樣保存與刪除。</li>
+        <li><strong>位置</strong>：在聊天中分享位置時的座標；開啟「距離」時，App 會回報大約位置，伺服器只用來算出你們之間的距離，讀數最多保留 12 小時，另一半只看得到距離（以及你選擇分享的城市）。</li>
+        <li><strong>裝置與推播</strong>：推播通知和小工具所需的裝置代碼，登出或在其他裝置登出時就會失效。新帳號預設不在通知裡顯示訊息內容；你在設定裡開啟「顯示訊息預覽」後，訊息內容才會經由 Apple 或 Google 的推播服務送到你的手機。</li>
         <li><strong>購買</strong>：訂閱和購買透過 Apple 或 Google Play 處理，我們只會收到購買狀態與到期日，不會取得你的付款資訊。</li>
         <li><strong>使用紀錄</strong>：每天是否開啟過 App（只記日期），用來了解配對與留存狀況。</li>
       </ul>
@@ -73,7 +74,7 @@
     </section>
     <section>
       <h2><img src="../assets/art/spot-house.webp" alt="">服務供應商</h2>
-      <p>我們使用以下服務來提供 App：Supabase（資料庫、檔案儲存、登入與即時連線）、Apple（登入、推播通知與付款）、Google（登入、Android 推播通知、Google Play 付款與寄送驗證碼信件）、Cloudflare（通話中繼）。這些供應商只會依我們的指示處理資料。</p>
+      <p>我們使用以下服務來提供 App：Supabase（資料庫、檔案儲存、登入與即時連線）、Apple（登入、推播通知與付款）、Google（登入、Android 推播通知 Firebase Cloud Messaging、Google Play 付款）、Resend（寄送驗證碼與確認信）、Cloudflare（通話中繼）、OpenStreetMap（Android 版地圖圖磚：會收到你手機的 IP 位址與顯示的地圖範圍）。這些供應商只會依我們的指示處理資料。</p>
     </section>
     <section>
       <h2><img src="../assets/art/spot-hourglass.webp" alt="">資料保存</h2>
@@ -112,9 +113,10 @@
         <li><strong>Your content</strong>: messages, photos, voice messages, doodles on the chat, handwritten notes, stickers, moods, memories and where photos were taken (for the memory map), shared lists, time capsules, daily question answers, and cycle data if you turn it on.</li>
         <li><strong>View-once and replayable photos</strong>: kept in a private folder that neither of your apps can download directly; they open only inside the app, each time through a link that expires quickly. If the person viewing one takes a screenshot while it's open, we record when and tell the sender.</li>
         <li><strong>Camera and microphone</strong>: used only while you have the in-app camera open or hold to record; photos and voice messages are uploaded only when you tap send.</li>
-        <li><strong>Calls</strong>: voice and video calls are encrypted and peer to peer; when a direct connection isn't possible they are relayed, still encrypted, through Cloudflare. We never record or store calls, only a call log (time and length).</li>
-        <li><strong>Heartbeat</strong>: only when you tap "send your heartbeat" does the app read your current heart rate from Apple Health and send the number to your partner; it isn't stored separately.</li>
-        <li><strong>Device and notifications</strong>: the device token needed for push notifications.</li>
+        <li><strong>Calls</strong>: voice and video calls are encrypted and peer to peer; when a direct connection isn't possible they are relayed, still encrypted, through Cloudflare. We never record or store calls, only a call log (time, length and the technical data used to set up the connection).</li>
+        <li><strong>Heartbeat</strong>: only when you tap "send your heartbeat" does the app read your current heart rate from Apple Health and send the number to your partner; the number is saved with that heartbeat in your shared space and kept and deleted like your other content.</li>
+        <li><strong>Location</strong>: the coordinates when you share a location in chat; with Distance turned on, the app reports an approximate location that the server uses only to work out how far apart you are, keeping readings for at most 12 hours. Your partner sees only the distance (and the city, if you choose to share it).</li>
+        <li><strong>Device and notifications</strong>: the device tokens needed for push notifications and widgets; they stop working when you sign out, here or on another device. New accounts don't show message text in notifications; only after you turn on "Show message previews" does message text travel through Apple's or Google's push service to your phone.</li>
         <li><strong>Purchases</strong>: subscriptions and purchases are handled by Apple or Google Play; we only receive their status and expiry, never your payment details.</li>
         <li><strong>Usage</strong>: whether you opened the app on a given day (the date only), to understand pairing and retention.</li>
       </ul>
@@ -125,7 +127,7 @@
     </section>
     <section>
       <h2><img src="../assets/art/spot-house.webp" alt="">Service providers</h2>
-      <p>We use Supabase (database, file storage, sign-in and realtime), Apple (sign-in, notifications and payments), Google (sign-in, Android notifications, Google Play payments and sending code emails) and Cloudflare (call relay). They process data only on our instructions.</p>
+      <p>We use Supabase (database, file storage, sign-in and realtime), Apple (sign-in, notifications and payments), Google (sign-in, Android notifications through Firebase Cloud Messaging, Google Play payments), Resend (sending code and confirmation emails), Cloudflare (call relay) and OpenStreetMap (map tiles in the Android app, which receives your phone's IP address and the map area shown). They process data only on our instructions.</p>
     </section>
     <section>
       <h2><img src="../assets/art/spot-hourglass.webp" alt="">Retention</h2>
