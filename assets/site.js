@@ -58,7 +58,7 @@
   // --- Critters hop when you point at them or tap them (once per hop, never under Reduce Motion).
   function hop(event) {
     var critter = event.target.closest && event.target.closest(".critter");
-    if (!critter || critter.classList.contains("hop") || critter.closest(".mate") || still.matches) return;
+    if (!critter || critter.classList.contains("hop") || critter.closest(".mate, .mark") || still.matches) return;
     critter.classList.add("hop");
   }
   document.addEventListener("mouseover", hop);

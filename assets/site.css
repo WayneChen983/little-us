@@ -619,12 +619,18 @@ footer.site.night-foot a:hover { color: #F28B9D; }
 
 /* --- the bear in the U: say hi (home.js bear()). Only transforms and opacity move. --- */
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* The bear sits IN the U: the whole U behind it, then a copy of the U's lower part (below the rim line, .3 em
+   over the baseline) in front, so its belly is inside the cup and anything above the rim shows whole. Glyph
+   numbers measured from Jua's U: the opening is centred .3165 em from the glyph's origin, .25 em wide; the
+   inside floor is .16 em over the baseline; the line box starts .75 em over the baseline. */
 .mark .u { pointer-events: none; }
 .mark .u .bear { pointer-events: auto; }
-.mark .peek-in.bear { width: .46em; height: .52em; bottom: .16em; border-radius: .08em; clip-path: inset(-1.2em -.3em 0 -.3em); } /* it can rise out of the U, never drop below its bowl */
+.mark .u-front { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; clip-path: inset(.45em -.2em -.3em -.2em); }
+.mark .peek-in.bear { z-index: 1; left: .1565em; width: .32em; height: .5em; bottom: .31em; translate: none; border-radius: .08em; animation-name: bearin; }
+@keyframes bearin { from { opacity: 0; translate: 0 .25em; } to { opacity: 1; translate: 0 0; } }
 .mark .peek-in.bear:focus-visible { outline: 3px solid var(--rose-ink); outline-offset: .02em; }
 .bear-body { position: absolute; inset: 0; transform-origin: 50% 100%; transition: translate .45s cubic-bezier(.3, 1.5, .5, 1), rotate .45s var(--ease); translate: 0 var(--by, 0); rotate: var(--bt, 0deg); }
-.mark .peek-in.bear img { position: absolute; bottom: 0; left: 50%; width: calc(var(--iw) / 353 * 100%); translate: -50% 0; }
+.mark .peek-in.bear img { position: absolute; bottom: 0; left: 0; right: 0; margin: 0 auto; width: calc(var(--iw) / 353 * 100%); }
 .bear.noticed .bear-body { --by: -.12em; }
 .bear.idle .bear-body { animation: idlepeek 1.6s var(--ease) 1; }
 .bear.pop .bear-body { animation: bearpop 1.5s cubic-bezier(.3, 1.4, .5, 1) 1; }
@@ -640,8 +646,8 @@ footer.site.night-foot a:hover { color: #F28B9D; }
   42% { translate: 0 -.66em; scale: .95 1.06; animation-timing-function: cubic-bezier(.6, 0, .9, .5); } 70% { translate: 0 -.02em; scale: 1.06 .94; }
   84% { translate: 0 -.06em; scale: 1; } 100% { translate: 0 0; scale: 1; }
 }
-@keyframes bearshy { 0% { translate: 0 0; } 18%, 55% { translate: 0 .34em; } 75%, 88% { translate: 0 .1em; } 100% { translate: 0 0; } }
-.float-heart { position: absolute; z-index: 2; left: 50%; bottom: .7em; width: .12em; pointer-events: none; animation: floatheart 1.4s ease-out 1 both; }
+@keyframes bearshy { 0% { translate: 0 0; rotate: 0deg; } 18%, 55% { translate: 0 .15em; rotate: 0deg; } 75%, 88% { translate: 0 .07em; rotate: 0deg; } 100% { translate: 0 0; rotate: 0deg; } }
+.float-heart { position: absolute; z-index: 3; left: .3165em; bottom: .75em; width: .12em; pointer-events: none; animation: floatheart 1.4s ease-out 1 both; }
 @keyframes floatheart { 0% { opacity: 0; translate: -50% 0; scale: .5; } 20% { opacity: 1; scale: 1; } 100% { opacity: 0; translate: calc(-50% + var(--dx, 0em)) -.45em; scale: .9; } }
 @media (prefers-reduced-motion: reduce) {
   .bear-body { transition: none; }

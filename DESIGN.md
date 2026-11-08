@@ -179,6 +179,9 @@ only when the demo is near or you press Send. No third-party requests, cookies o
   focus ring). Hover or a first tap: it rises a little and tilts toward you. Each press, in turn: wave (pops up
   with a springy bounce), heart (two of the app's heart particles float up), shy (ducks into the U, peeks back),
   jump (cheer pose, a big hop); every fifth press the bunny on the "e" holds up its heart. A quiet peek every 8 s
-  when nobody's playing. It's clipped to the U's bowl, so it never drops below the letter or widens the page.
+  when nobody's playing. It sits IN the U: the whole U behind it, a copy of the U's lower part (below a rim line .3 em over the
+  baseline) in front, centred on the opening (measured from Jua's U), so nothing is ever cut by a box.
   Reduce Motion: the pose changes for a moment, nothing moves. Art: bear-happy/wave/heart/cheer (site art),
   bear-loved (app critter), spot-particleHeart (app spot).
+
+- The night chapter's small "23:30 · 最後一頁" label is gone (owner's ask).
