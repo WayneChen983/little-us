@@ -483,6 +483,10 @@ footer.site .wrap { position: relative; display: flex; flex-wrap: wrap; gap: 8px
 footer.site .end { margin-left: auto; }
 footer.site a { text-decoration-color: var(--line); }
 footer.site a:hover { text-decoration-color: var(--rose); }
+footer.site .social { display: inline-flex; gap: 16px; align-items: center; }
+footer.site .social a { display: inline-flex; padding: 4px; margin: -4px; color: var(--soft-ink); text-decoration: none; }
+footer.site .social a:hover, footer.site .social a:focus-visible { color: var(--rose); }
+footer.site .social svg { width: 22px; height: 22px; fill: currentColor; }
 .cheer { position: absolute; bottom: calc(100% + 32px); left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; gap: 4px; pointer-events: none; }
 .night + footer.site .cheer { bottom: calc(100% + 32px); }
 .cheer img { height: 84px; width: auto; pointer-events: auto; }
